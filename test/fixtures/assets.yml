@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  status: MyString
+  cost: 1
+  serial_number: MyString
+  operating_system: MyString
+  purchase_date: 2011-11-29 17:52:00
+  reciept_url: MyString
+  additional_info: MyText
+  description: MyText
+  type: MyString
+
+two:
+  name: MyString
+  status: MyString
+  cost: 1
+  serial_number: MyString
+  operating_system: MyString
+  purchase_date: 2011-11-29 17:52:00
+  reciept_url: MyString
+  additional_info: MyText
+  description: MyText
+  type: MyString

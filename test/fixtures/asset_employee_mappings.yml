@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  asset_id: 1
+  employee_id: 1
+  date_issued: 2011-11-29 17:47:00
+  date_returned: 2011-11-29 17:47:00
+  remark: MyText
+
+two:
+  asset_id: 1
+  employee_id: 1
+  date_issued: 2011-11-29 17:47:00
+  date_returned: 2011-11-29 17:47:00
+  remark: MyText
