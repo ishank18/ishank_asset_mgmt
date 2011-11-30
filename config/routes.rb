@@ -1,4 +1,7 @@
 IshankAssetMgmt::Application.routes.draw do
+
+	gem 'devise'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

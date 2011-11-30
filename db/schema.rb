@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129131058) do
+ActiveRecord::Schema.define(:version => 20111130055426) do
 
   create_table "asset_employee_mappings", :force => true do |t|
     t.integer  "asset_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20111129131058) do
     t.datetime "updated_at"
   end
 
-  create_table "loptops", :force => true do |t|
+  create_table "laptops", :force => true do |t|
     t.string   "operating_system"
     t.boolean  "has_bag"
     t.datetime "created_at"
