@@ -1,0 +1,47 @@
+<span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
+<h1 align='center'>Welcome Admin!</h1>
+<div id="container">
+	<div class='LeftPanel'>
+		<table class='HomePageTable'>
+			<tr>
+				<td><%= link_to 'View all assets', assets_path %></td>
+				<td><%= link_to 'View all employee', employees_path %></td>
+			</tr>
+			<tr>
+				<td><%= link_to 'Add new assets', new_asset_path %></td>
+				<td><%= link_to 'Add new Employee', new_employee_path %></td>
+			</tr>
+			<tr>
+				<td><%= link_to 'Assign asset', new_asset_employee_mapping_path %></td>
+				<td><%= link_to 'Add new admin', new_admin_registration_path %></td>
+			</tr>
+		</table>
+			
+	
+	
+	</div>
+	<div class='RightPanel'>
+		<%= form_tag search_path do %>
+		<table id='searchForm'>
+			<tr>
+				<td><%= text_field_tag 'text' %> </td>
+				<td>
+					<% options = options_for_select([['Employee', 'employee'], ['Asset', 'asset']]) %>
+					<%= select_tag(:search_type, options) %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= submit_tag "Search!" %></td>
+				<td></td>
+			</tr>
+		</table>
+		<% end %>
+		<span class='TagListHead'>Tag List</span>
+		<div class='TagList'>
+		Mac Book Hp
+		</div>
+		
+	</div>
+	<div class='Clear'></div>
+</div>
+

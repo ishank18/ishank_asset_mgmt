@@ -1,7 +1,25 @@
 IshankAssetMgmt::Application.routes.draw do
 
-	gem 'devise'
+	as :admin do
+		match '/admins/confirmation' => 'confirmations#update', :via => :put, :as => :update_admin_confirmation
+	end
+	
+	devise_for :admins, :controllers => { :registrations => "admin/registrations", 
+																													:confirmations => "confirmations"}
+	
+	post 'saerch', :to => "home#search", :as => :search
+	
+  resources "tags"
+  resources "employees"
+  resources "asset_employee_mappings"
+	resources 'assets'
+	
+  
+  
+	root :to => "home#index"
+	
 
+	
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
