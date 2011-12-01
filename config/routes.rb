@@ -14,8 +14,7 @@ IshankAssetMgmt::Application.routes.draw do
   resources "asset_employee_mappings"
 	resources 'assets'
 	
-  
-  
+  get 'change_form_content', :to => "assets#change_form_content", :as => :change_form_content
 	root :to => "home#index"
 	
 

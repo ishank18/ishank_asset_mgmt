@@ -7,3 +7,5 @@ body { }
 .TagList { background:#cccccc; width:300px; margin-left:35px; padding:10px; }
 .TagListHead { margin-left:35px; font-weight:bold; }
 #searchForm { padding:30px; width:300px; }
+#assetTable tr td select { width:300px;  }
+#assetTable tr td { vertical-align:top; }

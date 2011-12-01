@@ -1,0 +1,80 @@
+<script>
+
+function changeForm() {
+	$.ajax({
+    url: '<%= change_form_content_path %>', 
+    dataType: 'script',
+    type: 'get', 
+    data: 'category='+$("#category").attr("value")
+  });
+}
+
+</script>
+
+<h1> Add Asset </h1>
+
+<%= form_for(@asset) do |f| %>
+ <% if @asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@asset.errors.count, "error") %>
+        prohibited this user from being saved:</h2>
+      <ul>
+      <% @asset.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table id='assetTable'>
+	
+	<tr>
+		<td>Category</td>
+		<td>
+			<% options = options_for_select([['-- Select --', ''], ['Laptop', 'laptop'], ['Network Device', 'network_device'], ['Mobile Phone', 'mobile_phone']],@category) %>
+			<%= select_tag(:category, options, :onChange => "changeForm()") %>
+
+		</td>
+	</tr>
+	<tr>
+		<td><%= f.label :status %></td>
+		<td>
+			<% options = options_for_select([['Operational', 'operational'], ['Recieved', 'recieved'], ['Spare', 'spare'], ['Repair', 'repair']]) %>
+			<%= f.select(:status, options) %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= f.label :name %></td>
+		<td><%= f.text_field :name %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :cost %></td>
+		<td><%= f.text_field :cost %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :searial_number %></td>
+		<td><%= f.text_field :serial_number %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :purchase_date %></td>
+		<td><%= f.datepicker :purchase_date %></td>
+	</tr>
+	<tr id="specifics">
+		
+	</tr>
+	<tr>
+		<td><%= f.label :description %></td>
+		<td><%= f.text_area :description, :rows => 3, :columns => 80 %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :additional_info %></td>
+		<td><%= f.text_area :additional_info, :rows => 3, :columns => 80  %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><%= f.submit "Add Asset!" %></td>
+	</tr>
+	
+</table>
+<% end %>
+
