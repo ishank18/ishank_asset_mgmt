@@ -9,11 +9,53 @@ function changeForm() {
   });
 }
 
+function addTags() {
+	var tagsArray = $("#tagsTextField").attr("value").split(",");
+	$("#tagsTextField").attr("value", "") 
+	var tagsHTML = ""
+	var previousTags = $(".DelTag").get()
+	$.each(previousTags, function(key, currEle) { 
+ 		tagsHTML += "<span onclick='delTag(this)' class='DelTag'>"+currEle.innerHTML+"</span>";
+	});
+	$.each(tagsArray, function(key, value) { 
+		if(value != "") {
+ 			tagsHTML += "<span onclick='delTag(this)' class='DelTag'>"+value+"</span>";
+ 		}
+	});
+	$("#tags").html(tagsHTML)
+}
+	
+function fillTagContent() {
+	addTags()
+	var previousTags = $(".DelTag").get()
+	var tags = ""
+	$.each(previousTags, function(key, currEle) {
+		if(key != previousTags.length-1) { 
+	 		tags += currEle.innerHTML+",";
+	 	}
+	 	else {
+	 		tags += currEle.innerHTML
+	 	}
+	});
+	$("#tagsTextField").attr("value", tags)
+}
+
+function delTag(currentTag) {
+	 $(currentTag).remove();
+}
+
 </script>
 
 <h1> Add Asset </h1>
 
 <%= form_for(@asset) do |f| %>
+<div id='addTags'>
+	Add Tags<br>
+	<%= text_field_tag :tagsTextField %>
+	<span id='addTagButton' onclick='addTags()'>Add</span>
+	<div id='tags'></div>
+	
+</div>
  <% if @asset.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@asset.errors.count, "error") %>
@@ -72,7 +114,7 @@ function changeForm() {
 	</tr>
 	<tr>
 		<td></td>
-		<td><%= f.submit "Add Asset!" %></td>
+		<td><%= f.submit "Add Asset!", :onclick => "fillTagContent()" %></td>
 	</tr>
 	
 </table>

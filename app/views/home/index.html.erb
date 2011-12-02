@@ -38,9 +38,11 @@
 		<% end %>
 		<span class='TagListHead'>Tag List</span>
 		<div class='TagList'>
-		Mac Book Hp
+		<% @tags.each do |tag| %>
+			<%= link_to tag.name, tag, :alt => tag.assets.count.to_s+" Item", :title => tag.assets.count.to_s+" Item" %>
+		<% end %>
 		</div>
-		
+		<br>
 	</div>
 	<div class='Clear'></div>
 </div>

@@ -1,8 +1,9 @@
 class HomeController < ApplicationController
 		
 		def index
-			 p session["warden.user.admin.key"]
+			 @tags = Tag.all
 		end
 		def search
+			
 		end
 end

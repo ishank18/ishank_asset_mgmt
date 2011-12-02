@@ -4,8 +4,12 @@ body { }
 .RightPanel { float:right; width:500px; }
 .HomePageTable tr td { padding:20px; }
 .Clear { clear:both; }
-.TagList { background:#cccccc; width:300px; margin-left:35px; padding:10px; }
+.TagList { background:#cccccc; width:300px; margin-left:35px; padding:10px; text-align: justify; }
 .TagListHead { margin-left:35px; font-weight:bold; }
+.DelTag { background:#cccccc; margin:3px; cursor:pointer; }
 #searchForm { padding:30px; width:300px; }
 #assetTable tr td select { width:300px;  }
 #assetTable tr td { vertical-align:top; }
+#addTags { float:right; }
+#tags { width:300px; }
+#addTagButton { color: blue; cursor: pointer; text-decoration: underline; }
