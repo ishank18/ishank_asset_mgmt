@@ -16,7 +16,7 @@ IshankAssetMgmt::Application.routes.draw do
 	
   get 'change_form_content', :to => "assets#change_form_content", :as => :change_form_content
 	root :to => "home#index"
-	
+	get 'populate_asset', :to => "asset_employee_mappings#populate_asset", :as => :populate_asset
 
 	
   # The priority is based upon order of creation:

@@ -1,2 +1,16 @@
-<h1>Employees#index</h1>
-<p>Find me in app/views/employees/index.html.erb</p>
+<table width="800">
+	<tr>
+		<th>Employee Id</th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Action</th>
+	</tr>
+	<% @employees.each do |emp| %>
+	<tr>
+		<td><%= emp.company_id %></td>
+		<td><%= emp.name %></td>
+		<td><%= emp.email %></td>
+		<td><%= link_to 'Edit', edit_employee_path(emp.id.to_s) %></td>
+	</tr>
+	<% end %>
+</table>

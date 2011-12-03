@@ -1,10 +1,11 @@
 class AssetsController < ApplicationController
   
   def index
-  	
+  	@assets = Asset.all
   end
 
   def show
+  	
   end
 
   def edit
@@ -20,9 +21,7 @@ class AssetsController < ApplicationController
 	end
 	
 	def create
-	
 
-	
 		params[:asset][:purchase_date] = DateTime.strptime(params[:asset][:purchase_date], "%m/%d/20%y")
 		@category = params[:category]
 		@asset = Asset.new(params[:asset])
@@ -46,7 +45,7 @@ class AssetsController < ApplicationController
 		end	
 
 		if(@asset.save)
-			redirect_to assets_path, :alert => "Asset Successfully Added!"
+			
 			tags = params['tagsTextField'].split(",")
 			tags.each do |tag|
 				if(tag_element = Tag.find_by_name(tag.strip))
@@ -59,6 +58,7 @@ class AssetsController < ApplicationController
 					
 				end	
 			end	
+			redirect_to assets_path, :alert => "Asset Successfully Added!"
 		else
 			@asset.purchase_date = @asset.purchase_date.strftime("%m/%d/20%y")
 			render :action => "new"
