@@ -1,8 +1,9 @@
 class RegistrationsController < ApplicationController
 	
 	skip_before_filter :authenticate_admin!, :only => [:new]
-	before_filter :logged_in?
+  before_filter :logged_in?
   #prepend_before_filter :require_no_authentication, :only => [:create, :cancel ]
+  
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
   include Devise::Controllers::InternalHelpers
 

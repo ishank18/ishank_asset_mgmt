@@ -1,4 +1,6 @@
 class Asset < ActiveRecord::Base
+  ### validates presens of purchase date
+  
 	belongs_to :resource, :polymorphic => true
 	validates_presence_of :name
 	validates_numericality_of :cost, :allow_nil => true

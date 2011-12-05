@@ -3,6 +3,7 @@ class TagsController < ApplicationController
   end
 
   def show
+    ### Use where instead of find
   	@tag = Tag.find(params[:id])
   end
 

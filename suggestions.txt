@@ -1,0 +1,5 @@
+- Add database.yml.example 
+- Remove index.html, use git rm
+- Change admin password to be a min of 6 chars
+- Add flash msg after sending email to invite new admin
+

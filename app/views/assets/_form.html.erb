@@ -56,6 +56,7 @@ function delTag(currentTag) {
 	<div id='tags'></div>
 	
 </div>
+	<!-- Make a seperate partial for this - in shared -->
  <% if @asset.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@asset.errors.count, "error") %>
@@ -73,7 +74,9 @@ function delTag(currentTag) {
 	<tr>
 		<td>Category</td>
 		<td>
-			<% options = options_for_select([['-- Select --', ''], ['Laptop', 'laptop'], ['Network Device', 'network_device'], ['Mobile Phone', 'mobile_phone']],@category) %>
+			<!-- use allow blank -->
+			<!-- make seperate constant for choices -->
+			<% options = options_for_select([['-- Select --', ''], ['Laptop', 'laptop'], ['Network Device', 'network_device'], ['Mobile Phone', 'mobile_phone']]) %>
 			<%= select_tag(:category, options, :onChange => "changeForm()") %>
 
 		</td>
@@ -81,6 +84,7 @@ function delTag(currentTag) {
 	<tr>
 		<td><%= f.label :status %></td>
 		<td>
+			<!-- Make separate constant for this -->
 			<% options = options_for_select([['Operational', 'operational'], ['Recieved', 'recieved'], ['Spare', 'spare'], ['Repair', 'repair']]) %>
 			<%= f.select(:status, options) %>
 		</td>
