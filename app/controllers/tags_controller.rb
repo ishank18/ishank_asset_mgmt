@@ -4,7 +4,7 @@ class TagsController < ApplicationController
 
   def show
     ### Use where instead of find
-  	@tag = Tag.find(params[:id])
+  	@tag = Tag.where("id = ?", params[:id]).first
   end
 
   def edit

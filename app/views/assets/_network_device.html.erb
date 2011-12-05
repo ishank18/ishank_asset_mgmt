@@ -1,4 +1,10 @@
 <tr>
 	<td>Location</td>
-	<td><%= text_field_tag :location %></td>
+	<td>
+		<% if @asset.object_id != 4 %>
+			<%= text_field_tag :location, @asset.resource.location %>
+		<% else %>
+			<%= text_field_tag :location %>
+		<% end %>	
+	</td>
 </tr>

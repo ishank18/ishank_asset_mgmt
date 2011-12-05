@@ -76,8 +76,7 @@ function delTag(currentTag) {
 		<td>
 			<!-- use allow blank -->
 			<!-- make seperate constant for choices -->
-			<% options = options_for_select([['-- Select --', ''], ['Laptop', 'laptop'], ['Network Device', 'network_device'], ['Mobile Phone', 'mobile_phone']]) %>
-			<%= select_tag(:category, options, :onChange => "changeForm()") %>
+			<%= show_category @asset %>
 
 		</td>
 	</tr>
@@ -85,8 +84,7 @@ function delTag(currentTag) {
 		<td><%= f.label :status %></td>
 		<td>
 			<!-- Make separate constant for this -->
-			<% options = options_for_select([['Operational', 'operational'], ['Recieved', 'recieved'], ['Spare', 'spare'], ['Repair', 'repair']]) %>
-			<%= f.select(:status, options) %>
+			<%= f.select(:status, options_for_select(STATUS, @asset.status), :include_blank => "- Select -") %>
 		</td>
 	</tr>
 	<tr>
@@ -106,7 +104,7 @@ function delTag(currentTag) {
 		<td><%= f.datepicker :purchase_date %></td>
 	</tr>
 	<tr id="specifics">
-		
+		<%= render_specific_partial @asset.resource_type %>
 	</tr>
 	<tr>
 		<td><%= f.label :description %></td>

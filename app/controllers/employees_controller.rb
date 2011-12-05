@@ -7,6 +7,7 @@ class EmployeesController < ApplicationController
   end
 
   def edit
+  	@employee = Employee.where("id = ?", params[:id]).first
   end
 
   def new

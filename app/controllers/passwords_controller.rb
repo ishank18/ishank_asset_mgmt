@@ -10,12 +10,8 @@ class PasswordsController < ApplicationController
   end
 
   # POST /resource/password
-  def create *args
-  	if(!args.empty?)
-  		self.resource = resource_class.send_reset_password_instructions()
-  	else
-    	self.resource = resource_class.send_reset_password_instructions(params[resource_name])
-    end	
+  def create 
+  
     if successfully_sent?(resource)
       respond_with({}, :location => after_sending_reset_password_instructions_path_for(resource_name))
     else

@@ -1,4 +1,10 @@
 <tr>
 	<td>Operating System</td>
-	<td><%= text_field_tag :operating_system %></td>
+	<td>
+		<% if @asset.object_id != 4 %>
+			<%= text_field_tag :operating_system, @asset.resource.operating_system %>
+		<% else %>
+			<%= text_field_tag :operating_system %>
+		<% end %>	
+	</td>
 </tr>

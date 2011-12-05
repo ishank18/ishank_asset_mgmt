@@ -9,6 +9,8 @@ class AssetsController < ApplicationController
   end
 
   def edit
+  	@asset = Asset.where("id = ?", params[:id]).first
+  	@asset.purchase_date = @asset.purchase_date.strftime("%m/%d/20%y") if (@asset.purchase_date != "" && @asset.purchase_date != nil)
   end
 
   def new
@@ -22,10 +24,10 @@ class AssetsController < ApplicationController
 	
 	def create
     ### Cannot change params
-		params[:asset][:purchase_date] = DateTime.strptime(params[:asset][:purchase_date], "%m/%d/20%y")
+
 		@category = params[:category]
 		@asset = Asset.new(params[:asset])
-	
+		@asset.purchase_date = DateTime.strptime(params[:asset][:purchase_date], "%m/%d/20%y") unless(params[:asset][:purchase_date] == "")
 		if(@category == "laptop")
 			@laptop = Laptop.new(:operating_system => params[:operating_system], :has_bag => params[:has_bag])
 			@asset.resource = @laptop
@@ -53,7 +55,8 @@ class AssetsController < ApplicationController
 			end	
 			redirect_to assets_path, :alert => "Asset Successfully Added!"
 		else
-			@asset.purchase_date = @asset.purchase_date.strftime("%m/%d/20%y")
+			@category = params[:category]
+			@asset.purchase_date = @asset.purchase_date.strftime("%m/%d/20%y") unless(params[:asset][:purchase_date] == "")
 			render :action => "new"
 		end	
 	end	
