@@ -118,6 +118,5 @@ class RegistrationsController < ApplicationController
     			redirect_to(new_admin_session_path)
     		end	
     		
-
     end
 end
