@@ -8,7 +8,7 @@ IshankAssetMgmt::Application.routes.draw do
 																													:confirmations => "confirmations"}
 	
 	post 'saerch', :to => "home#search", :as => :search
-	
+	resources "add_admins"
   resources "tags"
   resources "employees"
   resources "asset_employee_mappings"

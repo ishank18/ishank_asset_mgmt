@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
 		
 		def index
-			 @tags = Tag.all
+			p session
+			@tags = Tag.all
 		end
 		
 		  

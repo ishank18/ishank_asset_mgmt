@@ -13,3 +13,4 @@ body { }
 #addTags { float:right; }
 #tags { width:300px; }
 #addTagButton { color: blue; cursor: pointer; text-decoration: underline; }
+#notice { text-align:center; }
