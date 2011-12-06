@@ -1,2 +1,27 @@
-<h1>Employees#show</h1>
-<p>Find me in app/views/employees/show.html.erb</p>
+<h2 align='center'><%= @employee.name %></h2>
+
+<table  width="800" class="ShowTable" align='center'>
+	<tr>
+		<td width="200px;">EmployeeId</td>
+		<td><%= @employee.company_id %></td>
+	</tr>
+	<tr >
+		<td>Name</td>
+		<td><%= @employee.name %></td>
+	</tr>
+	<tr>
+		<td>E- Mail</td>
+		<td><%= @employee.email %></td>
+	</tr>
+	<tr>
+		<td>Actions</td>
+		<td>
+			<%= link_to 'Edit', edit_employee_path(@employee) %> &nbsp;
+			<%= link_to 'Return Asset', return_asset_path(@employee) %>
+		</td>
+	</tr>
+</table>
+
+<script>
+	$(".ShowTable tr:even").addClass("AlternateRow");
+</script>

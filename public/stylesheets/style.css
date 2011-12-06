@@ -1,4 +1,6 @@
 body { }
+a { color:#0008a8; text-decoration:none; }
+a:hover { color:red; }
 #container { border:1px solid; }
 .LeftPanel { float:left; }
 .RightPanel { float:right; width:500px; }
@@ -7,7 +9,11 @@ body { }
 .TagList { background:#cccccc; width:300px; margin-left:35px; padding:10px; text-align: justify; }
 .TagListHead { margin-left:35px; font-weight:bold; }
 .DelTag { background:#cccccc; margin:3px; cursor:pointer; padding-left:17px; background: url("../images/cross.gif") no-repeat scroll 0 0 grey; }
-#searchForm { padding:30px; width:300px; }
+.ShowTable { border:1px solid; width: 800px; }
+.ShowTable tr td {  padding:4px; }
+.AlternateRow { background: #AADfaa; }
+#searchBox { float:left; background:#eee; width:400px; padding:5px; margin-top:25px; }
+#searchForm { padding:30px; width:300px; background:#FEFEFE }
 #assetTable tr td select { width:300px;  }
 #assetTable tr td { vertical-align:top; }
 #addTags { float:right; }

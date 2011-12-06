@@ -7,4 +7,10 @@ class Asset < ActiveRecord::Base
 	validates_length_of :cost, :maximum => 10
 	has_and_belongs_to_many :tags, :join_table => 'assets_tags'
 	has_many :asset_employee_mappings
+	
+	
+	define_index do
+		indexes :name
+	end
+	
 end

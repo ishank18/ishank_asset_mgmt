@@ -1,3 +1,13 @@
+<script>
+function ajaxSearch() {
+	$.ajax({
+    url: '<%= search_path %>', 
+    dataType: 'script',
+    type: 'get', 
+    data: 'query_for_asset='+$("#query_for_asset").attr("value")+"&query_for_emp="+$("#query_for_emp").attr("value")
+  });
+}
+</script>
 <span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
 <h1 align='center'>Welcome Admin!</h1>
 
@@ -25,22 +35,19 @@
 	
 	
 	</div>
+	<div id="searchBox">
+	</div>
 	<div class='RightPanel'>
-		<%= form_tag search_path do %>
 		<table id='searchForm'>
 			<tr>
-				<td><%= text_field_tag 'text' %> </td>
-				<td>
-					<% options = options_for_select([['Employee', 'employee'], ['Asset', 'asset']]) %>
-					<%= select_tag(:search_type, options) %>
-				</td>
+				<td>Asset<br><%= text_field_tag 'query_for_asset' %> </td>
+				<td>Employee<br><%= text_field_tag 'query_for_emp' %> </td>
 			</tr>
 			<tr>
-				<td><%= submit_tag "Search!" %></td>
+				<td><input type="button" value="Search!" onclick="ajaxSearch();" /></td>
 				<td></td>
 			</tr>
 		</table>
-		<% end %>
 		<span class='TagListHead'>Tag List</span>
 		<div class='TagList'>
 		<% @tags.each do |tag| %>

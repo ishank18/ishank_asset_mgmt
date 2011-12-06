@@ -1,4 +1,6 @@
-<table width="800">
+<h2 align='center'>All Assets</h2>
+
+<table width="800" class="ShowTable" align='center'>
 	<tr>
 		<th>Product Id</th>
 		<th>Name</th>
@@ -12,7 +14,11 @@
 		<td><%= link_to asset.name, asset %></td>
 		<td><%= asset.status %></td>
 		<td><%= show_employee asset %></td>
-		<td><%= link_to 'Edit', edit_asset_path(asset.id.to_s) %></td>
+		<td><%= link_to 'Edit', edit_asset_path(asset) %></td>
 	</tr>
 	<% end %>
 </table>
+
+<script>
+	$(".ShowTable tr:odd").addClass("AlternateRow");
+</script>

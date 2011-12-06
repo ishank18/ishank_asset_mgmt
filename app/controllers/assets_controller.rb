@@ -5,7 +5,7 @@ class AssetsController < ApplicationController
   end
 
   def show
-  	
+  	@asset = Asset.where("id = ?", params[:id]).first
   end
 
   def edit

@@ -8,6 +8,14 @@ module AssetsHelper
 		end
 	end
 	
+	def show_status asset
+		if(asset.status == "Assigned")
+			"Assigned to #{link_to asset.asset_employee_mappings.first.employee.name, asset.asset_employee_mappings.first.employee}".html_safe
+		else
+			asset.status
+		end
+	end
+	
 	def show_category asset
 		if(asset.id)
 			asset.resource_type
@@ -26,5 +34,13 @@ module AssetsHelper
 		else		
 		end	
 	end
+	
+	def date_to_string date_obj
+  	if(date_obj != "" && date_obj != nil)
+  		date_obj.strftime("%B %d, %Y")
+  	else
+  		""	
+  	end	
+  end
 	
 end

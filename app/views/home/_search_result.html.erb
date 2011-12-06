@@ -1,0 +1,10 @@
+<h2>Search result</h2>
+
+<% if(@result.count == 0) %>
+	<%= "Sorry No results found ".html_safe %>
+<% else %>
+	<%= "Displaying <b>#{@result.count}</b> results found".html_safe %><br><br>
+	<% @result.each do |res| %>
+		<%= link_to res.name, res %><br>
+	<% end %>
+<% end %>

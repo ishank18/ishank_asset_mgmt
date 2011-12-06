@@ -7,13 +7,13 @@ IshankAssetMgmt::Application.routes.draw do
 	devise_for :admins, :controllers => { :registrations => "admin/registrations", 
 																													:confirmations => "confirmations"}
 	
-	post 'saerch', :to => "home#search", :as => :search
+	get 'search', :to => "home#search", :as => :search
 	resources "add_admins"
   resources "tags"
   resources "employees"
   resources "asset_employee_mappings"
 	resources 'assets'
-	
+	get "return/:employee_id", :to => "asset_employee_mappings#return_asset", :as => :return_asset
   get 'change_form_content', :to => "assets#change_form_content", :as => :change_form_content
 	root :to => "home#index"
 	get 'populate_asset', :to => "asset_employee_mappings#populate_asset", :as => :populate_asset

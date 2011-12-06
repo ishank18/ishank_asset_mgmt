@@ -6,6 +6,10 @@ class HomeController < ApplicationController
 		
 		  
 		def search
+			@query_for_asset = params[:query_for_asset]
+			@query_for_emp = params[:query_for_emp]
 			
+			@result = []
 		end
+		
 end

@@ -9,6 +9,10 @@ class Employee < ActiveRecord::Base
 	validates_presence_of :name, :email, :company_id
 	has_many :asset_employee_mappings
 	
+	define_index do
+		indexes :name
+	end
+	
 	def positive_emp_id
 		errors.add(:company_id, "should be a positive value") if (company_id.nil? || company_id < 0.01)
 	end

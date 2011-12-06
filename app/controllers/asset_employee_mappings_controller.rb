@@ -35,6 +35,11 @@ class AssetEmployeeMappingsController < ApplicationController
 		
 	end
 	
+	def return_asset
+		@aem = AssetEmployeeMapping.where("employee_id = ?", params[:employee_id]).first
+		
+	end
+	
 	
 	def get_all_employee
 		options_for_emp = []

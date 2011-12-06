@@ -1,0 +1,24 @@
+<%= form_for(@aem) do |f| %>
+<table>
+	<tr>
+		<td>Employee Name</td>
+		<td><%= @aem.employee.name %></td>
+	</tr>
+	<tr>
+		<td>Asset Name</td>
+		<td><%= @aem.employee.name %></td>
+	</tr>
+	<tr>
+		<td>Date</td>
+		<td><%= f.datepicker :date_returned %></td>
+	</tr>
+	<tr>
+		<td>Remark</td>
+		<td><%= f.text_area :remark, :rows => 3, :columns => 80 %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><%= f.submit "Return Asset!" %></td>
+	</tr>
+</table>
+<% end %>

@@ -1,0 +1,68 @@
+
+
+<h2 align='center'><%= @asset.name %></h2>
+<table class='ShowTable' align='center'>
+	<tr>
+		<td width="200px;">Id</td>
+		<td><%= @asset.id %></td>
+	</tr>
+	<tr >
+		<td>Name</td>
+		<td><%= @asset.name %></td>
+	</tr>
+	<tr>
+		<td>Status</td>
+		<td><%= show_status @asset %></td>
+	</tr>
+	<tr >
+		<td>Cost</td>
+		<td><%= @asset.cost %></td>
+	</tr>
+	<tr>
+		<td>Category</td>
+		<td><%= @asset.resource_type %></td>
+	</tr>
+	<tr >
+		<td>Serial Number</td>
+		<td><%= @asset.serial_number %></td>
+	</tr>
+	<tr>
+		<td>Purchase date</td>
+		<td><%= date_to_string @asset.purchase_date %></td>
+	</tr>
+	<% if(@asset.resource_type == "MobilePhone" || @asset.resource_type == "Laptop" ) %>
+		<tr >
+			<td>Operating System</td>
+			<td><%= @asset.resource.operating_system %></td>
+		</tr>
+	<% end %>
+	<% if(@asset.resource_type == "Laptop" ) %>
+		<tr>
+			<td>Has Bag</td>
+			<td><%= ((@asset.resource.has_bag.to_s.length != 0)? "Yes" : "No" ).to_s %></td>
+		</tr>
+	<% end %>
+	<% if(@asset.resource_type == "NetworkDevice" ) %>
+		<tr >
+			<td >Location</td>
+			<td><%= @asset.resource.location %></td>
+		</tr>
+	<% end %>
+	<tr >
+		<td>Additional Info</td>
+		<td><%= @asset.additional_info %></td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td><%= @asset.description %></td>
+	</tr>
+	<tr>
+		<td>Actions</td>
+		<td><%= link_to 'Edit', edit_asset_path(@asset) %></td>
+	</tr>
+</table>
+
+
+<script>
+	$(".ShowTable tr:even").addClass("AlternateRow");
+</script>
