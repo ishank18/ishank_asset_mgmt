@@ -1,20 +1,22 @@
-<tr>
-	<td>Operating System</td>
-	<td>
-		<% if @asset.object_id != 4 %>
-			<%= text_field_tag :operating_system, @asset.resource.operating_system %>
-		<% else %>
-			<%= text_field_tag :operating_system %>
-		<% end %>	
-	</td>
-</tr>
-<tr>
-	<td>Has Bag</td>
-	<td>
-		<% if @asset.object_id != 4 %>
-			<%= check_box_tag "laptop[has_bag]", @asset.resource.has_bag, !@asset.resource.has_bag.nil? %>
-		<% else %>
-			<%= check_box_tag :has_bag %>
-		<% end %>	
-	</td>
-</tr>
+<table>
+	<tr>
+		<td>Operating System</td>
+		<td>
+			<% if !@asset.nil? %>
+				<%= text_field_tag :operating_system, @asset.resource.operating_system %>
+			<% else %>
+				<%= text_field_tag :operating_system %>
+			<% end %>	
+		</td>
+	</tr>
+	<tr>
+		<td>Has Bag</td>
+		<td>
+			<% if !@asset.nil? %>
+				<%= check_box_tag :has_bag, @asset.resource.has_bag, !@asset.resource.has_bag.nil? %>
+			<% else %>
+				<%= check_box_tag :has_bag %>
+			<% end %>	
+		</td>
+	</tr>
+</table>	

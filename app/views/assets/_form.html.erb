@@ -103,8 +103,12 @@ function delTag(currentTag) {
 		<td><%= f.label :purchase_date %></td>
 		<td><%= f.datepicker :purchase_date %></td>
 	</tr>
-	<tr id="specifics">
-		<%= render_specific_partial @asset.resource_type %>
+	<tr >
+		<td colspan=2>
+		<div id="specifics">
+			<%= render_specific_partial @asset.resource_type %>
+		</div>
+		</td>
 	</tr>
 	<tr>
 		<td><%= f.label :description %></td>

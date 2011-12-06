@@ -23,4 +23,13 @@ class EmployeesController < ApplicationController
 		end		
 	end
 
+	def update
+		@employee = Employee.where("id = ?", params[:id]).first
+		if @employee.update_attributes(params[:employee])
+			redirect_to(@employee, :alert => 'Employee details successfully updated.')
+		else
+			render :action => "edit"
+		end
+	end
+
 end
