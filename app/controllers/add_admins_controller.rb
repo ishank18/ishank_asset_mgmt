@@ -1,3 +1,4 @@
+### Change it to adminscontroller
 class AddAdminsController < ApplicationController
   
   def new

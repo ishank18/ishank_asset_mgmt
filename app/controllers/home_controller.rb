@@ -11,7 +11,7 @@ class HomeController < ApplicationController
 			
 			asset_result = Asset.where("name like '%#{@query_for_asset}%'")
 			emp_result = Employee.where("name like '%#{@query_for_emp}%'")
-			
+			### Put in model
 			if(@query_for_emp == "")
 				@result = asset_result
 			elsif(@query_for_asset == "")
