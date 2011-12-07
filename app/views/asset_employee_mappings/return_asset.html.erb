@@ -1,16 +1,48 @@
+<script>
+
+function changeForm() {
+	$.ajax({
+    url: '<%= change_aem_form_path %>', 
+    dataType: 'script',
+    type: 'get', 
+    data: 'employee_id=<%= @aem.employee_id %>&asset_id='+$("#asset_employee_mapping_asset_id").attr("value")
+  });
+}
+
+</script>
+
+<h2 align='center'>Return Asset</h2>
+
 <%= form_for(@aem) do |f| %>
-<table>
+<table width="800" class="ShowTable" align='center'>
 	<tr>
 		<td>Employee Name</td>
-		<td><%= @aem.employee.name %></td>
+		<td>
+			<%= @aem.employee.name %>
+			<%= f.hidden_field :employee_id %>
+		</td>
 	</tr>
 	<tr>
 		<td>Asset Name</td>
-		<td><%= @aem.employee.name %></td>
+		<td><%= f.select :asset_id,  options_for_select(@options_for_asset), {}, :onchange => "changeForm();" %></td>
 	</tr>
 	<tr>
-		<td>Date</td>
-		<td><%= f.datepicker :date_returned %></td>
+		<td>Issued on</td>
+		<td id='issued_on'><%= date_to_string @aem.date_issued %></td>
+	</tr>
+	<tr>
+		<td>Assignment Type</td>
+		<td id='assignment_type'><%= @aem.assignment_type %></td>
+	</tr>
+	<tr>
+		<td>Return date</td>
+		<td>
+			<%= text_field_tag :return_date %>
+			<script>
+				jQuery(document).ready(function(){$('#return_date').datepicker({})});
+			</script>
+			<span id='scheduled_date'><%= show_scheduled_date @aem.date_returned %></span>
+			</td>
 	</tr>
 	<tr>
 		<td>Remark</td>
@@ -22,3 +54,7 @@
 	</tr>
 </table>
 <% end %>
+
+<script>
+	$(".ShowTable tr:even").addClass("AlternateRow");
+</script>

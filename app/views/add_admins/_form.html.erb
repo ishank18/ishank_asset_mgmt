@@ -1,8 +1,8 @@
-<h2>Add Admin</h2>
+<h2 align='center'>Add Admin</h2>
 
 <%= form_tag add_admins_path, :method => :post do %>
 
- <% if @admin.errors.any? %>
+ 	<% if @admin.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin.errors.count, "error") %>
         prohibited this user from being saved:</h2>
@@ -14,9 +14,18 @@
     </div>
   <% end %>
   
-  <div>E - mail<br />
-  <%= email_field_tag :email %></div>
-
-  <div><%= submit_tag "Add Admin" %></div>
+  <table width="800" class="ShowTable" align='center'>
+		<tr>
+			<td>E - mail</td>
+			<td><%= email_field_tag :email %></td>
+		</tr>	
+		<tr>
+			<td></td>
+			<td><%= submit_tag "Add Admin" %></td>
+		</tr>	
+  </table>
   
 <% end %>
+<script>
+	$(".ShowTable tr:odd").addClass("AlternateRow");
+</script>

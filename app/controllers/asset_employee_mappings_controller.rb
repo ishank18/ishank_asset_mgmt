@@ -35,11 +35,38 @@ class AssetEmployeeMappingsController < ApplicationController
 		
 	end
 	
-	def return_asset
-		@aem = AssetEmployeeMapping.where("employee_id = ?", params[:employee_id]).first
-		
+	def update
+		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ?", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
+		@aem.date_returned = string_to_date params[:return_date]
+		@aem.asset.status = "spare"
+		@aem.asset.save!
+		if(@aem.update_attributes(params[:asset_employee_mapping]))
+			redirect_to employee_path(@aem.employee), :alert => "Asset Successfully Returned!"
+		else
+			render :action => return_asset
+		end
 	end
 	
+	def return_asset
+		aem_array = AssetEmployeeMapping.where("employee_id = ?", params[:employee_id])
+		#@aem = aem_array.first
+		@options_for_asset = []
+		aem_array.each do |aem|
+			if(aem.asset.status == "Assigned")
+				@aem ||= aem
+				currOpt = []
+				currOpt << aem.asset.name
+				currOpt << aem.asset_id
+				@options_for_asset << currOpt
+			end	
+		end
+	end
+	
+	def change_aem_form
+		emp_id = params[:employee_id]
+		ast_id = params[:asset_id]
+		@aem = AssetEmployeeMapping.where("asset_id = ? and employee_id = ?", ast_id, emp_id).first
+	end
 	
 	def get_all_employee
 		options_for_emp = []

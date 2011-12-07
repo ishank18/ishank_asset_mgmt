@@ -38,7 +38,7 @@ function disableTo(currEle) {
     </div>
   <% end %>
 
-<table id='assetTable'>
+<table id='assetTable' width="800" class="ShowTable" align='center'>
 
 	<tr>
 		<td><label>Product Category</label></td>
@@ -94,3 +94,7 @@ function disableTo(currEle) {
 </table>
 <% end %>
 
+
+<script>
+	$(".ShowTable tr:even").addClass("AlternateRow");
+</script>

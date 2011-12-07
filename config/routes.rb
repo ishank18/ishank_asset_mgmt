@@ -6,7 +6,8 @@ IshankAssetMgmt::Application.routes.draw do
 	
 	devise_for :admins, :controllers => { :registrations => "admin/registrations", 
 																													:confirmations => "confirmations"}
-	
+																													
+	get "change_aem_form", :to => "asset_employee_mappings#change_aem_form", :as => "change_aem_form"
 	get 'search', :to => "home#search", :as => :search
 	resources "add_admins"
   resources "tags"

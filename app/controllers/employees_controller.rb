@@ -20,7 +20,7 @@ class EmployeesController < ApplicationController
 		if(@employee.save)
 			redirect_to employees_path, :alert => "Asset Successfully Added!"
 		else
-			render :partial => "form"	
+			render :action => "new"	
 		end		
 	end
 

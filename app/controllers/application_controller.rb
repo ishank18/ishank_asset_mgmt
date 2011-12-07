@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   	if(date_obj != "" && date_obj != nil)
   		date_obj.strftime("%m/%d/%Y")
   	else
-  		""	
+  		""
   	end	
   end
   	

@@ -4,7 +4,11 @@ module AssetsHelper
 		if(asset.asset_employee_mappings.empty?)
 			"-"
 		else
-			link_to asset.asset_employee_mappings.first.employee.name, asset.asset_employee_mappings.first.employee
+			if(asset.status == "Assigned")
+				link_to asset.asset_employee_mappings.first.employee.name, asset.asset_employee_mappings.first.employee
+			else
+				"-"	
+			end
 		end
 	end
 	
@@ -35,12 +39,6 @@ module AssetsHelper
 		end	
 	end
 	
-	def date_to_string date_obj
-  	if(date_obj != "" && date_obj != nil)
-  		date_obj.strftime("%B %d, %Y")
-  	else
-  		""	
-  	end	
-  end
+	
 	
 end
