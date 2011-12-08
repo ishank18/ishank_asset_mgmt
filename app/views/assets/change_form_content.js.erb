@@ -1,2 +1,2 @@
 $('#specifics').html("");
-$('#specifics').html("<%= escape_javascript(render :partial => @sp_asset.to_s )%>");
+$('#specifics').html("<%= escape_javascript(render :partial => params[:category] )%>");

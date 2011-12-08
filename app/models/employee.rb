@@ -6,12 +6,18 @@ class Employee < ActiveRecord::Base
   validate :positive_emp_id
 	
 	### Do in rails 3 way ex - validates :name, :presence => true, :uniqueness => true
+	validates :email, :presence => true, :uniqueness => true
+	
+	
+	
 	validates_uniqueness_of :company_id, :email
 	validates_numericality_of :company_id
 	validates_presence_of :name, :email, :company_id
 	
   #### Use has many through
-	has_many :asset_employee_mappings
+  
+  has_many :asset_employee_mappings
+	has_many :assets, :through => :asset_employee_mappings
 	
   # define_index do
   #   indexes :name

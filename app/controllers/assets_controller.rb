@@ -12,10 +12,6 @@ class AssetsController < ApplicationController
 
   def new
   	@asset = Asset.new
-<<<<<<< HEAD
-  	#@category = ""
-=======
->>>>>>> ffd953e85c040ad123e052b9d686eaec41d01dd2
   end
   
   def create
@@ -42,13 +38,13 @@ class AssetsController < ApplicationController
 
 
 	def change_form_content
-		@sp_asset = params[:category]
 	end
 
 
 	def update
 		@asset = Asset.where(:id => params[:id]).first
 		params[:asset][:purchase_date] = string_to_date params[:asset][:purchase_date]
+		
 		if @asset.update_attributes(params[:asset])
 			category = @asset.resource_type
 			if(category == "Laptop")
