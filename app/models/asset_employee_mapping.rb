@@ -25,6 +25,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 			}
 			Employee.find_by_sql(sql)
 		else
+			[]
 		end
 	end
 	

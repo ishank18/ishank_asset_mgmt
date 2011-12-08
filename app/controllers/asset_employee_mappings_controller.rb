@@ -37,7 +37,7 @@ class AssetEmployeeMappingsController < ApplicationController
 	end
 	
 	def update
-		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ?", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
+		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ? and status = 'Assigned'", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
 		@aem.date_returned = string_to_date params[:return_date]
 		@aem.status = "returned"
 		@aem.asset.status = "spare"
@@ -50,11 +50,10 @@ class AssetEmployeeMappingsController < ApplicationController
 	end
 	
 	def return_asset
-		aem_array = AssetEmployeeMapping.where("employee_id = ?", params[:employee_id])
-		#@aem = aem_array.first
+		aem_array = AssetEmployeeMapping.where("employee_id = ?", params[:id])
 		@options_for_asset = []
 		aem_array.each do |aem|
-			if(aem.asset.status == "Assigned")
+			if(aem.asset.status == "Assigned" && aem.status == "Assigned")
 				@aem ||= aem
 				currOpt = []
 				currOpt << aem.asset.name

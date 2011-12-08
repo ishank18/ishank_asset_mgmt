@@ -58,7 +58,10 @@
 	</tr>
 	<tr>
 		<td>Actions</td>
-		<td><%= link_to 'Edit', edit_asset_path(@asset) %></td>
+		<td>
+			<%= link_to 'Edit', edit_asset_path(@asset) %>
+			<%= link_to 'Return Asset', return_asset_path(:type => "asset", :id => @asset.id.to_s) if @asset.status == "Assigned" %>
+		</td>
 	</tr>
 </table>
 

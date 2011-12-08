@@ -4,22 +4,32 @@ IshankAssetMgmt::Application.routes.draw do
 		match '/admins/confirmation' => 'confirmations#update', :via => :put, :as => :update_admin_confirmation
 	end
 	
-	devise_for :admins, :controllers => { :registrations => "admin/registrations", 
-																													:confirmations => "confirmations"}
+	devise_for :admins, :controllers => { :registrations => "admin/registrations", :confirmations => "confirmations"}
 																													
 	get "change_aem_form", :to => "asset_employee_mappings#change_aem_form", :as => "change_aem_form"
+	
 	get 'search', :to => "home#search", :as => :search
-	resources "add_admins"
+	
+	resources "admins"
+	
   resources "tags"
+  
   resources "employees"
+  
   resources "asset_employee_mappings"
+  
 	resources 'assets'
-	get "return/:employee_id", :to => "asset_employee_mappings#return_asset", :as => :return_asset
+	
+	get "return/:type/:id", :to => "asset_employee_mappings#return_asset", :as => :return_asset
+	
   get 'change_form_content', :to => "assets#change_form_content", :as => :change_form_content
-	root :to => "home#index"
+	
 	get 'populate_asset', :to => "asset_employee_mappings#populate_asset", :as => :populate_asset
+	
 	get 'show_tag', :to => "home#show_tag", :as => :show_tag
 	
+	root :to => "home#index"
+		
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
