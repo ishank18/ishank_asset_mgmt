@@ -1,6 +1,13 @@
 module AssetsHelper
 
 	def show_employee asset
+	  
+    # if asset.status == "Assigned"
+    #       link_to asset.employees.first.name, asset.asset_employee_mappings.first.employee
+    # else
+    #   "-"
+    # end 
+	  
 		if(asset.asset_employee_mappings.empty?)
 			"-"
 		else
@@ -21,10 +28,10 @@ module AssetsHelper
 	end
 	
 	def show_category asset
-		if(asset.id)
+		if !asset.new_record?
 			asset.resource_type
 		else
-			select_tag "category", options_for_select(CATEGORY, @category), :include_blank => "- Select -", :onchange => "changeForm()"	
+			select_tag "category", options_for_select(CATEGORY, params[:category] || ""), :include_blank => "- Select -", :onchange => "changeForm()"	
 		end
 	end
 	
@@ -35,7 +42,6 @@ module AssetsHelper
 			render :partial => "network_device"
 		elsif(rt == "MobilePhone")
 			render :partial => "mobile_phone"
-		else		
 		end	
 	end
 	

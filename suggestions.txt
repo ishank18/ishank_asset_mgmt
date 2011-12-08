@@ -3,3 +3,6 @@
 - Change admin password to be a min of 6 chars
 - Add flash msg after sending email to invite new admin
 
+- View all assets - if no asset, dont show table headings, show 'add new asset' link
+
+

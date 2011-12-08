@@ -6,11 +6,13 @@ class Asset < ActiveRecord::Base
 	validates_numericality_of :cost, :allow_nil => true
 	validates_length_of :cost, :maximum => 10
 	has_and_belongs_to_many :tags, :join_table => 'assets_tags'
+  
+  ## Use has many through for asset ans employees through asset_employee_mappings
 	has_many :asset_employee_mappings
 	
 	
-	define_index do
-		indexes :name
-	end
+  # define_index do
+  #   indexes :name
+  # end
 	
 end
