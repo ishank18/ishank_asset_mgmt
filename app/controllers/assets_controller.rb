@@ -4,27 +4,21 @@ class AssetsController < ApplicationController
   	@assets = Asset.all
   end
 
+
   def show
   	@asset = Asset.where(:id => params[:id]).first
   end
 
-  def edit
-  	@asset = Asset.where(:id => params[:id]).first
-  	@asset.purchase_date = date_to_string @asset.purchase_date
-  end
 
   def new
   	@asset = Asset.new
+<<<<<<< HEAD
   	#@category = ""
+=======
+>>>>>>> ffd953e85c040ad123e052b9d686eaec41d01dd2
   end
-
-	def change_form_content
-		@sp_asset = params[:category]
-	end
-	
-	def create
-    ### Cannot change params
-
+  
+  def create
 		@asset = Asset.new(params[:asset])
 		@asset.purchase_date = string_to_date params[:asset][:purchase_date]
 		add_to_category params
@@ -38,7 +32,18 @@ class AssetsController < ApplicationController
 			render :action => "new"
 		end	
 	end	
+  
 
+  def edit
+    ### extract below line in asset
+  	@asset = Asset.where(:id => params[:id]).first
+  	@asset.purchase_date = date_to_string @asset.purchase_date
+  end
+
+
+	def change_form_content
+		@sp_asset = params[:category]
+	end
 
 
 	def update
@@ -52,12 +57,11 @@ class AssetsController < ApplicationController
 				@asset.resource.update_attributes(:operating_system => params[:operating_system])
 			elsif(category == "NetworkDevice")
 				@asset.resource.update_attributes(:location => params[:location])
-			else	
 			end
+
 			add_tags params['tagsTextField']
 			redirect_to @asset, :alert => "Asset Successfully updated"
 		else
-			@category = params[:category]
 			@asset.purchase_date = date_to_string @asset.purchase_date
 			render :action => "edit"
 		end
@@ -90,7 +94,6 @@ class AssetsController < ApplicationController
 		elsif(category == "network_device")
 			@network_device = NetworkDevice.new(:location => params[:location])
 			@asset.resource = @network_device
-		else
 		end	
 	end
 	

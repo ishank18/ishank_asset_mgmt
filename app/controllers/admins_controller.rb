@@ -6,7 +6,7 @@ class AdminsController < ApplicationController
 
 	def create
 		@admin = Admin.new(:email => params[:email])
-		if(@admin.save)
+		if @admin.save
 			redirect_to :root, :alert => "Confirmation mail has been successfully send!"
 		else
 			render :partial => "form"

@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   	
   def string_to_date str
+  	### Use try method
+
   	unless(str.blank?)
   		DateTime.strptime(str, "%m/%d/%Y")
   	else
@@ -11,6 +13,8 @@ class ApplicationController < ActionController::Base
   end
   
   def date_to_string date_obj
+  	### Use try method
+  	
   	unless(date_obj.blank?)
   		date_obj.strftime("%m/%d/%Y")
   	else
