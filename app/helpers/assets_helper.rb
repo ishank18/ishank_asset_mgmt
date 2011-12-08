@@ -21,10 +21,10 @@ module AssetsHelper
 	end
 	
 	def show_category asset
-		if(asset.id)
+		if !asset.new_record?
 			asset.resource_type
 		else
-			select_tag "category", options_for_select(CATEGORY, @category), :include_blank => "- Select -", :onchange => "changeForm()"	
+			select_tag "category", options_for_select(CATEGORY, @category || ""), :include_blank => "- Select -", :onchange => "changeForm()"	
 		end
 	end
 	

@@ -15,7 +15,7 @@ class AssetsController < ApplicationController
 
   def new
   	@asset = Asset.new
-  	@category = ""
+  	#@category = ""
   end
 
 	def change_form_content
