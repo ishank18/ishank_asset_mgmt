@@ -61,7 +61,7 @@ function showTag(tag_id) {
 		<span class='TagListHead'>Tag List</span>
 		<div class='TagList'>
 		<% @tags.each do |tag| %>
-			<span class='TagSpan' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
+			<span class='<%= tag_class tag %>' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
 		<% end %>
 		</div>
 		<br>

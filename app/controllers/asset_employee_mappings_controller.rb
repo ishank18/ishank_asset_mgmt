@@ -50,7 +50,12 @@ class AssetEmployeeMappingsController < ApplicationController
 	end
 	
 	def return_asset
-		aem_array = AssetEmployeeMapping.where("employee_id = ?", params[:id])
+		@return_type = params[:type]
+		if(@return_type == "employee")
+			aem_array = AssetEmployeeMapping.where(:employee_id => params[:id])
+		else
+			aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned")
+		end	
 		@options_for_asset = []
 		aem_array.each do |aem|
 			if(aem.asset.status == "Assigned" && aem.status == "Assigned")

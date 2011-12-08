@@ -24,7 +24,7 @@ function changeForm() {
 	</tr>
 	<tr>
 		<td>Asset Name</td>
-		<td><%= f.select :asset_id,  options_for_select(@options_for_asset), {}, :onchange => "changeForm();" %></td>
+		<td><%= asset_name @options_for_asset, f %></td>
 	</tr>
 	<tr>
 		<td>Issued on</td>
