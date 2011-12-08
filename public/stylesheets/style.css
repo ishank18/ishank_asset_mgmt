@@ -2,6 +2,8 @@ body { }
 a { color:#0008a8; text-decoration:none; }
 a:hover { color:red; }
 #container { border:1px solid; }
+.TagSpan { cursor:pointer; color:blue; }
+.TagSpan:hover { color:red; }
 .LeftPanel { float:left; }
 .RightPanel { float:right; width:500px; }
 .HomePageTable tr td { padding:20px; }
@@ -12,7 +14,7 @@ a:hover { color:red; }
 .ShowTable { border:1px solid; width: 800px; }
 .ShowTable tr td {  padding:4px; }
 .AlternateRow { background: #AADfaa; }
-#searchBox { float:left; background:#eee; width:400px; padding:5px; margin-top:25px; }
+.searchBox { float:left; background:#eee; width:400px; padding:5px; margin-top:25px; }
 #searchForm { padding:30px; width:300px; background:#FEFEFE }
 #assetTable tr td select { width:300px;  }
 #assetTable tr td { vertical-align:top; }

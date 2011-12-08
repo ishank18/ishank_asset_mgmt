@@ -1,0 +1,5 @@
+<h2>Tag - <%= @tag.name %></h2>
+
+<% @tag.assets.each do |asset| %>
+	<%= link_to asset.name, asset %><br>
+<% end %>

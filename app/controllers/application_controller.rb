@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   	
   def string_to_date str
-  	if(str != "" && str != nil)
+  	unless(str.blank?)
   		DateTime.strptime(str, "%m/%d/%Y")
   	else
   		nil	
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
   
   def date_to_string date_obj
-  	if(date_obj != "" && date_obj != nil)
+  	unless(date_obj.blank?)
   		date_obj.strftime("%m/%d/%Y")
   	else
   		""

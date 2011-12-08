@@ -23,6 +23,7 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem = AssetEmployeeMapping.new(aem_params)
 		@aem.date_issued = string_to_date aem_params[:date_issued]
 		@aem.date_returned = string_to_date aem_params[:date_returned]
+		@aem.status = "Assigned"
 		@options_for_emp = get_all_employee
 		if(@aem.save)
 			Asset.update(aem_params[:asset_id], :status => "Assigned")
@@ -38,6 +39,7 @@ class AssetEmployeeMappingsController < ApplicationController
 	def update
 		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ?", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
 		@aem.date_returned = string_to_date params[:return_date]
+		@aem.status = "returned"
 		@aem.asset.status = "spare"
 		@aem.asset.save!
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
