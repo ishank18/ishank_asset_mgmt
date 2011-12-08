@@ -7,6 +7,16 @@ function ajaxSearch() {
     data: 'query_for_asset='+$("#query_for_asset").attr("value")+"&query_for_emp="+$("#query_for_emp").attr("value")
   });
 }
+
+function showTag(tag_id) {
+	$.ajax({
+    url: '<%= show_tag_path %>', 
+    dataType: 'script',
+    type: 'get', 
+    data: 'tag_id='+tag_id
+  });
+}
+
 </script>
 <span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
 <h1 align='center'>Welcome Admin!</h1>
@@ -28,7 +38,7 @@ function ajaxSearch() {
 			</tr>
 			<tr>
 				<td><%= link_to 'Assign asset', new_asset_employee_mapping_path %></td>
-				<td><%= link_to 'Add new admin', new_add_admin_path %></td>
+				<td><%= link_to 'Add new admin', new_admin_path %></td>
 			</tr>
 		</table>
 			
@@ -51,7 +61,7 @@ function ajaxSearch() {
 		<span class='TagListHead'>Tag List</span>
 		<div class='TagList'>
 		<% @tags.each do |tag| %>
-			<%= link_to tag.name, tag, :alt => tag.assets.count.to_s+" Item", :title => tag.assets.count.to_s+" Item" %>
+			<span class='<%= tag_class tag %>' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
 		<% end %>
 		</div>
 		<br>

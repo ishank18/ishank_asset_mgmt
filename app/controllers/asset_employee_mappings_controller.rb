@@ -23,6 +23,7 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem = AssetEmployeeMapping.new(aem_params)
 		@aem.date_issued = string_to_date aem_params[:date_issued]
 		@aem.date_returned = string_to_date aem_params[:date_returned]
+		@aem.status = "Assigned"
 		@options_for_emp = get_all_employee
 		if(@aem.save)
 			Asset.update(aem_params[:asset_id], :status => "Assigned")
@@ -36,8 +37,9 @@ class AssetEmployeeMappingsController < ApplicationController
 	end
 	
 	def update
-		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ?", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
+		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ? and status = 'Assigned'", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
 		@aem.date_returned = string_to_date params[:return_date]
+		@aem.status = "returned"
 		@aem.asset.status = "spare"
 		@aem.asset.save!
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
@@ -48,11 +50,15 @@ class AssetEmployeeMappingsController < ApplicationController
 	end
 	
 	def return_asset
-		aem_array = AssetEmployeeMapping.where("employee_id = ?", params[:employee_id])
-		#@aem = aem_array.first
+		@return_type = params[:type]
+		if(@return_type == "employee")
+			aem_array = AssetEmployeeMapping.where(:employee_id => params[:id])
+		else
+			aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned")
+		end	
 		@options_for_asset = []
 		aem_array.each do |aem|
-			if(aem.asset.status == "Assigned")
+			if(aem.asset.status == "Assigned" && aem.status == "Assigned")
 				@aem ||= aem
 				currOpt = []
 				currOpt << aem.asset.name

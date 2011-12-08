@@ -3,8 +3,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    ### Use where instead of find
-  	@tag = Tag.where(id => params[:id].to_i).first
+  	@tag = Tag.where(:id => params[:id].to_i).first
   end
 
   def edit

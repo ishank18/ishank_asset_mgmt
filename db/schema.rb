@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111203094111) do
+ActiveRecord::Schema.define(:version => 20111208050749) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20111203094111) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "assignment_type"
+    t.string   "status"
   end
 
   create_table "assets", :force => true do |t|

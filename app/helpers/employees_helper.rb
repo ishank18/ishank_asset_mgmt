@@ -9,6 +9,6 @@ module EmployeesHelper
 				end	
 			end
 		end
-		link_to 'Return Asset', return_asset_path(employee) if assigned
+		link_to 'Return Asset', return_asset_path(:type => "employee", :id => employee.id.to_s) if assigned
 	end		
 end

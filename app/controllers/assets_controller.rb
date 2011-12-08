@@ -5,11 +5,11 @@ class AssetsController < ApplicationController
   end
 
   def show
-  	@asset = Asset.where("id = ?", params[:id]).first
+  	@asset = Asset.where(:id => params[:id]).first
   end
 
   def edit
-  	@asset = Asset.where("id = ?", params[:id]).first
+  	@asset = Asset.where(:id => params[:id]).first
   	@asset.purchase_date = date_to_string @asset.purchase_date
   end
 
@@ -42,7 +42,7 @@ class AssetsController < ApplicationController
 
 
 	def update
-		@asset = Asset.where("id = ?", params[:id]).first
+		@asset = Asset.where(:id => params[:id]).first
 		params[:asset][:purchase_date] = string_to_date params[:asset][:purchase_date]
 		if @asset.update_attributes(params[:asset])
 			category = @asset.resource_type
