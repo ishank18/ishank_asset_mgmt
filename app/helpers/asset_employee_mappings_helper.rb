@@ -13,4 +13,28 @@ module AssetEmployeeMappingsHelper
 		end		
 	end
 	
+	def show_name aem
+		if(params[:resource] == "asset")
+			link_to aem.employee.name, aem.employee
+		else
+			link_to aem.asset.name, aem.asset
+		end
+	end
+	
+	def show_name_title
+		if(params[:resource] == "asset")
+			"Employee Name"
+		else
+			"Asset Name"
+		end
+	end
+	
+	def show_page_title
+		if(params[:resource] == "asset")
+			"History - #{Asset.where(:id => params[:id]).first.name}"
+		else
+			"History - #{Employee.where(:id => params[:id]).first.name}"
+		end
+	end
+	
 end

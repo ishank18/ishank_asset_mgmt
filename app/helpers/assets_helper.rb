@@ -16,11 +16,17 @@ module AssetsHelper
 
 	end
 	
+	def show_asset_history asset
+		unless(asset.asset_employee_mappings.blank?)
+			link_to "History", show_history_path(:resource => "asset", :id => asset.id.to_s)
+		end
+	end
+	
 	def show_status asset
 		if(asset.status == "Assigned")
 			"Assigned to #{link_to asset.assigned_employee.name, asset.assigned_employee}".html_safe
 		else
-			asset.status
+			asset.status.capitalize
 		end
 	end
 	

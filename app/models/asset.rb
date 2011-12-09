@@ -1,10 +1,16 @@
 class Asset < ActiveRecord::Base
   ### validates presens of purchase date
   
+  def can_be_assigned?
+		(self.status != "Assigned"	&& self.status != "repair")
+	end
+  
+  
 	belongs_to :resource, :polymorphic => true
 	validates :name, :presence => true
 	validates :status, :presence => true
 	validates :cost, :allow_nil => true, :numericality => true, :length => {:maximum => 10}
+	
 	
 	
 	has_and_belongs_to_many :tags, :join_table => 'assets_tags'

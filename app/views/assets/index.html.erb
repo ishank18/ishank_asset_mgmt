@@ -14,7 +14,10 @@
 		<td><%= link_to asset.name, asset %></td>
 		<td><%= asset.status.capitalize %></td>
 		<td><%= show_employee asset %></td>
-		<td><%= link_to 'Edit', edit_asset_path(asset) %></td>
+		<td>
+			<%= link_to 'Edit', edit_asset_path(asset) %>
+			<%= show_asset_history asset %>
+		</td>
 	</tr>
 	<% end %>
 </table>

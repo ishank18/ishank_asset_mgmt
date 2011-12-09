@@ -21,10 +21,6 @@ function showTag(tag_id) {
 <span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
 <h1 align='center'>Welcome Admin!</h1>
 
-<% if flash[:alert] %>
-  <p id="notice"><%= flash[:alert] %></p>
-<% end %>
-
 <div id="container">
 	<div class='LeftPanel'>
 		<table class='HomePageTable'>

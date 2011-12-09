@@ -20,19 +20,25 @@ class AssetEmployeeMappingsController < ApplicationController
 	def create
 	
 		aem_params = params[:asset_employee_mapping]
-		@aem = AssetEmployeeMapping.new(aem_params)
-		@aem.date_issued = string_to_date aem_params[:date_issued]
-		@aem.date_returned = string_to_date aem_params[:date_returned]
-		@aem.status = "Assigned"
-		@options_for_emp = get_all_employee
-		if(@aem.save)
-			Asset.update(aem_params[:asset_id], :status => "Assigned")
-			redirect_to Employee.find(aem_params[:employee_id]), :alert => "Asset Successfully Assigned"
+		asset = Asset.where(:id => aem_params[:asset_id]).first
+		if(asset.can_be_assigned?)
+			@aem = AssetEmployeeMapping.new(aem_params)
+			@aem.date_issued = string_to_date aem_params[:date_issued]
+			@aem.date_returned = string_to_date aem_params[:date_returned]
+			@aem.status = "Assigned"
+			@options_for_emp = get_all_employee
+	
+			if(@aem.save)
+				asset.update_attributes(:status => "Assigned")
+				redirect_to Employee.find(aem_params[:employee_id]), :alert => "Asset Successfully Assigned"
+			else
+				@aem.date_issued = aem_params[:date_issued]
+				@aem.date_returned = aem_params[:date_returned]
+				render :action => "new"
+			end		
 		else
-			@aem.date_issued = aem_params[:date_issued]
-			@aem.date_returned = aem_params[:date_returned]
-			render :action => "new"
-		end		
+			redirect_to asset, :alert => "This Asset cant be Assigned right now"
+		end	
 		
 	end
 	
@@ -42,10 +48,19 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem.status = "returned"
 		@aem.asset.status = "spare"
 		@aem.asset.save!
+	
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
 			redirect_to employee_path(@aem.employee), :alert => "Asset Successfully Returned!"
 		else
 			render :action => return_asset
+		end
+	end
+	
+	def history
+		if(params[:resource] == "employee")
+			@aem = AssetEmployeeMapping.where(:employee_id => params[:id])
+		else
+			@aem = AssetEmployeeMapping.where(:asset_id => params[:id])
 		end
 	end
 	
@@ -55,7 +70,8 @@ class AssetEmployeeMappingsController < ApplicationController
 			aem_array = AssetEmployeeMapping.where(:employee_id => params[:id])
 		else
 			aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned")
-		end	
+		end
+		
 		@options_for_asset = []
 		aem_array.each do |aem|
 			if(aem.asset.status == "Assigned" && aem.status == "Assigned")
@@ -66,6 +82,7 @@ class AssetEmployeeMappingsController < ApplicationController
 				@options_for_asset << currOpt
 			end	
 		end
+		redirect_to assets_path, :alert => "No asset is assigned to selected pair" if @aem.blank?
 	end
 	
 	def change_aem_form

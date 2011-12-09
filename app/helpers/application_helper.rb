@@ -9,4 +9,14 @@ module ApplicationHelper
   	end	
   end
 
+	def flash_message
+		
+		message = ""
+		[:notice, :alert].each do |type|
+			if(!flash[type].blank?)
+				message += content_tag :div, flash[type], :class => "#{type}"
+			end	
+		end
+		message.html_safe
+	end
 end

@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
 		if @admin.save
 			redirect_to :root, :alert => "Confirmation mail has been successfully send!"
 		else
-			render :partial => "form"
+			render :action => "new"
 		end	
 	end
 	

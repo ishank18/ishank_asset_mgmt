@@ -20,6 +20,9 @@ a:hover { color:red; }
 .TagSizeThree { font-size:18px; }
 .TagSizeFour { font-size:21px; }
 .TagSizeBig { font-size:24px; }
+.notice { color:#9186E0; text-align:center; }
+.error { color:red; text-align:center; }
+.alert { color:#347877; text-align:center; }
 #searchForm { padding:30px; width:300px; background:#FEFEFE }
 #assetTable tr td select { width:300px;  }
 #assetTable tr td { vertical-align:top; }
