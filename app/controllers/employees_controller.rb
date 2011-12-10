@@ -6,6 +6,9 @@ class EmployeesController < ApplicationController
 
   def show
   	@employee = Employee.where(:id => params[:id]).first
+  	if(@employee.nil?)
+  		@employee = Employee.only_deleted.where(:id => params[:id]).first
+  	end	
   end
 
   def edit
@@ -32,6 +35,12 @@ class EmployeesController < ApplicationController
 		else
 			render :action => "edit"
 		end
+	end
+	
+	def disable
+		employee = Employee.where(:id => params[:id]).first
+		##Employee.where(:id => params[:id]).first.destroy	
+		redirect_to employees_path, :notice => "Employee Successfully disable"
 	end
 
 end

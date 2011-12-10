@@ -23,7 +23,7 @@ a:hover { color:red; }
 .notice { color:#9186E0; text-align:center; }
 .error { color:red; text-align:center; }
 .alert { color:#347877; text-align:center; }
-#searchForm { padding:30px; width:300px; background:#FEFEFE }
+#searchForm { background:#FEFEFE }
 #assetTable tr td select { width:300px;  }
 #assetTable tr td { vertical-align:top; }
 #addTags { float:right; }

@@ -1,12 +1,4 @@
 <script>
-function ajaxSearch() {
-	$.ajax({
-    url: '<%= search_path %>', 
-    dataType: 'script',
-    type: 'get', 
-    data: 'query_for_asset='+$("#query_for_asset").attr("value")+"&query_for_emp="+$("#query_for_emp").attr("value")
-  });
-}
 
 function showTag(tag_id) {
 	$.ajax({
@@ -18,7 +10,7 @@ function showTag(tag_id) {
 }
 
 </script>
-<span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
+
 <h1 align='center'>Welcome Admin!</h1>
 
 <div id="container">
@@ -44,16 +36,9 @@ function showTag(tag_id) {
 	<div id="searchBox">
 	</div>
 	<div class='RightPanel'>
-		<table id='searchForm'>
-			<tr>
-				<td>Asset<br><%= text_field_tag 'query_for_asset' %> </td>
-				<td>Employee<br><%= text_field_tag 'query_for_emp' %> </td>
-			</tr>
-			<tr>
-				<td><input type="button" value="Search!" onclick="ajaxSearch();" /></td>
-				<td></td>
-			</tr>
-		</table>
+	<br>
+		<%= link_to "search", search_path %><br><br>
+		
 		<span class='TagListHead'>Tag List</span>
 		<div class='TagList'>
 		<% @tags.each do |tag| %>

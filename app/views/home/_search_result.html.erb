@@ -5,6 +5,6 @@
 <% else %>
 	<%= "Displaying <b>#{@result.count}</b> results found".html_safe %><br><br>
 	<% @result.each do |res| %>
-		<%= link_to res.name, res %><br>
+		<%= link_to "#{res.id} - #{res.name}", res %><br>
 	<% end %>
 <% end %>

@@ -6,9 +6,9 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	
 	
 	
-	def self.search asset_str, employee_str
+	def self.search asset_str, employee_str, status, category
 		sql = "SELECT"
-		if(!asset_str.blank? && !employee_str.blank?)
+		if((!asset_str.blank? or !status.blank? or !category.blank?) && !employee_str.blank?)
 			sql += %{
 				distinct(asset_employee_mappings.id), asset_employee_mappings.asset_id FROM `asset_employee_mappings` 
 				INNER JOIN `assets` ON `assets`.`id` = `asset_employee_mappings`.`asset_id` 
@@ -16,11 +16,31 @@ class AssetEmployeeMapping < ActiveRecord::Base
 				where assets.name like '%#{asset_str}%' and employees.name like '%#{employee_str}%'
 				and asset_employee_mappings.status = 'Assigned'
 			}
+			unless status.blank?
+				sql += %{
+					and assets.status = '#{status}'
+				}
+			end	
+			unless category.blank?
+				sql += %{
+					and assets.resource_type = '#{category}'
+				}
+			end	
 			AssetEmployeeMapping.find_by_sql(sql)
-		elsif(!asset_str.blank?)
+		elsif(!asset_str.blank? or !status.blank? or !category.blank?)
 			sql += %{
 				id, name from assets where name like "%#{asset_str}%"
 			}
+			unless status.blank?
+				sql += %{
+					and assets.status = '#{status}'
+				}
+			end	
+			unless category.blank?
+				sql += %{
+					and assets.resource_type = '#{category}'
+				}
+			end	
 			Asset.find_by_sql(sql)
 		elsif(!employee_str.blank?)
 			sql += %{

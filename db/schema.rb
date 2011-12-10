@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208050749) do
+ActiveRecord::Schema.define(:version => 20111209122954) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(:version => 20111208050749) do
     t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "vendor"
+    t.string   "currency_unit"
   end
 
   create_table "assets_tags", :id => false, :force => true do |t|
@@ -71,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20111208050749) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   create_table "laptops", :force => true do |t|

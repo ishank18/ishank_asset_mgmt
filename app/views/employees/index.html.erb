@@ -13,8 +13,10 @@
 		<td><%= link_to emp.name, emp %></td>
 		<td><%= emp.email %></td>
 		<td>
+			<%= link_to 'Disable', disable_employee_path(:id => emp.id.to_s), :method => :put %>
 			<%= link_to 'Edit', edit_employee_path(emp.id.to_s) %>
 			<%= show_history emp %>
+			
 		</td>
 	</tr>
 	<% end %>

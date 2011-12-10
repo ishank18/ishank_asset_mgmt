@@ -5,4 +5,9 @@
 
 - View all assets - if no asset, dont show table headings, show 'add new asset' link
 
-
+- Category + Status Search
+- Currency Option
+- Buttons
+- Disable Employees
+- Vendor Name
+- Logout Link

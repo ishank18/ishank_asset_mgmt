@@ -4,6 +4,8 @@ gem 'rails', '3.0.7'
 gem 'devise'
 gem 'jquery_datepicker'
 gem 'jquery-rails', '>= 1.0.12'
+gem 'rails3_acts_as_paranoid'
+
 # gem 'thinking-sphinx', '2.0.10'
 
 # Bundle edge Rails instead:

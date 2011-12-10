@@ -1,10 +1,10 @@
 module EmployeesHelper
 	def return_asset employee
-		aem = AssetEmployeeMapping.where("employee_id = ?", employee.id)
+		aem = AssetEmployeeMapping.where(:employee_id => employee.id)
 		assigned = false
 		unless(aem.empty?)
 			aem.each do |a|
-				if(a.asset.status == "Assigned")
+				if(a.status == "Assigned")
 					assigned = true
 				end	
 			end

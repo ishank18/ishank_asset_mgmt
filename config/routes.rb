@@ -33,6 +33,8 @@ IshankAssetMgmt::Application.routes.draw do
 	root :to => "home#index"
 	
 	get ':resource/:id/history', :to => "asset_employee_mappings#history", :as => "show_history"
+	
+	put 'employee/:id/disable', :to => "employees#disable", :as => "disable_employee"
 		
   # The priority is based upon order of creation:
   # first created -> highest priority.
