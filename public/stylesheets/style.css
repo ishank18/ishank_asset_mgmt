@@ -30,3 +30,4 @@ a:hover { color:red; }
 #tags { width:300px; }
 #addTagButton { color: blue; cursor: pointer; text-decoration: underline; }
 #notice { text-align:center; }
+#asset_currency_unit { width:auto;}

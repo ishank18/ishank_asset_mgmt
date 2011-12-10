@@ -14,7 +14,7 @@
 	</tr>
 	<tr >
 		<td>Cost</td>
-		<td><%= number_to_currency(@asset.cost, {:unit => "Rs. "}) %></td>
+		<td><%= number_to_currency(@asset.cost, {:unit => "#{@asset.currency_unit} "}) %></td>
 	</tr>
 	<tr>
 		<td>Category</td>
@@ -23,6 +23,10 @@
 	<tr >
 		<td>Serial Number</td>
 		<td><%= @asset.serial_number %></td>
+	</tr>
+	<tr >
+		<td>Vendor</td>
+		<td><%= @asset.vendor %></td>
 	</tr>
 	<tr>
 		<td>Purchase date</td>
