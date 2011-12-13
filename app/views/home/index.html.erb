@@ -37,8 +37,8 @@ function showTag(tag_id) {
 	</div>
 	<div class='RightPanel'>
 	<br>
-		<%= link_to "search", search_path %><br><br>
-		
+		<%= link_to "Search", search_path %><br><br>
+		<%= link_to "Disabled Employees", disabled_employees_path %><br><br>
 		<span class='TagListHead'>Tag List</span>
 		<div class='TagList'>
 		<% @tags.each do |tag| %>

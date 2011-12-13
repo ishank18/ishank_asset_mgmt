@@ -2,6 +2,7 @@ class Employee < ActiveRecord::Base
 
 
 	acts_as_paranoid
+	
   ### Add validations for checking email format, uniqueness, 
   ### numericality, positivity and uniqueness of employee id,
   ### uniqueness of name 

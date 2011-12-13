@@ -44,7 +44,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 			Asset.find_by_sql(sql)
 		elsif(!employee_str.blank?)
 			sql += %{
-				id, name from employees where name like "%#{employee_str}%"
+				id, name from employees where name like "%#{employee_str}%" AND (employees.deleted_at IS NULL)
 			}
 			Employee.find_by_sql(sql)
 		else

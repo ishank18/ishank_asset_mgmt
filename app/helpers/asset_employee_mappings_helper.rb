@@ -5,6 +5,15 @@ module AssetEmployeeMappingsHelper
 		end
 	end
 	
+	def get_employee aem
+		aem = aem.first
+		if(!aem.employee.blank?)
+			employee = aem.employee
+		else
+			employee = Employee.only_deleted.where(:id => aem.employee_id).first
+		end	
+	end
+	
 	def asset_name options_for_asset, f
 		if(@return_type == "employee")
 			f.select :asset_id,  options_for_select(options_for_asset), {}, :onchange => "changeForm();"
@@ -15,7 +24,7 @@ module AssetEmployeeMappingsHelper
 	
 	def show_name aem
 		if(params[:resource] == "asset")
-			link_to aem.employee.name, aem.employee
+			link_to (get_employee aem).name, (get_employee aem)
 		else
 			link_to aem.asset.name, aem.asset
 		end
@@ -29,11 +38,11 @@ module AssetEmployeeMappingsHelper
 		end
 	end
 	
-	def show_page_title
+	def show_page_title aem
 		if(params[:resource] == "asset")
-			"History - #{Asset.where(:id => params[:id]).first.name}"
+			"History - #{aem.assets.first.name}"
 		else
-			"History - #{Employee.where(:id => params[:id]).first.name}"
+			"History - #{(get_employee aem).name}"
 		end
 	end
 	

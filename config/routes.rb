@@ -16,7 +16,9 @@ IshankAssetMgmt::Application.routes.draw do
 	
   resources "tags"
   
-  resources "employees"
+  resources "employees" do
+  	get "disabled", :action => "disabled", :on => :collection
+  end
   
   resources "asset_employee_mappings"
   

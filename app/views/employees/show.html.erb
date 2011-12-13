@@ -16,7 +16,7 @@
 	<tr>
 		<td>Actions</td>
 		<td>
-			<%= link_to 'Disable', disable_employee_path(:id => @employee.id.to_s), :method => :put %> &nbsp;
+			<%= show_disable_option @employee.id %> &nbsp;
 			<%= link_to 'Edit', edit_employee_path(@employee) %> &nbsp;
 			<%= show_history @employee %> &nbsp;
 			<%= return_asset @employee %>

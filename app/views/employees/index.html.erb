@@ -10,13 +10,12 @@
 	<% @employees.each do |emp| %>
 	<tr>
 		<td><%= emp.company_id %></td>
-		<td><%= link_to emp.name, emp %></td>
+		<td><%= link_to emp.name, employee_path(emp.id) %></td>
 		<td><%= emp.email %></td>
 		<td>
-			<%= link_to 'Disable', disable_employee_path(:id => emp.id.to_s), :method => :put %>
+			<%= show_disable_option emp.id %>
 			<%= link_to 'Edit', edit_employee_path(emp.id.to_s) %>
 			<%= show_history emp %>
-			
 		</td>
 	</tr>
 	<% end %>
