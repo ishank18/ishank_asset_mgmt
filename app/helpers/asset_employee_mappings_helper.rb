@@ -6,7 +6,6 @@ module AssetEmployeeMappingsHelper
 	end
 	
 	def get_employee aem
-		aem = aem.first
 		if(!aem.employee.blank?)
 			employee = aem.employee
 		else
@@ -23,6 +22,7 @@ module AssetEmployeeMappingsHelper
 	end
 	
 	def show_name aem
+		p aem
 		if(params[:resource] == "asset")
 			link_to (get_employee aem).name, (get_employee aem)
 		else
@@ -40,9 +40,9 @@ module AssetEmployeeMappingsHelper
 	
 	def show_page_title aem
 		if(params[:resource] == "asset")
-			"History - #{aem.assets.first.name}"
+			"History - #{aem.first.asset.name}"
 		else
-			"History - #{(get_employee aem).name}"
+			"History - #{(get_employee aem.first).name}"
 		end
 	end
 	

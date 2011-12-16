@@ -4,39 +4,37 @@ IshankAssetMgmt::Application.routes.draw do
 		match '/admins/confirmation' => 'confirmations#update', :via => :put, :as => :update_admin_confirmation
 	end
 	
-	devise_for :admins, :controllers => { :registrations => "admin/registrations", :confirmations => "confirmations"}
-																
-																													
-	get "change_aem_form", :to => "asset_employee_mappings#change_aem_form", :as => "change_aem_form"
-	
-	
+	devise_for :admins, :controllers => { :registrations => "admin/registrations", :confirmations => "confirmations" }
+																	
 	get 'search', :to => "home#search", :as => :search
-	
+
 	resources "admins"
 	
   resources "tags"
   
   resources "employees" do
-  	get "disabled", :action => "disabled", :on => :collection
+  	get "disabled", :on => :collection
+  	put 'disable', :on => :member
   end
   
-  resources "asset_employee_mappings"
+  resources "asset_employee_mappings" do
+  	get "change_form", :on => :collection
+  	get ":type/:id/return", :action => "return_asset", :as => "return", :on => :collection
+  	get 'populate_asset', :action => "populate_asset", :as => "populate_asset", :on => :collection
+  	get ':resource/:id/history', :action => "history", :as => "history", :on => :collection
+  end
   
-	resources 'assets'
-	
-	get "return/:type/:id", :to => "asset_employee_mappings#return_asset", :as => :return_asset
-	
-  get 'change_form_content', :to => "assets#change_form_content", :as => :change_form_content
-	
-	get 'populate_asset', :to => "asset_employee_mappings#populate_asset", :as => :populate_asset
+	resources "assets" do
+		get 'change_form_content', :action => "change_form_content", :on => :collection
+	end
 	
 	get 'show_tag', :to => "home#show_tag", :as => :show_tag
 	
 	root :to => "home#index"
 	
-	get ':resource/:id/history', :to => "asset_employee_mappings#history", :as => "show_history"
 	
-	put 'employee/:id/disable', :to => "employees#disable", :as => "disable_employee"
+	
+	
 		
   # The priority is based upon order of creation:
   # first created -> highest priority.

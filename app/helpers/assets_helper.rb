@@ -18,7 +18,7 @@ module AssetsHelper
 	
 	def show_asset_history asset
 		unless(asset.asset_employee_mappings.blank?)
-			link_to "History", show_history_path(:resource => "asset", :id => asset.id.to_s)
+			link_to "History", history_asset_employee_mappings_path(:resource => "asset", :id => asset.id.to_s)
 		end
 	end
 	

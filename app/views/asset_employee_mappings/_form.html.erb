@@ -1,7 +1,7 @@
 <script>
 function populateAsset() {
 	$.ajax({
-    url: '<%= populate_asset_path %>', 
+    url: '<%= populate_asset_asset_employee_mappings_path %>', 
     dataType: 'script',
     type: 'get', 
     data: 'category='+$("#category").attr("value")

@@ -2,7 +2,7 @@
 
 function changeForm() {
 	$.ajax({
-    url: '<%= change_form_content_path %>', 
+    url: '<%= change_form_content_assets_path %>', 
     dataType: 'script',
     type: 'get', 
     data: 'category='+$("#category").attr("value")

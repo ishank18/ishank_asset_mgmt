@@ -7,6 +7,7 @@ class Asset < ActiveRecord::Base
   
   
 	belongs_to :resource, :polymorphic => true
+	validates :category, :presence => true
 	validates :name, :presence => true
 	validates :status, :presence => true
 	validates :cost, :allow_nil => true, :numericality => true, :length => {:maximum => 10}
