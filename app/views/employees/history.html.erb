@@ -1,0 +1,25 @@
+<h2 align='center'>History - <%= @aem.first.employee.name %></h2>
+<table width="800" class="ShowTable" align='center'>
+	<tr>
+		<th>Asset Name</th>
+		<th>Issue Date</th>
+		<th>Return Date</th>
+		<th>Assignment Type</th>
+		<th>Status</th>
+		<th>Remark</th>
+	</tr>
+	<% @aem.each do |aem| %>
+	<tr>
+		<td><%= link_to aem.asset.name, aem.asset %></td>
+		<td><%= date_to_string aem.date_issued %></td>
+		<td><%= date_to_string aem.date_returned %></td>
+		<td><%= aem.assignment_type.capitalize %></td>
+		<td><%= aem.status.capitalize %></td>
+		<td><%= aem.remark %></td>
+	</tr>
+	<% end %>
+</table>
+
+<script>
+	$(".ShowTable tr:odd").addClass("AlternateRow");
+</script>

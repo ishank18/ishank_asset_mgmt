@@ -15,6 +15,7 @@ IshankAssetMgmt::Application.routes.draw do
   resources "employees" do
   	get "disabled", :on => :collection
   	put 'disable', :on => :member
+  	get "history", :on => :member
   end
   
   resources "asset_employee_mappings" do
@@ -25,7 +26,9 @@ IshankAssetMgmt::Application.routes.draw do
   end
   
 	resources "assets" do
-		get 'change_form_content', :action => "change_form_content", :on => :collection
+		get "change_form_content", :action => "change_form_content", :on => :collection
+		get "history", :on => :member
+		get "assign", :on => :collection
 	end
 	
 	get 'show_tag', :to => "home#show_tag", :as => :show_tag

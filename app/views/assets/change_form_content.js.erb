@@ -1,1 +1,1 @@
-$('#specifics').html("<%= escape_javascript(render :partial => params[:resource_type] )%>");
+$('#specifics').html("<%= escape_javascript(render :partial => params[:resource_type].tableize )%>");

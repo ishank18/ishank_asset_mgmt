@@ -21,29 +21,8 @@ module AssetEmployeeMappingsHelper
 		end		
 	end
 	
-	def show_name aem
-		p aem
-		if(params[:resource] == "asset")
-			link_to (get_employee aem).name, (get_employee aem)
-		else
-			link_to aem.asset.name, aem.asset
-		end
-	end
+
 	
-	def show_name_title
-		if(params[:resource] == "asset")
-			"Employee Name"
-		else
-			"Asset Name"
-		end
-	end
-	
-	def show_page_title aem
-		if(params[:resource] == "asset")
-			"History - #{aem.first.asset.name}"
-		else
-			"History - #{(get_employee aem.first).name}"
-		end
-	end
+
 	
 end

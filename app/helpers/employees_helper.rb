@@ -14,7 +14,7 @@ module EmployeesHelper
 	
 	def show_history employee
 		unless(employee.asset_employee_mappings.blank?)
-			link_to "History", history_asset_employee_mappings_path(:resource => "employee", :id => employee.id.to_s)
+			link_to "History", history_employee_path(employee)
 		end
 	end
 	

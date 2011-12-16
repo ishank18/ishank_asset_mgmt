@@ -1,8 +1,7 @@
 module AssetsHelper
 
 	def show_employee asset
-    # Fetch calue from constant
-		if(asset.status == "Assigned")
+		if(asset.status == STATUS[4][1])
 			link_to asset.assigned_employee.name, asset.assigned_employee
 		else
 			"-"	
@@ -12,7 +11,7 @@ module AssetsHelper
 	
 	def show_asset_history asset
 		unless(asset.asset_employee_mappings.blank?)
-			link_to "History", history_asset_employee_mappings_path(:resource => "asset", :id => asset.id)
+			link_to "History", history_asset_path(asset)
 		end
 	end
 	
@@ -29,21 +28,10 @@ module AssetsHelper
 		if !asset.new_record?
 			asset.resource_type
 		else
-			select_tag "category", options_for_select(CATEGORY, params[:category] || ""), :include_blank => "- Select -", :onchange => "changeForm()"	
+			select_tag "asset[resource_type]", options_for_select(CATEGORY), :include_blank => "- Select -", :onchange => "changeForm()"	
 		end
 	end
 	
-	
-	def render_specific_partial rt
-		#render :partial => rt
-		if(rt == "Laptop")
-			render :partial => "laptop"
-		elsif(rt == "NetworkDevice")
-			render :partial => "network_device"
-		elsif(rt == "MobilePhone")
-			render :partial => "mobile_phone"
-		end	
-	end
 	
 	def tag_class tag
 		tag_count = tag.assets.count

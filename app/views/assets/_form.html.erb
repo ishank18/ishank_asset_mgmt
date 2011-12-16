@@ -76,8 +76,8 @@ function delTag(currentTag) {
 			<td>Category</td>
 			<td>
 			<!-- make seperate constant for choices -->
-			<%#= show_category @asset %>
-			<%= select_tag "asset[resource_type]", options_for_select(CATEGORY.values, [CATEGORY[@asset.try(:resource_type)], @asset.try(:resource_type)] ), :include_blank => "- Select -", :onchange => "changeForm()"	%>
+			<%= show_category @asset %>
+			
 			</td>
 		</tr>
 		<tr>
@@ -110,7 +110,7 @@ function delTag(currentTag) {
 		<tr >
 			<td colspan=2>
 			<div id="specifics">
-				<%= render_specific_partial @asset.resource_type %>
+				<%= render :partial => @asset.resource_type.tableize if !@asset.resource_type.nil? %>
 			</div>
 			</td>
 		</tr>

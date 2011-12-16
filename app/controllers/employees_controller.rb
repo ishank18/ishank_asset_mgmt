@@ -11,6 +11,10 @@ class EmployeesController < ApplicationController
   	end	
   end
 
+	def history
+		@aem = AssetEmployeeMapping.where(:employee_id => params[:id])
+	end
+
 	def disabled
   	@employees = Employee.only_deleted	
   	render :action => "index"
@@ -43,12 +47,13 @@ class EmployeesController < ApplicationController
 	end
 	
 	def disable
-		#employee = Employee.where(:id => params[:id]).first
-		Employee.where(:id => params[:id]).first.destroy	
-		redirect_to employees_path, :notice => "Employee Successfully disable"
+		aem = Employee.where(:id => params[:id]).first.asset_employee_mappings.collect { |a| a.status }
+		if(aem.include?("Assigned"))
+			redirect_to :back, :notice => "First remove all assigned Asset"
+		else
+			Employee.where(:id => params[:id]).first.destroy	
+			redirect_to employees_path, :notice => "Employee Successfully disable"			
+		end
 	end
 	
-	
-	
-
 end

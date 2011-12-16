@@ -9,15 +9,25 @@ class AssetsController < ApplicationController
   	@asset = Asset.where(:id => params[:id]).first
   end
 
+	def history
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:id])
+	end
 
   def new
   	@asset = Asset.new
   end
   
+  def assign
+  	@aem = AssetEmployeeMapping.new
+  	@options_for_emp = get_all_employee
+  end
+  
   def create
 		@asset = Asset.new(params[:asset])
 		@asset.purchase_date = string_to_date params[:asset][:purchase_date]
-		add_to_category params
+
+		@asset.resource = params[:asset][:resource_type].classify.constantize.new(params[:resource])
+
 
 		if(@asset.save)
 			add_tags params['tagsTextField']
@@ -26,7 +36,8 @@ class AssetsController < ApplicationController
 			@category = params[:category]
 			@asset.purchase_date = date_to_string @asset.purchase_date
 			render :action => "new"
-		end	
+		end
+			
 	end	
   
 
@@ -82,18 +93,21 @@ class AssetsController < ApplicationController
 
 	def add_to_category params
 		category = params[:category]
-		if(category == "laptop")
-			@laptop = Laptop.new(:operating_system => params[:operating_system], :has_bag => params[:has_bag])
-			@asset.resource = @laptop
-		elsif(category == "mobile_phone")
-			@mobile_phone = MobilePhone.new(:operating_system => params[:operating_system])
-			@asset.resource = @mobile_phone	
-		elsif(category == "network_device")
-			@network_device = NetworkDevice.new(:location => params[:location])
-			@asset.resource = @network_device
-		end	
+		
+		
 	end
 	
+	
+	def get_all_employee
+		options_for_emp = []
+		Employee.all.each do |emp|
+  		currOpt = []
+  		currOpt << emp.name
+  		currOpt << emp.id
+  		options_for_emp << currOpt
+  	end
+  	options_for_emp
+	end
 	
 
 end

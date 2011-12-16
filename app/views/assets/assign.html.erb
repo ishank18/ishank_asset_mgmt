@@ -1,0 +1,100 @@
+<script>
+function populateAsset() {
+	$.ajax({
+    url: '<%= populate_asset_asset_employee_mappings_path %>', 
+    dataType: 'script',
+    type: 'get', 
+    data: 'category='+$("#category").attr("value")
+  });
+}
+
+function disableTo(currEle) {
+	var returned = $("#asset_employee_mapping_date_returned");
+	if(currEle.value == "Temporary") {
+		returned.attr("disabled", false);
+		returned.datepicker({"disabled":false});
+	}
+	else {
+		returned.attr("disabled", true);
+		returned.attr("value", "");
+		returned.datepicker({"disabled":true});
+	}	
+}
+
+</script>
+
+<%= form_for(@aem) do |f| %>
+
+	
+ <% if @aem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@aem.errors.count, "error") %>
+        prohibited this user from being saved:</h2>
+      <ul>
+      <% @aem.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table id='assetTable' width="800" class="ShowTable" align='center'>
+
+	<tr>
+		<td><label>Product Category</label></td>
+		<td>
+			<%= select_tag "category", options_for_select(CATEGORY), :include_blank => "- Select -", :onChange => "populateAsset()" %>
+		</td>
+	</tr>
+
+	<tr>
+		<td><%= f.label :asset %></td>
+		<td><%= f.select(:asset_id, []) %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :employee %></td>
+		<td><%= f.select(:employee_id, @options_for_emp, :include_blank => "- Select -") %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :assignment_type %></td>
+		<td>
+			<label><%= f.radio_button :assignment_type, 'Permanent', :checked => true, :onclick => "disableTo(this)" %> Permanent</label>
+			<label><%= f.radio_button :assignment_type, 'Temporary', :onclick => "disableTo(this)" %> Temporary</label>
+		</td>
+	</tr>
+		
+	<tr>
+		<td><%= f.label :from %></td>
+		<td><%= f.datepicker :date_issued %></td>
+	</tr>
+	
+	<tr>
+		<td><%= f.label :to %></td>
+		<td>
+			<%= f.text_field :date_returned, :disabled => true %>
+			<script>
+				if(($("input[name='asset_employee_mapping[assignment_type]']:checked").attr("value")) == "Temporary") {
+					$("#asset_employee_mapping_date_returned").attr("disabled", false);
+					$("#asset_employee_mapping_date_returned").datepicker({"disabled":false});
+				}
+			</script>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><%= f.label :remark %></td>
+		<td><%= f.text_area :remark, :rows => 3, :columns => 80  %></td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td><%= f.submit "Assign Asset" %></td>
+	</tr>
+	
+</table>
+<% end %>
+
+
+<script>
+	$(".ShowTable tr:even").addClass("AlternateRow");
+</script>
