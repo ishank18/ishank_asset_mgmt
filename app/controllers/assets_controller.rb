@@ -38,6 +38,7 @@ class AssetsController < ApplicationController
 
 
 	def change_form_content
+	  
 	end
 
 

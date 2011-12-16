@@ -1,4 +1,4 @@
-CATEGORY=['Laptop', 'laptop'], ['Network Device', 'network_device'], ['Mobile Phone', 'mobile_phone']
+CATEGORY = { :laptop => 'Laptop', :network_device => "Network Device", :mobile_phone => "Mobile Phone"}
 
 STATUS=['Operational', 'operational'], ['Recieved', 'recieved'], ['Spare', 'spare'], ['Repair', 'repair'], ['Assigned', 'Assigned']
 

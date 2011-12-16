@@ -1,13 +1,7 @@
 module AssetsHelper
 
 	def show_employee asset
-	  
-    # if asset.status == "Assigned"
-    #       link_to asset.employees.first.name, asset.asset_employee_mappings.first.employee
-    # else
-    #   "-"
-    # end 
-
+    # Fetch calue from constant
 		if(asset.status == "Assigned")
 			link_to asset.assigned_employee.name, asset.assigned_employee
 		else
@@ -18,7 +12,7 @@ module AssetsHelper
 	
 	def show_asset_history asset
 		unless(asset.asset_employee_mappings.blank?)
-			link_to "History", history_asset_employee_mappings_path(:resource => "asset", :id => asset.id.to_s)
+			link_to "History", history_asset_employee_mappings_path(:resource => "asset", :id => asset.id)
 		end
 	end
 	

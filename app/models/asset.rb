@@ -1,4 +1,5 @@
 class Asset < ActiveRecord::Base
+
   ### validates presens of purchase date
   
   def can_be_assigned?
