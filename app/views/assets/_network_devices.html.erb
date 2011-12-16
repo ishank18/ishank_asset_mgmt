@@ -1,0 +1,12 @@
+<table>
+	<tr>
+		<td>Location</td>
+		<td>
+			<% if !@asset.nil? %>
+				<%= text_field_tag :location, @asset.resource.location %>
+			<% else %>
+				<%= text_field_tag :location %>
+			<% end %>	
+		</td>
+	</tr>
+</table>	
