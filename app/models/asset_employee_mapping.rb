@@ -5,7 +5,6 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	validates_presence_of :date_issued, :asset_id, :employee_id
 	
 	
-	
 	def self.search asset_str, employee_str, status, category
 		sql = "SELECT"
 		if((!asset_str.blank? or !status.blank? or !category.blank?) && !employee_str.blank?)

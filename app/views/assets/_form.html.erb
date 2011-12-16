@@ -77,7 +77,7 @@ function delTag(currentTag) {
 			<td>
 			<!-- make seperate constant for choices -->
 			<%#= show_category @asset %>
-			<%= select_tag "asset[resource_type]", options_for_select(CATEGORY.values, [CATEGORY[params[:resource_type]], params[:resource_type]] ), :include_blank => "- Select -", :onchange => "changeForm()"	%>
+			<%= select_tag "asset[resource_type]", options_for_select(CATEGORY.values, [CATEGORY[@asset.try(:resource_type)], @asset.try(:resource_type)] ), :include_blank => "- Select -", :onchange => "changeForm()"	%>
 			</td>
 		</tr>
 		<tr>
