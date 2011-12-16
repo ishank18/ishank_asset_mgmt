@@ -2,11 +2,11 @@
 
 function changeForm() {
 	$.ajax({
-    url: '<%= change_form_content_assets_path %>', 
-    dataType: 'script',
-    type: 'get', 
-    data: 'category='+$("#category").attr("value")
-  });
+		    url: '<%= change_form_content_assets_path %>', 
+		    dataType: 'script',
+		    type: 'get', 
+		    data: 'resource_type='+$("#asset_resource_type").attr("value")
+		  });
 }
 
 function addTags() {
@@ -49,14 +49,15 @@ function delTag(currentTag) {
 <h1> Add Asset </h1>
 
 <%= form_for @asset do |f| %>
-<div id='addTags'>
-	Add Tags<br>
-	<%= text_field_tag :tagsTextField %>
-	<span id='addTagButton' onclick='addTags()'>Add</span>
-	<div id='tags'></div>
-	
-</div>
+	<div id='addTags'>
+		Add Tags<br>
+		<%= text_field_tag :tagsTextField %>
+		<span id='addTagButton' onclick='addTags()'>Add</span>
+		<div id='tags'></div>
+	</div>
+
 	<!-- Make a seperate partial for this - in shared -->
+	<!-- render :partial => "shared/errors", :locals => {:obj => @asset } -->
  <% if @asset.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@asset.errors.count, "error") %>
@@ -69,65 +70,64 @@ function delTag(currentTag) {
     </div>
   <% end %>
 
-<table id='assetTable' width="800" class="ShowTable" align='center'>
+	<table id='assetTable' width="800" class="ShowTable" align='center'>
 	
-	<tr>
-		<td>Category</td>
-		<td>
-			<!-- use allow blank -->
+		<tr>
+			<td>Category</td>
+			<td>
 			<!-- make seperate constant for choices -->
-			<%= show_category @asset %>
-
-		</td>
-	</tr>
-	<tr>
-		<td><%= f.label :status %></td>
-		<td>
+			<%#= show_category @asset %>
+			<%= select_tag "asset[resource_type]", options_for_select(CATEGORY.values, [CATEGORY[@asset.try(:resource_type)], @asset.try(:resource_type)] ), :include_blank => "- Select -", :onchange => "changeForm()"	%>
+			</td>
+		</tr>
+		<tr>
+			<td><%= f.label :status %></td>
+			<td>
 			<!-- Make separate constant for this -->
 			<%= f.select(:status, options_for_select(STATUS, @asset.status), :include_blank => "- Select -") %>
-		</td>
-	</tr>
-	<tr>
-		<td><%= f.label :name %></td>
-		<td><%= f.text_field :name %></td>
-	</tr>
-	<tr>
-		<td><%= f.label :cost %></td>
-		<td><label><%= f.select(:currency_unit, options_for_select(CURRENCY, @asset.currency_unit)) %></label><%= f.text_field :cost %></td>
-	</tr>
-	<tr>
-		<td><%= f.label :serial_number %></td>
-		<td><%= f.text_field :serial_number %></td>
-	</tr>
-	<tr>
-		<td><%= f.label :vendor %></td>
-		<td><%= f.text_field :vendor %></td>
-	</tr>
-	<tr>
-		<td><%= f.label :purchase_date %></td>
-		<td><%= f.datepicker :purchase_date %></td>
-	</tr>
-	<tr >
-		<td colspan=2>
-		<div id="specifics">
-			<%= render_specific_partial @asset.resource_type %>
-		</div>
-		</td>
-	</tr>
-	<tr>
-		<td><%= f.label :description %></td>
-		<td><%= f.text_area :description, :rows => 3, :columns => 80 %></td>
-	</tr>
-	<tr>
-		<td><%= f.label :additional_info %></td>
-		<td><%= f.text_area :additional_info, :rows => 3, :columns => 80  %></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><%= f.submit "Add Asset!", :onclick => "fillTagContent()" %></td>
-	</tr>
+			</td>
+		</tr>
+		<tr>
+			<td><%= f.label :name %></td>
+			<td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :cost %></td>
+			<td><label><%= f.select(:currency_unit, options_for_select(CURRENCY, @asset.currency_unit)) %></label><%= f.text_field :cost %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :serial_number %></td>
+			<td><%= f.text_field :serial_number %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :vendor %></td>
+			<td><%= f.text_field :vendor %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :purchase_date %></td>
+			<td><%= f.datepicker :purchase_date %></td>
+		</tr>
+		<tr >
+			<td colspan=2>
+			<div id="specifics">
+				<%= render_specific_partial @asset.resource_type %>
+			</div>
+			</td>
+		</tr>
+		<tr>
+			<td><%= f.label :description %></td>
+			<td><%= f.text_area :description, :rows => 3, :columns => 80 %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :additional_info %></td>
+			<td><%= f.text_area :additional_info, :rows => 3, :columns => 80  %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><%= f.submit "Add Asset!", :onclick => "fillTagContent()" %></td>
+		</tr>
 	
-</table>
+	</table>
 <% end %>
 
 <script>

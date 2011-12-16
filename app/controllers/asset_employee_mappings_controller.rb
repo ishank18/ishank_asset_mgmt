@@ -1,24 +1,12 @@
 class AssetEmployeeMappingsController < ApplicationController
-  def index
-  end
 
-  def show
-  end
-
-  def edit
-  end
-
+  ## Move to asset as assign -> collection
   def new
   	@aem = AssetEmployeeMapping.new
   	@options_for_emp = get_all_employee
   end
   
-  def populate_asset
-  	@assets = Asset.where("resource_type = ? and status != 'Assigned'", params[:category])
-  end
-
 	def create
-	
 		aem_params = params[:asset_employee_mapping]
 		asset = Asset.where(:id => aem_params[:asset_id]).first
 		if(asset.can_be_assigned?)
@@ -42,6 +30,9 @@ class AssetEmployeeMappingsController < ApplicationController
 		
 	end
 	
+	def edit
+  end
+  
 	def update
 		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ? and status = 'Assigned'", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
 		@aem.date_returned = string_to_date params[:return_date]
@@ -56,6 +47,8 @@ class AssetEmployeeMappingsController < ApplicationController
 		end
 	end
 	
+	
+  # Move to respective controllers
 	def history
 		if(params[:resource] == "employee")
 			@aem = AssetEmployeeMapping.where(:employee_id => params[:id])
@@ -63,6 +56,7 @@ class AssetEmployeeMappingsController < ApplicationController
 			@aem = AssetEmployeeMapping.where(:asset_id => params[:id])
 		end
 	end
+	
 	
 	def return_asset
 		@return_type = params[:type]
@@ -85,11 +79,13 @@ class AssetEmployeeMappingsController < ApplicationController
 		redirect_to assets_path, :alert => "No asset is assigned to selected pair" if @aem.blank?
 	end
 	
+	
 	def change_aem_form
 		emp_id = params[:employee_id]
 		ast_id = params[:asset_id]
 		@aem = AssetEmployeeMapping.where("asset_id = ? and employee_id = ?", ast_id, emp_id).first
 	end
+	
 	
 	def get_all_employee
 		options_for_emp = []
@@ -101,5 +97,10 @@ class AssetEmployeeMappingsController < ApplicationController
   	end
   	options_for_emp
 	end
+	
+	
+	def populate_asset
+  	@assets = Asset.where("resource_type = ? and status != 'Assigned'", params[:category])
+  end
 	
 end
