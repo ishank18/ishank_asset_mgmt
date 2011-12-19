@@ -19,16 +19,19 @@ class AssetsController < ApplicationController
   
   def assign
   	@aem = AssetEmployeeMapping.new
+    # at view level
   	@options_for_emp = get_all_employee
   end
   
   def create
 		@asset = Asset.new(params[:asset])
 		@asset.purchase_date = string_to_date params[:asset][:purchase_date]
+		
 		resource_type = params[:asset][:resource_type]
 		@asset.resource = resource_type.classify.constantize.new(params[:resource]) unless resource_type.blank?
+		
 		if(@asset.save)
-			add_tags params['tagsTextField']
+			add_tags params[:tagsTextField]
 			redirect_to assets_path, :alert => "Asset Successfully Added!"
 		else
 			@category = resource_type
@@ -38,7 +41,7 @@ class AssetsController < ApplicationController
 	end	
   
   def edit
-    ### extract below line in asset
+    ### extract below line in find_asset before_filter
   	@asset = Asset.where(:id => params[:id]).first
   	@asset.purchase_date = date_to_string @asset.purchase_date
   end
@@ -49,6 +52,7 @@ class AssetsController < ApplicationController
 	def update
 		@asset = Asset.where(:id => params[:id]).first
 		params[:asset][:purchase_date] = string_to_date params[:asset][:purchase_date]
+		
 		if @asset.update_attributes(params[:asset])
 			@asset.resource.update_attributes(params[:resource])
 			add_tags params['tagsTextField']
@@ -70,7 +74,5 @@ class AssetsController < ApplicationController
 			end	
 		end	
 	end
-
-
 	
 end
