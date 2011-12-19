@@ -22,7 +22,6 @@ IshankAssetMgmt::Application.routes.draw do
   	get "change_form", :on => :collection
   	get ":type/:id/return", :action => "return_asset", :as => "return", :on => :collection
   	get 'populate_asset', :action => "populate_asset", :as => "populate_asset", :on => :collection
-  	get ':resource/:id/history', :action => "history", :as => "history", :on => :collection
   end
   
 	resources "assets" do

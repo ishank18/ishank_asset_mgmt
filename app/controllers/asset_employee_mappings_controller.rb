@@ -9,32 +9,28 @@ class AssetEmployeeMappingsController < ApplicationController
 	def create
 		aem_params = params[:asset_employee_mapping]
 		asset = Asset.where(:id => aem_params[:asset_id]).first
-		if(asset.can_be_assigned?)
-			@aem = AssetEmployeeMapping.new(aem_params)
-			@aem.date_issued = string_to_date aem_params[:date_issued]
-			@aem.date_returned = string_to_date aem_params[:date_returned]
-			@aem.status = "Assigned"
-			@options_for_emp = get_all_employee
-	
-			if(@aem.save)
-				asset.update_attributes(:status => "Assigned")
-				redirect_to Employee.find(aem_params[:employee_id]), :alert => "Asset Successfully Assigned"
-			else
-				@aem.date_issued = aem_params[:date_issued]
-				@aem.date_returned = aem_params[:date_returned]
-				render :action => "new"
-			end		
+		cba = asset.try(:can_be_assigned?)
+		@aem = AssetEmployeeMapping.new(aem_params)
+		@aem.date_issued = string_to_date aem_params[:date_issued]
+		@aem.date_returned = string_to_date aem_params[:date_returned]
+		@aem.status = "Assigned"
+		@options_for_emp = get_all_employee
+		if(@aem.save && cba)
+			asset.update_attributes(:status => "Assigned")
+			redirect_to Employee.find(aem_params[:employee_id]), :alert => "Asset Successfully Assigned"
 		else
-			redirect_to asset, :alert => "This Asset cant be Assigned right now"
-		end	
-		
+			@aem.date_issued = aem_params[:date_issued]
+			@aem.date_returned = aem_params[:date_returned]
+			render :action => "new"
+		end		
 	end
 	
 	def edit
   end
   
 	def update
-		@aem = AssetEmployeeMapping.where("employee_id = ? and asset_id = ? and status = 'Assigned'", params[:asset_employee_mapping][:employee_id], params[:asset_employee_mapping][:asset_id]).first
+		
+		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], :asset_id => params[:asset_employee_mapping][:asset_id], :status => 'Assigned').first
 		@aem.date_returned = string_to_date params[:return_date]
 		@aem.status = "returned"
 		@aem.asset.status = "spare"
@@ -44,16 +40,6 @@ class AssetEmployeeMappingsController < ApplicationController
 			redirect_to employee_path(@aem.employee), :alert => "Asset Successfully Returned!"
 		else
 			render :action => return_asset
-		end
-	end
-	
-	
-  # Move to respective controllers
-	def history
-		if(params[:resource] == "employee")
-			@aem = AssetEmployeeMapping.where(:employee_id => params[:id])
-		else
-			@aem = AssetEmployeeMapping.where(:asset_id => params[:id])
 		end
 	end
 	
@@ -86,17 +72,7 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem = AssetEmployeeMapping.where("asset_id = ? and employee_id = ?", ast_id, emp_id).first
 	end
 	
-	
-	def get_all_employee
-		options_for_emp = []
-		Employee.all.each do |emp|
-  		currOpt = []
-  		currOpt << emp.name
-  		currOpt << emp.id
-  		options_for_emp << currOpt
-  	end
-  	options_for_emp
-	end
+
 	
 	
 	def populate_asset

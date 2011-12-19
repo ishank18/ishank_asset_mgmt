@@ -5,7 +5,7 @@ class Asset < ActiveRecord::Base
 	validates :name, :presence => true
 	validates :status, :presence => true
 	validates :cost, :allow_nil => true, :numericality => true, :length => {:maximum => 10}
-	
+	validates :resource_type, :presence => true
 	
 	belongs_to :resource, :polymorphic => true	
 	has_and_belongs_to_many :tags, :join_table => 'assets_tags'  

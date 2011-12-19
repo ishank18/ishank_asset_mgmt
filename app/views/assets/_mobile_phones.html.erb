@@ -2,11 +2,7 @@
 	<tr>
 		<td>Operating System</td>
 		<td>
-			<% if !@asset.nil? %>
-				<%= text_field_tag "resource[operating_system]", @asset.resource.operating_system %>
-			<% else %>
-				<%= text_field_tag "resource[operating_system]" %>
-			<% end %>	
+			<%= text_field_tag "resource[operating_system]", @asset.try(:resource).try(:operating_system) %>
 		</td>
 	</tr>
 </table>

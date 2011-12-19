@@ -1,9 +1,9 @@
-<% if @admin.errors.any? %>
+<% if obj.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@admin.errors.count, "error") %>
+    <h2><%= pluralize(obj.errors.count, "error") %>
       prohibited this user from being saved:</h2>
     <ul>
-    <% @admin.errors.full_messages.each do |msg| %>
+    <% obj.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

@@ -28,7 +28,7 @@ module AssetsHelper
 		if !asset.new_record?
 			asset.resource_type
 		else
-			select_tag "asset[resource_type]", options_for_select(CATEGORY), :include_blank => "- Select -", :onchange => "changeForm()"	
+			select_tag "asset[resource_type]", options_for_select(CATEGORY, @category), :include_blank => "- Select -", :onchange => "changeForm()"	
 		end
 	end
 	

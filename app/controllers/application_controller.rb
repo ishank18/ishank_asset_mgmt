@@ -9,6 +9,16 @@ class ApplicationController < ActionController::Base
 		!date_obj.blank? ? date_obj.strftime("%m/%d/%Y") : nil
   end
   	
+	def get_all_employee
+		options_for_emp = []
+		Employee.all.each do |emp|
+  		currOpt = []
+  		currOpt << emp.name
+  		currOpt << emp.id
+  		options_for_emp << currOpt
+  	end
+  	options_for_emp
+	end	
 
   	
 end
