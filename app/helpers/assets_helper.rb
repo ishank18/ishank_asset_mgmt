@@ -1,7 +1,7 @@
 module AssetsHelper
 
 	def show_employee asset
-		if(asset.status == STATUS[4][1])
+		if(asset.status == "Assigned")
 			link_to asset.assigned_employee.name, asset.assigned_employee
 		else
 			"-"	

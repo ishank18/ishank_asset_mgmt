@@ -51,10 +51,14 @@ class AssetsController < ApplicationController
 		params[:asset][:purchase_date] = string_to_date params[:asset][:purchase_date]
 		if @asset.update_attributes(params[:asset])
 			@asset.resource.update_attributes(params[:resource])
+			if(@asset.resource.class.name == "Laptop")
+				@asset.resource.has_bag = !params[:resource][:has_bag].blank?
+				@asset.resource.save!
+			end	
 			add_tags params['tagsTextField']
 			redirect_to @asset, :alert => "Asset Successfully updated"
 		else
-			@asset.purchase_date = params[:asset][:purchase_date]
+			@asset.purchase_date = date_to_string params[:asset][:purchase_date]
 			render :action => "edit"
 		end
 	end

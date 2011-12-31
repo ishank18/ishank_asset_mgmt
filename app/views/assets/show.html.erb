@@ -41,7 +41,7 @@
 	<% if(@asset.resource_type == "Laptop" ) %>
 		<tr>
 			<td>Has Bag</td>
-			<td><%= ((@asset.resource.has_bag.to_s.length != 0)? "Yes" : "No" ).to_s %></td>
+			<td><%= ( @asset.resource.has_bag ? "Yes" : "No" ).to_s %></td>
 		</tr>
 	<% end %>
 	<% if(@asset.resource_type == "NetworkDevice" ) %>

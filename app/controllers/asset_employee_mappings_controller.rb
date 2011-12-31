@@ -13,7 +13,6 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem = AssetEmployeeMapping.new(aem_params)
 		@aem.date_issued = string_to_date aem_params[:date_issued]
 		@aem.date_returned = string_to_date aem_params[:date_returned]
-		@aem.status = "Assigned"
 		@options_for_emp = get_all_employee
 		if(@aem.save && cba)
 			asset.update_attributes(:status => "Assigned")

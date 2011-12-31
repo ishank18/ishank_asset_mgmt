@@ -22,7 +22,7 @@ function disableTo(currEle) {
 }
 
 </script>
-
+<h2 align='center'>Assign asset</h2>
 <%= form_for(@aem) do |f| %>
  
   <%= render :partial => "shared/errors", :locals => { :obj => @aem } %>
@@ -38,7 +38,7 @@ function disableTo(currEle) {
 
 		<tr>
 			<td><%= f.label :asset %></td>
-			<td><%= f.select(:asset_id, []) %></td>
+			<td><%= f.select(:asset_id, [], :include_blank => "- Select -") %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :employee %></td>

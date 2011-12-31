@@ -26,7 +26,6 @@ a:hover { color:red; }
 #searchForm { background:#FEFEFE }
 #assetTable tr td select { width:300px;  }
 #assetTable tr td { vertical-align:top; }
-#addTags { float:right; }
 #tags { width:300px; }
 #addTagButton { color: blue; cursor: pointer; text-decoration: underline; }
 #notice { text-align:center; }
