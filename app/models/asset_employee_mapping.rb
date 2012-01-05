@@ -1,9 +1,15 @@
 class AssetEmployeeMapping < ActiveRecord::Base
+
+	before_save :update_status
+	before_update :update_aem_asset
+
+	validates :date_issued, :presence => true
+	validates :asset_id, :presence => true
+	validates :employee_id, :presence => true
+	validate :check_temp_assignment_date
+
 	belongs_to :asset
 	belongs_to :employee
-	
-	validates_presence_of :date_issued, :asset_id, :employee_id
-	
 	
 	def self.search asset_str, employee_str, status, category
 		sql = "SELECT"
@@ -51,4 +57,23 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		end
 	end
 	
+	def check_temp_assignment_date
+		unless(date_returned.blank?)
+			if(date_issued > date_returned)
+				errors.add(:base, 'Date Returned Cant be greater than date issued')
+			end
+		end	
+	end
+	
+	def update_status
+		self.status = "Assigned"
+	end
+	
+	def update_aem_asset
+		self.status = "returned"
+		self.asset.status = "spare"
+		self.asset.save!
+	end
+	
 end
+

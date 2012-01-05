@@ -7,7 +7,9 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+
 <div id="header">
+	<% if admin_signed_in? %>
 	<ul>
 		<li><%= link_to 'Home', root_path %></li>
 		<li><%= link_to 'View all Assets', assets_path %></li>
@@ -17,8 +19,9 @@
 		<li><%= link_to 'Assign asset', assign_assets_path %></li>
 		<li><%= link_to 'Add new admin', new_admin_path %></li>
 	</ul>	
-	
-</div><br><br>
+	<% end %>
+</div>
+<br><br>
 <span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
 <%= flash_message %>
 <%= yield %>

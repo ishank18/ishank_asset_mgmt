@@ -41,7 +41,7 @@
 	<% if(@asset.resource_type == "Laptop" ) %>
 		<tr>
 			<td>Has Bag</td>
-			<td><%= ((@asset.resource.has_bag.to_s.length != 0)? "Yes" : "No" ).to_s %></td>
+			<td><%= ( @asset.resource.has_bag ? "Yes" : "No" ).to_s %></td>
 		</tr>
 	<% end %>
 	<% if(@asset.resource_type == "NetworkDevice" ) %>
@@ -63,7 +63,7 @@
 		<td>
 			<%= link_to 'Edit', edit_asset_path(@asset) %>
 			<%= show_asset_history @asset %>
-			<%= link_to 'Return Asset', return_asset_employee_mappings_path(:type => "asset", :id => @asset.id.to_s) if @asset.status == "Assigned" %>
+			<%= link_to 'Return Asset', return_asset_path(:type => "asset", :id => @asset.id.to_s) if @asset.status == "Assigned" %>
 		</td>
 	</tr>
 </table>

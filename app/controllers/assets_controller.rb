@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
   
   def index
-  	@assets = Asset.all
+  	@assets = Asset.paginate :page=>params[:page], :order => 'id asc', :per_page => 20
   end
 
 
@@ -19,8 +19,6 @@ class AssetsController < ApplicationController
   
   def assign
   	@aem = AssetEmployeeMapping.new
-    # at view level
-  	@options_for_emp = get_all_employee
   end
   
   def create
@@ -55,10 +53,14 @@ class AssetsController < ApplicationController
 		
 		if @asset.update_attributes(params[:asset])
 			@asset.resource.update_attributes(params[:resource])
+			if(@asset.resource.class.name == "Laptop")
+				@asset.resource.has_bag = !params[:resource][:has_bag].blank?
+				@asset.resource.save!
+			end	
 			add_tags params['tagsTextField']
 			redirect_to @asset, :alert => "Asset Successfully updated"
 		else
-			@asset.purchase_date = params[:asset][:purchase_date]
+			@asset.purchase_date = date_to_string params[:asset][:purchase_date]
 			render :action => "edit"
 		end
 	end

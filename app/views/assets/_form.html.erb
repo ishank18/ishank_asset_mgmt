@@ -46,15 +46,10 @@ function delTag(currentTag) {
 
 </script>
 
-<h1> Add Asset </h1>
+
 
 <%= form_for @asset do |f| %>
-	<div id='addTags'>
-		Add Tags<br>
-		<%= text_field_tag :tagsTextField %>
-		<span id='addTagButton' onclick='addTags()'>Add</span>
-		<div id='tags'></div>
-	</div>
+	
 
 	<%= render :partial => "shared/errors", :locals => { :obj => @asset } %>
 
@@ -70,7 +65,14 @@ function delTag(currentTag) {
 		<tr>
 			<td><%= f.label :status %></td>
 			<td>
-			<%= f.select(:status, options_for_select(STATUS, @asset.status), :include_blank => "- Select -") %>
+
+			<!-- Make separate constant for this -->
+			<% if @asset.status == "Assigned" %>
+				Assigned
+			<% else %>
+				<%= f.select(:status, options_for_select(STATUS, @asset.status), :include_blank => "- Select -") %>
+			<% end %>
+
 			</td>
 		</tr>
 		<tr>
@@ -110,6 +112,16 @@ function delTag(currentTag) {
 		<tr>
 			<td><%= f.label :additional_info %></td>
 			<td><%= f.text_area :additional_info, :rows => 3, :columns => 80  %></td>
+		</tr>
+		<tr>
+			<td>Tags</td>
+			<td>
+				<div id='addTags'>
+					<%= text_field_tag :tagsTextField %>
+					<span id='addTagButton' onclick='addTags()'>Add</span>
+					<div id='tags'></div>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td></td>

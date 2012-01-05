@@ -20,9 +20,10 @@ IshankAssetMgmt::Application.routes.draw do
   
   resources "asset_employee_mappings" do
   	get "change_form", :on => :collection
-  	get ":type/:id/return", :action => "return_asset", :as => "return", :on => :collection
   	get 'populate_asset', :action => "populate_asset", :as => "populate_asset", :on => :collection
   end
+  
+  get ":type/:id/return", :to => "asset_employee_mappings#return_asset", :as => "return_asset"
   
 	resources "assets" do
 		get "change_form_content", :action => "change_form_content", :on => :collection

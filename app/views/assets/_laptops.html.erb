@@ -9,7 +9,7 @@
 		<td>Has Bag</td>
 		<td>
 			<% if !@asset.nil? %>
-				<%= check_box_tag "resource[has_bag]", @asset.resource.has_bag, !@asset.resource.has_bag.nil? %>
+				<%= check_box_tag "resource[has_bag]", "has_bag", @asset.resource.has_bag %>
 			<% else %>
 				<%= check_box_tag "resource[has_bag]" %>
 			<% end %>	
