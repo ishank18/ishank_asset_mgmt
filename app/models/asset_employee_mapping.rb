@@ -1,6 +1,7 @@
 class AssetEmployeeMapping < ActiveRecord::Base
 
 	before_save :update_status
+	before_update :update_aem_asset
 
 	validates :date_issued, :presence => true
 	validates :asset_id, :presence => true
@@ -66,6 +67,12 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	
 	def update_status
 		self.status = "Assigned"
+	end
+	
+	def update_aem_asset
+		self.status = "returned"
+		self.asset.status = "spare"
+		self.asset.save!
 	end
 	
 end

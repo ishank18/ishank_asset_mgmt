@@ -9,7 +9,7 @@ module EmployeesHelper
 				end	
 			end
 		end
-		link_to 'Return Asset', return_asset_employee_mappings_path(:type => "employee", :id => employee.id.to_s) if assigned
+		link_to 'Return Asset', return_asset_path(:type => "employee", :id => employee.id.to_s) if assigned
 	end		
 	
 	def show_history employee

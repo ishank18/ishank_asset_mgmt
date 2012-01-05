@@ -29,10 +29,7 @@ class AssetEmployeeMappingsController < ApplicationController
 		
 		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], :asset_id => params[:asset_employee_mapping][:asset_id], :status => 'Assigned').first
 		@aem.date_returned = string_to_date params[:return_date]
-		@aem.status = "returned"
-		@aem.asset.status = "spare"
-		@aem.asset.save!
-	
+			
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
 			redirect_to employee_path(@aem.employee), :alert => "Asset Successfully Returned!"
 		else
