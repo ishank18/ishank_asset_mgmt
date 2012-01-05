@@ -48,8 +48,8 @@ class AssetsController < ApplicationController
 
 	def update
 		if @asset.update_attributes(params[:asset])
-		  ## Shou
-      # @asset.resource.update_attributes(params[:resource])
+		  ## Should clubbed with params[:asset]
+      @asset.resource.update_attributes(params[:resource])
 						
 			add_tags params['tagsTextField']
 			redirect_to @asset, :alert => "Asset Successfully updated"
