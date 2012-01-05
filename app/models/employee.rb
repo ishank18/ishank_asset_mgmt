@@ -10,7 +10,7 @@ class Employee < ActiveRecord::Base
 	
 	### Do in rails 3 way ex - validates :name, :presence => true, :uniqueness => true
 	validates :email, :presence => true, :uniqueness => true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
-	validates :company_id, :presence => true, :numericality => {:only_integer => true, :greater_than => 0, :message => " employee Id must be positive"}, :uniqueness => true
+	validates :employee_id, :presence => true, :numericality => {:only_integer => true, :greater_than => 0, :message => " employee Id must be positive"}, :uniqueness => true
 	validates :name, :presence => true
 	
   #### Use has many through

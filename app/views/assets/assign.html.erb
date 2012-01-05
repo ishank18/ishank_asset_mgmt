@@ -42,7 +42,7 @@ function disableTo(currEle) {
 		</tr>
 		<tr>
 			<td><%= f.label :employee %></td>
-			<td><%= f.select(:employee_id, @options_for_emp, :include_blank => "- Select -") %></td>
+			<td><%= f.select(:employee_id, get_all_employees, :include_blank => "- Select -") %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :assignment_type %></td>

@@ -15,7 +15,6 @@ class Asset < ActiveRecord::Base
 	has_and_belongs_to_many :tags, :join_table => 'assets_tags'  
   has_many :asset_employee_mappings
 	has_many :employees, :through => :asset_employee_mappings
-	accepts_nested_attributes_for :resource
 	
 	
 	def assigned_employee
@@ -29,7 +28,7 @@ class Asset < ActiveRecord::Base
   def check_future_date
 		unless(purchase_date.blank?)  
 			if(purchase_date > Time.now)
-					errors.add_to_base('Future Purchase date is not allowed')
+					errors.add(:base, 'Future Purchase date is not allowed')
 			end
 		end
   end

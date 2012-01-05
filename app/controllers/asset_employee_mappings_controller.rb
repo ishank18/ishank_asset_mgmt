@@ -3,7 +3,6 @@ class AssetEmployeeMappingsController < ApplicationController
   ## Move to asset as assign -> collection
   def new
   	@aem = AssetEmployeeMapping.new
-  	@options_for_emp = get_all_employee
   end
   
 	def create
@@ -13,7 +12,6 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem = AssetEmployeeMapping.new(aem_params)
 		@aem.date_issued = string_to_date aem_params[:date_issued]
 		@aem.date_returned = string_to_date aem_params[:date_returned]
-		@options_for_emp = get_all_employee
 		if(@aem.save && cba)
 			asset.update_attributes(:status => "Assigned")
 			redirect_to Employee.find(aem_params[:employee_id]), :alert => "Asset Successfully Assigned"

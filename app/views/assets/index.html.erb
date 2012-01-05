@@ -1,26 +1,33 @@
 <h2 align='center'>All Assets</h2>
 
-<table width="800" class="ShowTable" align='center'>
-	<tr>
-		<th>Product Id</th>
-		<th>Name</th>
-		<th>Status</th>
-		<th>Assigned To</th>
-		<th>Action</th>
-	</tr>
-	<% @assets.each do |asset| %>
-	<tr>
-		<td><%= asset.id %></td>
-		<td><%= link_to asset.name, asset %></td>
-		<td><%= asset.status.capitalize %></td>
-		<td><%= show_employee asset %></td>
-		<td>
-			<%= link_to 'Edit', edit_asset_path(asset) %>
-			<%= show_asset_history asset %>
-		</td>
-	</tr>
-	<% end %>
-</table>
+<div align='center'>
+	<div class='table_container'>
+		<div id="pageEnteriesInfo" align='right'><%= page_entries_info @products %></div><br>
+		<table width="800" class="ShowTable" align='center'>
+			<tr>
+				<th>Product Id</th>
+				<th>Name</th>
+				<th>Status</th>
+				<th>Assigned To</th>
+				<th>Action</th>
+			</tr>
+			<% @assets.each do |asset| %>
+			<tr>
+				<td><%= asset.id %></td>
+				<td><%= link_to asset.name, asset %></td>
+				<td><%= asset.status.capitalize %></td>
+				<td><%= show_employee asset %></td>
+				<td>
+					<%= link_to 'Edit', edit_asset_path(asset) %>
+					<%= show_asset_history asset %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+		<br>
+		<div id='pagination' align='left'><%= will_paginate @assets %></div>
+	</div>
+</div>
 
 <script>
 	$(".ShowTable tr:odd").addClass("AlternateRow");

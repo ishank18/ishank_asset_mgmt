@@ -5,6 +5,9 @@ gem 'devise'
 gem 'jquery_datepicker'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'rails3_acts_as_paranoid'
+gem 'rspec-rails','~> 2.6'
+gem 'shoulda-matchers'
+gem 'will_paginate', '>= 3.0.pre'
 
 # gem 'thinking-sphinx', '2.0.10'
 

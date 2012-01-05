@@ -19,4 +19,16 @@ module ApplicationHelper
 		end
 		message.html_safe
 	end
+	
+	def get_all_employees
+		options_for_emp = []
+		Employee.all.each do |emp|
+  		currOpt = []
+  		currOpt << emp.name
+  		currOpt << emp.id
+  		options_for_emp << currOpt
+  	end
+  	options_for_emp
+	end	
+	
 end

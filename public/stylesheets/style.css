@@ -32,7 +32,11 @@ a:hover { color:red; }
 #asset_currency_unit { width:auto;}
 #header ul {padding:0px;}
 #header ul li { float:left; list-style:none; display:inline; padding:5px; background:#cccaaa; margin-left:5px; border:1px solid #237487 }
-
-
-
-
+.actionsLinks { float:right; }
+.pagination { padding: 3px; margin: 3px; }
+.pagination a { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #777777; text-decoration: none; color: #000099; }
+.pagination a:hover,
+.pagination a:active { border: 1px solid #787778; color: #327; }
+.pagination span.current { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #000099; font-weight: bold; background-color: #000099; color: #FFF; }
+.pagination span.disabled { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #555; color: #555; }
+.table_container { width:800px; }

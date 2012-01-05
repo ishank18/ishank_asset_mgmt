@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
   
   def index
-  	@assets = Asset.all
+  	@assets = Asset.paginate :page=>params[:page], :order => 'id asc', :per_page => 20
   end
 
 
@@ -19,7 +19,6 @@ class AssetsController < ApplicationController
   
   def assign
   	@aem = AssetEmployeeMapping.new
-  	@options_for_emp = get_all_employee
   end
   
   def create
