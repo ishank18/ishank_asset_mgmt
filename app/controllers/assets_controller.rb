@@ -1,12 +1,16 @@
 class AssetsController < ApplicationController
   
+  before_filter :find_asset, :only => [:show, :edit, :update, :destroy]
+  
+  ## created_at desc
   def index
-  	@assets = Asset.paginate :page=>params[:page], :order => 'id asc', :per_page => 20
+  	@assets = Asset.paginate :page => params[:page], :order => 'id asc', :per_page => 20
   end
 
-
+  ## Move in before_filter
+  ## redirect somewhere if asset not found
   def show
-  	@asset = Asset.where(:id => params[:id]).first
+    
   end
 
 	def history
@@ -23,7 +27,6 @@ class AssetsController < ApplicationController
   
   def create
 		@asset = Asset.new(params[:asset])
-		@asset.purchase_date = string_to_date params[:asset][:purchase_date]
 		
 		resource_type = params[:asset][:resource_type]
 		@asset.resource = resource_type.classify.constantize.new(params[:resource]) unless resource_type.blank?
@@ -33,34 +36,25 @@ class AssetsController < ApplicationController
 			redirect_to assets_path, :alert => "Asset Successfully Added!"
 		else
 			@category = resource_type
-			@asset.purchase_date = date_to_string @asset.purchase_date
 			render :action => "new"
 		end			
 	end	
   
   def edit
-    ### extract below line in find_asset before_filter
-  	@asset = Asset.where(:id => params[:id]).first
-  	@asset.purchase_date = date_to_string @asset.purchase_date
   end
 
 	def change_form_content  
 	end
 
 	def update
-		@asset = Asset.where(:id => params[:id]).first
-		params[:asset][:purchase_date] = string_to_date params[:asset][:purchase_date]
-		
 		if @asset.update_attributes(params[:asset])
-			@asset.resource.update_attributes(params[:resource])
-			if(@asset.resource.class.name == "Laptop")
-				@asset.resource.has_bag = !params[:resource][:has_bag].blank?
-				@asset.resource.save!
-			end	
+		  ## Shou
+      # @asset.resource.update_attributes(params[:resource])
+						
 			add_tags params['tagsTextField']
 			redirect_to @asset, :alert => "Asset Successfully updated"
+
 		else
-			@asset.purchase_date = date_to_string params[:asset][:purchase_date]
 			render :action => "edit"
 		end
 	end
@@ -76,5 +70,13 @@ class AssetsController < ApplicationController
 			end	
 		end	
 	end
+	
+	protected
+	
+	def find_asset
+	  @asset = Asset.where(:id => params[:id]).first
+	  redirect_to root_path, :notice => "Could not find asset" unless @asset
+	end
+	
 	
 end

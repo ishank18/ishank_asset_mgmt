@@ -1,14 +1,6 @@
 module AssetsHelper
 
-	def show_employee asset
-		if(asset.status == "Assigned")
-			link_to asset.assigned_employee.name, asset.assigned_employee
-		else
-			"-"	
-		end
-
-	end
-	
+  ## Move in view
 	def show_asset_history asset
 		unless(asset.asset_employee_mappings.blank?)
 			link_to "History", history_asset_path(asset)

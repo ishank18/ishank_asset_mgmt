@@ -50,7 +50,6 @@ function delTag(currentTag) {
 
 <%= form_for @asset do |f| %>
 	
-
 	<%= render :partial => "shared/errors", :locals => { :obj => @asset } %>
 
 	<table id='assetTable' width="800" class="ShowTable" align='center'>
@@ -59,26 +58,25 @@ function delTag(currentTag) {
 			<td>Category</td>
 			<td>
 			<%= show_category @asset %>
-			
 			</td>
 		</tr>
+
 		<tr>
 			<td><%= f.label :status %></td>
 			<td>
-
-			<!-- Make separate constant for this -->
 			<% if @asset.status == "Assigned" %>
 				Assigned
 			<% else %>
 				<%= f.select(:status, options_for_select(STATUS, @asset.status), :include_blank => "- Select -") %>
 			<% end %>
-
 			</td>
 		</tr>
+
 		<tr>
 			<td><%= f.label :name %></td>
 			<td><%= f.text_field :name %></td>
 		</tr>
+		
 		<tr>
 			<td><%= f.label :cost %></td>
 			<td>
@@ -86,33 +84,46 @@ function delTag(currentTag) {
 				<%= f.text_field :cost %>
 			</td>
 		</tr>
+		
 		<tr>
 			<td><%= f.label :serial_number %></td>
 			<td><%= f.text_field :serial_number %></td>
 		</tr>
+		
 		<tr>
 			<td><%= f.label :vendor %></td>
 			<td><%= f.text_field :vendor %></td>
 		</tr>
+		
 		<tr>
 			<td><%= f.label :purchase_date %></td>
-			<td><%= f.datepicker :purchase_date %></td>
+			<td><%= f.text_field :purchase_date, :value => @asset.purchase_date.try(:strftime, "%m/%d/%Y") %></td>
+			
+			<script>
+				$(function() {
+					$( "#asset_purchase_date" ).datepicker({ dateFormat: "mm/dd/yy" });
+				});
+				</script>
 		</tr>
+		
 		<tr >
 			<td colspan=2>
 			<div id="specifics">
-				<%= render :partial => @asset.resource_type.tableize if !@asset.resource_type.blank? %>
+				<%= render :partial => @asset.resource_type.tableize unless @asset.resource_type.blank? %>
 			</div>
 			</td>
 		</tr>
+		
 		<tr>
 			<td><%= f.label :description %></td>
 			<td><%= f.text_area :description, :rows => 3, :columns => 80 %></td>
 		</tr>
+		
 		<tr>
 			<td><%= f.label :additional_info %></td>
 			<td><%= f.text_area :additional_info, :rows => 3, :columns => 80  %></td>
 		</tr>
+		
 		<tr>
 			<td>Tags</td>
 			<td>
@@ -123,6 +134,7 @@ function delTag(currentTag) {
 				</div>
 			</td>
 		</tr>
+		
 		<tr>
 			<td></td>
 			<td>
