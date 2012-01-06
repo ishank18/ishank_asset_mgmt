@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 		@tags = Tag.all
 	end
 	
-	  
+	## Optimize  
 	def search
 		@result = AssetEmployeeMapping.search params[:query_for_asset],  params[:query_for_emp], params[:status], params[:category]
 		unless(@result.blank?)

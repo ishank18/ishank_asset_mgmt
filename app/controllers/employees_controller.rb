@@ -48,6 +48,7 @@ class EmployeesController < ApplicationController
 	
 	def disable
 		aem = Employee.where(:id => params[:id]).first.asset_employee_mappings.collect { |a| a.status }
+		
 		if(aem.include?("Assigned"))
 			redirect_to :back, :notice => "First remove all assigned Asset"
 		else
