@@ -12,7 +12,7 @@ function disableTo(currEle) {
 	var returned = $("#asset_employee_mapping_date_returned");
 	if(currEle.value == "Temporary") {
 		returned.attr("disabled", false);
-		returned.datepicker({"disabled":false});
+		returned.datepicker({"disabled":false, dateFormat: "dd/mm/yy" });
 	}
 	else {
 		returned.attr("disabled", true);
@@ -54,7 +54,12 @@ function disableTo(currEle) {
 		
 		<tr>
 			<td><%= f.label :from %></td>
-			<td><%= f.datepicker :date_issued %></td>
+			<td><%= f.text_field :date_issued %></td>
+			<script>
+				$(function() {
+					$("#asset_employee_mapping_date_issued").datepicker({ dateFormat: "dd/mm/yy" });
+				});
+			</script>
 		</tr>
 	
 		<tr>
@@ -63,8 +68,8 @@ function disableTo(currEle) {
 				<%= f.text_field :date_returned, :disabled => true %>
 				<script>
 					if(($("input[name='asset_employee_mapping[assignment_type]']:checked").attr("value")) == "Temporary") {
-						$("#asset_employee_mapping_date_returned").attr("disabled", false);
-						$("#asset_employee_mapping_date_returned").datepicker({"disabled":false});
+						$("#asset_employee_mapping_date_returned").attr( "disabled", false );
+						$("#asset_employee_mapping_date_returned").datepicker({ dateFormat: "dd/mm/yy" });
 					}
 				</script>
 			</td>

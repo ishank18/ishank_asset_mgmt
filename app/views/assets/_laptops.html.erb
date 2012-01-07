@@ -2,14 +2,14 @@
 	<tr>
 		<td>Operating System</td>
 		<td>
-			<%= text_field_tag "asset[resource][operating_system]", @asset.try(:resource).try(:operating_system) %>
+			<%= text_field_tag "asset[resource_attributes][operating_system]", @asset.try(:resource).try(:operating_system) %>
 		</td>
 	</tr>
 	<tr>
 		<td>Has Bag</td>
 		<td>
-				<%= hidden_field_tag "asset[resource][has_bag]", false %>
-				<%= check_box_tag "asset[resource][has_bag]", true, @asset.try(:resource).try(:has_bag) %>
+				<%= hidden_field_tag "asset[resource_attributes][has_bag]", false %>
+				<%= check_box_tag "asset[resource_attributes][has_bag]", true, @asset.try(:resource).try(:has_bag) %>
 		</td>
 	</tr>
 </table>	

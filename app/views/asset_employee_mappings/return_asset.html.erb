@@ -13,7 +13,11 @@ function changeForm() {
 
 <h2 align='center'>Return Asset</h2>
 
+
 <%= form_for(@aem) do |f| %>
+
+<%= render :partial => "shared/errors", :locals => { :obj => @aem } %>
+
 <table width="800" class="ShowTable" align='center'>
 	<tr>
 		<td>Employee Name</td>
@@ -37,11 +41,11 @@ function changeForm() {
 	<tr>
 		<td>Return date</td>
 		<td>
-			<%= text_field_tag :return_date %>
+			<%= f.text_field :date_returned, :value => "" %>
 			<script>
-				jQuery(document).ready(function(){$('#return_date').datepicker({})});
+				$('#asset_employee_mapping_date_returned').datepicker({ dateFormat: "dd/mm/yy" })
 			</script>
-			<span id='scheduled_date'><%= show_scheduled_date @aem.date_returned %></span>
+			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string @aem.date_returned}</b>".html_safe if @aem.assignment_type == "Temporary" %></span>
 			</td>
 	</tr>
 	<tr>

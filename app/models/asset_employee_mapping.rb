@@ -1,12 +1,14 @@
 class AssetEmployeeMapping < ActiveRecord::Base
 
-	before_save :update_status
+	before_create :update_status
+	before_create :check_future_issued_date
+	before_save :check_temp_assignment_date
 	before_update :update_aem_asset
 
 	validates :date_issued, :presence => true
 	validates :asset_id, :presence => true
 	validates :employee_id, :presence => true
-	validate :check_temp_assignment_date
+
 
 	belongs_to :asset
 	belongs_to :employee
@@ -58,15 +60,25 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	end
 	
 	def check_temp_assignment_date
-		unless(date_returned.blank?)
-			if(date_issued > date_returned)
+		unless(self.date_returned.blank?)
+			if(self.date_issued > self.date_returned)
 				errors.add(:base, 'Date Returned Cant be greater than date issued')
+				return false
 			end
 		end	
+	end
+
+	def check_future_issued_date		
+		p self.date_issued.day
+		if self.date_issued > DateTime.now
+			errors.add(:base, "Issue date can't be future date")
+			return false
+		end
 	end
 	
 	def update_status
 		self.status = "Assigned"
+		Asset.where(:id => self.asset_id).first.update_attributes(:status => "Assigned")
 	end
 	
 	def update_aem_asset

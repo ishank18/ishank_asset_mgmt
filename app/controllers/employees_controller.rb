@@ -1,18 +1,19 @@
 class EmployeesController < ApplicationController
 	
+	before_filter :find_employee, :only => [:show, :edit, :update]
+	
   def index
   	@employees ||= Employee.all 
   end
 
   def show
-  	@employee = Employee.where(:id => params[:id]).first
   	if(@employee.nil?)
   		@employee = Employee.only_deleted.where(:id => params[:id]).first
   	end	
   end
 
 	def history
-		@aem = AssetEmployeeMapping.where(:employee_id => params[:id])
+		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "date_returned desc"
 	end
 
 	def disabled
@@ -21,7 +22,6 @@ class EmployeesController < ApplicationController
 	end
 
   def edit
-  	@employee = Employee.where(:id => params[:id]).first
   end
 
   def new
@@ -38,7 +38,6 @@ class EmployeesController < ApplicationController
 	end
 
 	def update
-		@employee = Employee.where(:id => params[:id]).first
 		if @employee.update_attributes(params[:employee])
 			redirect_to(@employee, :alert => 'Employee details successfully updated.')
 		else
@@ -55,5 +54,13 @@ class EmployeesController < ApplicationController
 			redirect_to employees_path, :notice => "Employee Successfully disable"			
 		end
 	end
+	
+	protected
+	
+	def find_employee
+	  @employee = Employee.where(:id => params[:id]).first
+	  redirect_to root_path, :notice => "Could not find employee" unless @employee
+	end
+	
 	
 end

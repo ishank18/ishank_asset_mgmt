@@ -14,7 +14,7 @@ class AssetsController < ApplicationController
   end
 
 	def history
-		@aem = AssetEmployeeMapping.where(:asset_id => params[:id])
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:id]).order 'date_returned desc'
 	end
 
   def new
@@ -26,16 +26,11 @@ class AssetsController < ApplicationController
   end
   
   def create
-		@asset = Asset.new(params[:asset])
-		
-		resource_type = params[:asset][:resource_type]
-		@asset.resource = resource_type.classify.constantize.new(params[:resource]) unless resource_type.blank?
-		
+		@asset = Asset.new params[:asset]
 		if(@asset.save)
 			add_tags params[:tagsTextField]
 			redirect_to assets_path, :alert => "Asset Successfully Added!"
 		else
-			@category = resource_type
 			render :action => "new"
 		end			
 	end	
@@ -48,12 +43,9 @@ class AssetsController < ApplicationController
 
 	def update
 		if @asset.update_attributes(params[:asset])
-		  ## Should clubbed with params[:asset]
-      @asset.resource.update_attributes(params[:resource])
-						
+		  ## Should clubbed with params[:asset]			
 			add_tags params['tagsTextField']
 			redirect_to @asset, :alert => "Asset Successfully updated"
-
 		else
 			render :action => "edit"
 		end

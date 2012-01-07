@@ -19,7 +19,7 @@
 			<%= show_disable_option @employee.id %> &nbsp;
 			<%= link_to 'Edit', edit_employee_path(@employee) %> &nbsp;
 			<%= show_history @employee %> &nbsp;
-			<%= return_asset @employee %>
+			<%= link_to 'Return Asset', return_asset_path(:type => "employee", :id => @employee.id) if @employee.asset_employee_mappings.collect { |aem| aem.status }.include? "Assigned" %>
 		</td>
 	</tr>
 </table>

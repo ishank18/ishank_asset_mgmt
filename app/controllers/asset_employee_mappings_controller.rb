@@ -5,21 +5,15 @@ class AssetEmployeeMappingsController < ApplicationController
   end
   
 	def create
-		aem_params = params[:asset_employee_mapping]
-		asset = Asset.where(:id => aem_params[:asset_id]).first
-		cba = asset.try(:can_be_assigned?)
-		@aem = AssetEmployeeMapping.new(aem_params)
-		@aem.date_issued = string_to_date aem_params[:date_issued]
-		@aem.date_returned = string_to_date aem_params[:date_returned]
-		if(@aem.save && cba)
+	
+		@aem = AssetEmployeeMapping.new(params[:asset_employee_mapping])
+		
+		if(@aem.save && Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?))
       # Put in after_create
-			asset.update_attributes(:status => "Assigned")
 			redirect_to @aem.employee, :alert => "Asset Successfully Assigned"
 		else
       # set datepicker's default date
-      @aem.date_issued = params[:asset_employee_mapping][:date_issued]
-      @aem.date_returned = params[:asset_employee_mapping][:date_returned]
-			render :action => "new"
+			render :action => "assets/assign"
 		end		
 	end
 	
@@ -30,16 +24,12 @@ class AssetEmployeeMappingsController < ApplicationController
 	def update
 		
 		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], :asset_id => params[:asset_employee_mapping][:asset_id], :status => 'Assigned').first
-		@aem.date_returned = string_to_date params[:return_date]
-
+		
 	  # put in callback
-		@aem.asset.status = "spare"
-	
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
-
 			redirect_to employee_path(@aem.employee), :alert => "Asset Successfully Returned!"
 		else
-			render :action => return_asset
+			render :action => :return_asset
 		end
 	end
 	
@@ -71,10 +61,8 @@ class AssetEmployeeMappingsController < ApplicationController
 	def change_aem_form
 		emp_id = params[:employee_id]
 		ast_id = params[:asset_id]
-		@aem = AssetEmployeeMapping.where("asset_id = ? and employee_id = ?", ast_id, emp_id).first
+		@aem = AssetEmployeeMapping.where(:asset_id => ast_id, :employee_id => emp_id).first
 	end
-	
-
 	
 	
 	def populate_asset

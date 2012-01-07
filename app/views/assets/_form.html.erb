@@ -97,13 +97,13 @@ function delTag(currentTag) {
 		
 		<tr>
 			<td><%= f.label :purchase_date %></td>
-			<td><%= f.text_field :purchase_date, :value => @asset.purchase_date.try(:strftime, "%m/%d/%Y") %></td>
+			<td><%= f.text_field :purchase_date, :value => @asset.purchase_date.try(:strftime, "%d/%m/%Y") %></td>
 			
 			<script>
 				$(function() {
-					$( "#asset_purchase_date" ).datepicker({ dateFormat: "mm/dd/yy" });
+					$("#asset_purchase_date").datepicker({ dateFormat: "dd/mm/yy" });
 				});
-				</script>
+			</script>
 		</tr>
 		
 		<tr >

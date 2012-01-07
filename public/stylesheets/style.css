@@ -31,6 +31,7 @@ a:hover { color:red; }
 #notice { text-align:center; }
 #asset_currency_unit { width:auto;}
 #header ul {padding:0px;}
+#ui-datepicker-div { background: #aaa; padding:5px; border: 1px dashed ; }
 #header ul li { float:left; list-style:none; display:inline; padding:5px; background:#cccaaa; margin-left:5px; border:1px solid #237487 }
 .actionsLinks { float:right; }
 .pagination { padding: 3px; margin: 3px; }
