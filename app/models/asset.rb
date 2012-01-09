@@ -30,6 +30,7 @@ class Asset < ActiveRecord::Base
 		(status != "Assigned"	&& status != "repair")
 	end
   
+  ## 2 conditions can be written together
   def check_future_date
 		unless(purchase_date.blank?)  
 			if(purchase_date > Time.now)
