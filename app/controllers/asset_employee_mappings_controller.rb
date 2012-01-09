@@ -7,14 +7,14 @@ class AssetEmployeeMappingsController < ApplicationController
 	def create
 	
 		@aem = AssetEmployeeMapping.new(params[:asset_employee_mapping])
-		
-		if(@aem.save && Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?))
+		cba = Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?)
+		if ((@aem.save) && cba)
       # Put in after_create
 			redirect_to @aem.employee, :alert => "Asset Successfully Assigned"
 		else
       # set datepicker's default date
-			render :action => "assets/assign"
-		end		
+			render :template => "assets/assign"
+		end
 	end
 	
 	def edit
@@ -36,24 +36,14 @@ class AssetEmployeeMappingsController < ApplicationController
 	
 	def return_asset
 		if(params[:type].downcase == "employee")
-			aem_array = AssetEmployeeMapping.where(:employee_id => params[:id])
+			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => "Assigned")
 		else
-			aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned")
+			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned")
 		end
+		@aem = (@aem_array.select {|aem| aem if aem.asset.status == "Assigned" && aem.status = "Assigned"}).first
 		
-		@options_for_asset = []
-
 		# Put in view
-		aem_array.each do |aem|
-			if(aem.asset.status == "Assigned" && aem.status == "Assigned")
-				@aem ||= aem
-				currOpt = []
-				currOpt << aem.asset.name
-				currOpt << aem.asset_id
-				@options_for_asset << currOpt
-			end	
-		end
-		
+	
 		redirect_to assets_path, :alert => "No asset is assigned to selected pair" if @aem.blank?
 	end
 	
@@ -61,7 +51,8 @@ class AssetEmployeeMappingsController < ApplicationController
 	def change_aem_form
 		emp_id = params[:employee_id]
 		ast_id = params[:asset_id]
-		@aem = AssetEmployeeMapping.where(:asset_id => ast_id, :employee_id => emp_id).first
+		@aem = AssetEmployeeMapping.where(:asset_id => ast_id, :employee_id => emp_id, :status => "Assigned").first
+		p @aem
 	end
 	
 	

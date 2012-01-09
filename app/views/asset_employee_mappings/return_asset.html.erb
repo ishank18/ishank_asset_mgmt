@@ -2,7 +2,7 @@
 
 function changeForm() {
 	$.ajax({
-    url: '<%= change_form_asset_employee_mappings_path %>', 
+    url: '<%= change_aem_form_asset_employee_mappings_path %>', 
     dataType: 'script',
     type: 'get', 
     data: 'employee_id=<%= @aem.employee_id %>&asset_id='+$("#asset_employee_mapping_asset_id").attr("value")
@@ -28,7 +28,7 @@ function changeForm() {
 	</tr>
 	<tr>
 		<td>Asset Name</td>
-		<td><%= asset_name @options_for_asset, f %></td>
+		<td><%= asset_name f %></td>
 	</tr>
 	<tr>
 		<td>Issued on</td>

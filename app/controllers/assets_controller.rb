@@ -28,7 +28,7 @@ class AssetsController < ApplicationController
   def create
 		@asset = Asset.new params[:asset]
 		if(@asset.save)
-			add_tags params[:tagsTextField]
+			#add_tags params[:tagsTextField]
 			redirect_to assets_path, :alert => "Asset Successfully Added!"
 		else
 			render :action => "new"
@@ -44,24 +44,13 @@ class AssetsController < ApplicationController
 	def update
 		if @asset.update_attributes(params[:asset])
 		  ## Should clubbed with params[:asset]			
-			add_tags params['tagsTextField']
+			#add_tags params['tagsTextField']
 			redirect_to @asset, :alert => "Asset Successfully updated"
 		else
 			render :action => "edit"
 		end
 	end
 	
-	def add_tags t
-		tags = t.split(",")
-		tags.each do |tag|
-			if(tag_element = Tag.find_by_name(tag.strip))
-				@asset.tags << tag_element
-			else
-				new_tag = Tag.create(:name => tag.strip)
-				@asset.tags << new_tag				
-			end	
-		end	
-	end
 	
 	protected
 	

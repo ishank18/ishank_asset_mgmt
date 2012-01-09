@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
 
   ### validates presens of purchase date  
-  
+  before_save :change_tags_to_array
   
 	validates :name, :presence => true
 	validates :status, :presence => true
@@ -10,7 +10,9 @@ class Asset < ActiveRecord::Base
 	validates :serial_number, :presence => true, :uniqueness => true
 	validates :purchase_date, :presence => true
 	validates :vendor, :presence => true
-	validate :check_future_date					
+	validate :check_future_date		
+	
+	attr_accessor :tags_field
 	
 	belongs_to :resource, :polymorphic => true	
 	
@@ -36,13 +38,27 @@ class Asset < ActiveRecord::Base
 		end
   end
 
-	 def build_resource params
-	 	 if(self.id.nil?)
-		 	 r = self.resource_type.constantize.new params
-		 	 self.resource = r
-		 else
-			 self.resource.update_attributes params
-		 end	 
-   end
+	def build_resource params
+	 if(self.id.nil?)
+	 	 r = self.resource_type.constantize.new params
+	 	 self.resource = r
+	 else
+		 self.resource.update_attributes params
+	 end	 
+	end
+   
+  def change_tags_to_array
+  	unless tags_field.blank?
+			tags = self.tags_field.split(",")
+			tags.each do |tag|
+				if(tag_element = Tag.find_by_name(tag.strip))
+					self.tags << tag_element
+				else
+					new_tag = Tag.create(:name => tag.strip)
+					self.tags << new_tag				
+				end	
+			end
+		end	
+  end
   
 end

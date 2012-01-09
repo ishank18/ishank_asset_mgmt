@@ -59,6 +59,18 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		end
 	end
 	
+	def update_status
+		self.status = "Assigned"
+		Asset.where(:id => self.asset_id).first.update_attributes(:status => "Assigned")
+	end
+	
+	def check_future_issued_date		
+		if self.date_issued > DateTime.now
+			errors.add(:base, "Issue date can't be future date")
+			return false
+		end
+	end
+	
 	def check_temp_assignment_date
 		unless(self.date_returned.blank?)
 			if(self.date_issued > self.date_returned)
@@ -66,19 +78,6 @@ class AssetEmployeeMapping < ActiveRecord::Base
 				return false
 			end
 		end	
-	end
-
-	def check_future_issued_date		
-		p self.date_issued.day
-		if self.date_issued > DateTime.now
-			errors.add(:base, "Issue date can't be future date")
-			return false
-		end
-	end
-	
-	def update_status
-		self.status = "Assigned"
-		Asset.where(:id => self.asset_id).first.update_attributes(:status => "Assigned")
 	end
 	
 	def update_aem_asset

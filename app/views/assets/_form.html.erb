@@ -10,8 +10,8 @@ function changeForm() {
 }
 
 function addTags() {
-	var tagsArray = $("#tagsTextField").attr("value").split(",");
-	$("#tagsTextField").attr("value", "") 
+	var tagsArray = $("#asset_tags_field").attr("value").split(",");
+	$("#asset_tags_field").attr("value", "") 
 	var tagsHTML = ""
 	var previousTags = $(".DelTag").get()
 	$.each(previousTags, function(key, currEle) { 
@@ -37,7 +37,7 @@ function fillTagContent() {
 	 		tags += currEle.innerHTML
 	 	}
 	});
-	$("#tagsTextField").attr("value", tags)
+	$("#asset_tags_field").attr("value", tags)
 }
 
 function delTag(currentTag) {
@@ -128,7 +128,7 @@ function delTag(currentTag) {
 			<td>Tags</td>
 			<td>
 				<div id='addTags'>
-					<%= text_field_tag :tagsTextField %>
+					<%= f.text_field :tags_field, :value => "" %>
 					<span id='addTagButton' onclick='addTags()'>Add</span>
 					<div id='tags'></div>
 				</div>
