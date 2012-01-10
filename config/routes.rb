@@ -8,9 +8,8 @@ IshankAssetMgmt::Application.routes.draw do
 																	
 	get 'search', :to => "home#search", :as => :search
 
-	resources "admins"
-	
-  resources "tags"
+	resources :admins
+  resources :tags
   
   resources "employees" do
   	get "disabled", :on => :collection

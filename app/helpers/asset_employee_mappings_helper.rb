@@ -20,12 +20,10 @@ module AssetEmployeeMappingsHelper
 	def options_for_asset
 		options = []
 		@aem_array.each do |aem|
-			if(aem.asset.status == "Assigned" && aem.status == "Assigned")
 				currOpt = []
-				currOpt << aem.asset.name
+				currOpt << "#{aem.asset.id} - #{aem.asset.name}"
 				currOpt << aem.asset_id
 				options << currOpt
-			end	
 		end
 		options
 	end

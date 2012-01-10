@@ -13,7 +13,7 @@ class EmployeesController < ApplicationController
   end
 
 	def history
-		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "date_returned desc"
+		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "status asc"
 	end
 
 	def disabled

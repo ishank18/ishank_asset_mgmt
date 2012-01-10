@@ -14,7 +14,7 @@ class AssetsController < ApplicationController
   end
 
 	def history
-		@aem = AssetEmployeeMapping.where(:asset_id => params[:id]).order 'date_returned desc'
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:id]).order 'status asc'
 	end
 
   def new
