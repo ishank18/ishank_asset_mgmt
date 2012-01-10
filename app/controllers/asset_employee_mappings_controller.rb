@@ -7,8 +7,9 @@ class AssetEmployeeMappingsController < ApplicationController
 	def create
 	
 		@aem = AssetEmployeeMapping.new(params[:asset_employee_mapping])
-		cba = Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?)
-		if ((@aem.save) && cba)
+		can_assign_asset? = Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?)
+		
+		if ((@aem.save) && can_assign_asset?)
       # Put in after_create
 			redirect_to @aem.employee, :alert => "Asset Successfully Assigned"
 		else
@@ -36,10 +37,12 @@ class AssetEmployeeMappingsController < ApplicationController
 	
 	def return_asset
 		if(params[:type].downcase == "employee")
-			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => "Assigned")
+			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => "Assigned")#.joins(:assets).where("asset.status = ?", "Assigned")
 		else
 			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned")
 		end
+		
+		## Put above
 		@aem = (@aem_array.select {|aem| aem if aem.asset.status == "Assigned" && aem.status = "Assigned"}).first
 		
 		# Put in view
@@ -49,10 +52,7 @@ class AssetEmployeeMappingsController < ApplicationController
 	
 	
 	def change_aem_form
-		emp_id = params[:employee_id]
-		ast_id = params[:asset_id]
-		@aem = AssetEmployeeMapping.where(:asset_id => ast_id, :employee_id => emp_id, :status => "Assigned").first
-		p @aem
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :status => "Assigned").first
 	end
 	
 	
