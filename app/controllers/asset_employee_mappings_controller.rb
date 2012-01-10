@@ -52,7 +52,6 @@ class AssetEmployeeMappingsController < ApplicationController
 		emp_id = params[:employee_id]
 		ast_id = params[:asset_id]
 		@aem = AssetEmployeeMapping.where(:asset_id => ast_id, :employee_id => emp_id, :status => "Assigned").first
-		p @aem
 	end
 	
 	

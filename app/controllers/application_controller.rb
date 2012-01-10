@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	before_filter :authenticate_admin!
+	#before_filter :authenticate_admin!
   protect_from_forgery
   def string_to_date str
 		!str.blank? ? DateTime.strptime(str, "%m/%d/%Y") : nil
