@@ -1,6 +1,7 @@
 body { }
 a { color:#0008a8; text-decoration:none; }
 a:hover { color:red; }
+a:active { color:#FFf; }
 #container { border:1px solid; }
 .TagSpan { cursor:pointer; color:#000774; }
 .TagSpan:hover { color:red; }
@@ -23,6 +24,7 @@ a:hover { color:red; }
 .notice { color:#9186E0; text-align:center; }
 .error { color:red; text-align:center; }
 .alert { color:#347877; text-align:center; }
+.ProjectHeading { font-size:24px; float:left; margin-left: 5px; }
 #searchForm { background:#FEFEFE }
 #assetTable tr td select { width:300px;  }
 #assetTable tr td { vertical-align:top; }
@@ -30,9 +32,9 @@ a:hover { color:red; }
 #addTagButton { color: blue; cursor: pointer; text-decoration: underline; }
 #notice { text-align:center; }
 #asset_currency_unit { width:auto;}
-#header ul {padding:0px;}
-#ui-datepicker-div { background: #aaa; padding:5px; border: 1px dashed ; }
-#header ul li { float:left; list-style:none; display:inline; padding:5px; background:#cccaaa; margin-left:5px; border:1px solid #237487 }
+#tabs ul {padding:0px;}
+#tabs ul li { float:left; list-style:none; display:inline; padding:3px; background:#cccaaa; margin-left:5px; border:1px solid #237487; font-size:13px; }
+#header { width:800px; }
 .actionsLinks { float:right; }
 .pagination { padding: 3px; margin: 3px; }
 .pagination a { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #777777; text-decoration: none; color: #000099; }

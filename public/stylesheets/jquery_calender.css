@@ -1,0 +1,76 @@
+#ui-datepicker-div {
+    width: 200px;
+    border: 1px solid dashed #333;
+    padding: 5px;
+    background: gray;
+    display: none;
+}
+div.ui-datepicker-control {
+    position: relative;
+    height: 25px;
+    background: forestgreen;
+}
+div.ui-datepicker-control div {
+    padding: 5px;
+}
+div.ui-datepicker-control div a {
+    color: #fff;
+}
+div.ui-datepicker-links {
+    position: relative;
+    height: 20px;
+    padding: 5px 0 0 0;
+    background: darkgreen;
+    border-bottom: 1px solid green;
+    text-align: center;
+}
+div.ui-datepicker-links div {
+    padding: 5px;
+}
+div.ui-datepicker-links div a {
+    color: #fff;    
+}
+div.ui-datepicker-clear,
+div.ui-datepicker-prev {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+div.ui-datepicker-close,
+div.ui-datepicker-next {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+div.ui-datepicker-current {
+    display: inline;
+}
+div.ui-datepicker-header {
+    margin-top: 5px;
+    text-align: center;
+}
+div.ui-datepicker-header select {
+    margin: 0 3px;    
+}
+table.ui-datepicker {
+    width: 250px;
+    border-collapse: collapse;
+    margin: 10px 0 0 0;
+}
+table.ui-datepicker td {
+    padding: 3px;
+    border: 1px solid red;
+}
+table.ui-datepicker thead td {
+    text-align: center;
+    font-weight: bold;
+    background: green;
+    color: lightgreen;
+}
+td.ui-datepicker-today {
+    background: #dff6e4;
+}
+td.ui-datepicker-current-day {
+    background: darkgreen;
+    color: #fff;
+}

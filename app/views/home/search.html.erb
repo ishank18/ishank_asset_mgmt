@@ -14,7 +14,7 @@ function ajaxSearch() {
 	<tr >
 		<td >Asset :</td>
 		<td> <%= text_field_tag 'query_for_asset' %>  </td>
-		<td> <%= select_tag "status", options_for_select(STATUS), :include_blank => "- Select Status -" %> <%= select_tag "category", options_for_select(CATEGORY_CLASS), :include_blank => "- Select Category -" %> </td>
+		<td> <%= select_tag "status", options_for_select(STATUS.dup << ['Assigned', 'Assigned']), :include_blank => "- Select Status -" %> <%= select_tag "category", options_for_select(CATEGORY_CLASS), :include_blank => "- Select Category -" %> </td>
 	</tr>
 	<tr>
 		<td>Employee :</td>
@@ -26,10 +26,13 @@ function ajaxSearch() {
 		<td><input type="button" value="Search!" onclick="ajaxSearch();" /></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td colspan='3'>
+			<div id="searchBox"></div>
+		</td>
+	</tr>
 </table>
 
-<div id="searchBox">
-</div>
 
 <script>
 	$(".ShowTable tr:even").addClass("AlternateRow");

@@ -7,22 +7,27 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<div id="header">
-	<% if admin_signed_in? %>
-	<ul>
-		<li><%= link_to 'Home', root_path %></li>
-		<li><%= link_to 'View all Assets', assets_path %></li>
-		<li><%= link_to 'View all employee', employees_path %></li>
-		<li><%= link_to 'Add new assets', new_asset_path %></li>
-		<li><%= link_to 'Add new Employee', new_employee_path %></li>
-		<li><%= link_to 'Assign asset', assign_assets_path %></li>
-		<li><%= link_to 'Add new admin', new_admin_path %></li>
-	</ul>	
-	<% end %>
+<div align='center'>
+	<div id='header'>
+		<span class='ProjectHeading'>Asset Management</span>
+		<div id="tabs">
+			<% if admin_signed_in? %>
+				<span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
+				<br><br>
+				<ul>
+					<li><%= link_to 'Home', root_path %></li>
+					<li><%= link_to 'View all Assets', assets_path %></li>
+					<li><%= link_to 'View all employee', employees_path %></li>
+					<li><%= link_to 'Add new assets', new_asset_path %></li>
+					<li><%= link_to 'Add new Employee', new_employee_path %></li>
+					<li><%= link_to 'Assign asset', assign_assets_path %></li>
+					<li><%= link_to 'Add new admin', new_admin_path %></li>
+				</ul>	
+			<% end %>
+		</div>
+	</div>
 </div>
 <br><br>
-<span style='float:right'><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></span>
 <%= flash_message %>
 <%= yield %>
 
