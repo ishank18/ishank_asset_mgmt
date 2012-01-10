@@ -10,7 +10,6 @@ module ApplicationHelper
   end
 
 	def flash_message
-		
 		message = ""
 		[:notice, :alert].each do |type|
 			if(!flash[type].blank?)
@@ -18,6 +17,10 @@ module ApplicationHelper
 			end	
 		end
 		message.html_safe
+	end
+	
+	def menu_link_to name, uri_path
+		link_to name, uri_path, :class => ("highlighted" if request.fullpath == uri_path)
 	end
 	
 	def get_all_employees

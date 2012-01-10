@@ -27,14 +27,14 @@ class Asset < ActiveRecord::Base
 	end
 	
 	def can_be_assigned?
-		(status != "Assigned"	&& status != "repair")
+		status != "Assigned" && status != "repair"
 	end
   
   ## 2 conditions can be written together
   def check_future_date
 		unless(purchase_date.blank?)  
 			if(purchase_date > Time.now)
-					errors.add(:base, 'Future Purchase date is not allowed')
+				errors.add(:base, 'Future Purchase date is not allowed')
 			end
 		end
   end
