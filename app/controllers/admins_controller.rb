@@ -13,4 +13,17 @@ class AdminsController < ApplicationController
 		end	
 	end
 	
+  def reset
+		@admin = current_admin
+	end
+	
+	def update_password
+		@admin = current_admin
+		if(@admin.update_attributes(params[:admin]))
+			redirect_to root_path
+		else
+			render :action => "edit"
+		end
+	end
+	
 end

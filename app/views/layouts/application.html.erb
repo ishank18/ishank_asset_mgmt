@@ -13,18 +13,18 @@
 		<div id="tabs">
 			<% if admin_signed_in? %>
 				<span style='float:right'>
-					<%= link_to 'Edit Password', edit_password_path(current_admin) %>		
+					<%= link_to 'Edit Password', password_reset_admins_path %>		
 					<%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %>
 				</span>
 				<br><br>
 				<ul>
-					<li><%= menu_link_to 'Home', root_path %></li>
-					<li><%= menu_link_to 'View all Assets', assets_path %></li>
-					<li><%= menu_link_to 'View all employee', employees_path %></li>
-					<li><%= menu_link_to 'Add new assets', new_asset_path %></li>
-					<li><%= menu_link_to 'Add new Employee', new_employee_path %></li>
-					<li><%= menu_link_to 'Assign asset', assign_assets_path %></li>
-					<li><%= menu_link_to 'Add new admin', new_admin_path %></li>
+					<li><%= link_to 'Home', root_path, :class => class_name("home", "index") %></li>
+					<li><%= link_to 'View all Assets', assets_path, :class => class_name("assets", "index") %></li>
+					<li><%= link_to 'View all employee', employees_path, :class => class_name("employees", "index") %></li>
+					<li><%= link_to 'Add new assets', new_asset_path, :class => class_name("assets", "new") %></li>
+					<li><%= link_to 'Add new Employee', new_employee_path, :class => class_name("employees", "new") %></li>
+					<li><%= link_to 'Assign asset', assign_assets_path, :class => class_name("assets", "assign") %></li>
+					<li><%= link_to 'Add new admin', new_admin_path, :class => class_name("admins", "new") %></li>
 				</ul>	
 			<% end %>
 		</div>

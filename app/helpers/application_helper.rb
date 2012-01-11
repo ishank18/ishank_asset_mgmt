@@ -19,8 +19,8 @@ module ApplicationHelper
 		message.html_safe
 	end
 	
-	def menu_link_to name, uri_path
-		link_to name, uri_path, :class => ("highlighted" if request.fullpath == uri_path)
+	def class_name controller, action
+		"highlighted" if params[:controller] == controller && params[:action] == action
 	end
 	
 	def get_all_employees

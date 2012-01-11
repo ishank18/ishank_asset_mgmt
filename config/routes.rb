@@ -1,32 +1,35 @@
 IshankAssetMgmt::Application.routes.draw do
 
+
 	as :admin do
 		match '/admins/confirmation' => 'confirmations#update', :via => :put, :as => :update_admin_confirmation
 	end
 	
 	devise_for :admins, :controllers => { :registrations => "admin/registrations", :confirmations => "confirmations" }
-	devise_for :admins, :controllers => { :passwords => "passwords" }
-																	
+	
 	get 'search', :to => "home#search", :as => :search
-
-	resources :admins
+	
+	resources :admins do
+		get 'password/reset', :action => 'reset', :on => :collection
+		put 'update_password', :on => :collection
+	end
+	
   resources :tags
-  resources :passwords
-  
-  resources "employees" do
+
+  resources :employees do
   	get "disabled", :on => :collection
-  	put 'disable', :on => :member
+  	put "disable", :on => :member
   	get "history", :on => :member
   end
   
-  resources "asset_employee_mappings" do
+  resources :asset_employee_mappings do
   	get "change_aem_form", :on => :collection
   	get 'populate_asset', :action => "populate_asset", :as => "populate_asset", :on => :collection
   end
   
   get ":type/:id/return", :to => "asset_employee_mappings#return_asset", :as => "return_asset"
   
-	resources "assets" do
+	resources :assets do
 		get "change_form_content", :action => "change_form_content", :on => :collection
 		get "history", :on => :member
 		get "assign", :on => :collection

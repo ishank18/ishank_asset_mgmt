@@ -1,15 +1,13 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
-gem 'devise'
-gem 'jquery_datepicker'
+gem 'devise', '1.5.1'
+gem 'jquery_datepicker', '0.3.2'
 gem 'jquery-rails', '>= 1.0.12'
-gem 'rails3_acts_as_paranoid'
+gem 'rails3_acts_as_paranoid', '0.1.1'
 gem 'rspec-rails','~> 2.6'
-gem 'shoulda-matchers'
+gem 'shoulda-matchers', '1.0.0'
 gem 'will_paginate', '>= 3.0.pre'
-
-# gem 'thinking-sphinx', '2.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -24,7 +22,7 @@ gem 'mysql2', '0.2.7'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
-# gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'ruby-debug19', '0.11.6'
 
 # Bundle the extra gems:
 # gem 'bj'

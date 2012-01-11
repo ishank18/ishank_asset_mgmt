@@ -28,9 +28,11 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    archive-tar-minitar (0.5.2)
     arel (2.0.10)
     bcrypt-ruby (3.0.1)
     builder (2.1.2)
+    columnize (0.3.6)
     devise (1.5.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -43,6 +45,8 @@ GEM
       railties (~> 3.0)
       thor (~> 0.14)
     jquery_datepicker (0.3.2)
+    linecache19 (0.5.12)
+      ruby_core_source (>= 0.1.4)
     mail (2.2.19)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -86,6 +90,16 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.7.0)
+    ruby-debug-base19 (0.11.25)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby_core_source (0.1.5)
+      archive-tar-minitar (>= 0.5.2)
     shoulda-matchers (1.0.0)
     thor (0.14.6)
     treetop (1.4.10)
@@ -100,12 +114,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  devise
+  devise (= 1.5.1)
   jquery-rails (>= 1.0.12)
-  jquery_datepicker
+  jquery_datepicker (= 0.3.2)
   mysql2 (= 0.2.7)
   rails (= 3.0.7)
-  rails3_acts_as_paranoid
+  rails3_acts_as_paranoid (= 0.1.1)
   rspec-rails (~> 2.6)
-  shoulda-matchers
+  ruby-debug19
+  shoulda-matchers (= 1.0.0)
   will_paginate (>= 3.0.pre)
