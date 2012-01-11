@@ -5,11 +5,13 @@ IshankAssetMgmt::Application.routes.draw do
 	end
 	
 	devise_for :admins, :controllers => { :registrations => "admin/registrations", :confirmations => "confirmations" }
+	devise_for :admins, :controllers => { :passwords => "passwords" }
 																	
 	get 'search', :to => "home#search", :as => :search
 
 	resources :admins
   resources :tags
+  resources :passwords
   
   resources "employees" do
   	get "disabled", :on => :collection

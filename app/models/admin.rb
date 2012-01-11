@@ -5,6 +5,7 @@ class Admin < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+  
   def attempt_set_password(params)
 		p = {}
 		p[:password] = params[:password]

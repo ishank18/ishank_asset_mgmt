@@ -14,7 +14,7 @@
 		<td><%= emp.email %></td>
 		<td>
 			<%= show_disable_option emp.id %>
-			<%= link_to 'Edit', edit_employee_path(emp.id.to_s) %>
+			<%= link_to 'Edit', edit_employee_path(emp.id) unless Employee.where(:id => emp.id).blank? %>
 			<%= show_history emp %>
 		</td>
 	</tr>
