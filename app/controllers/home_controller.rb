@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 		
 	def index
-		@tags = Tag.all
+		@tags = Tag.includes(:assets)
 	end
 	
 	## Optimize  

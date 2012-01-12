@@ -16,7 +16,7 @@ class Asset < ActiveRecord::Base
 	
 	belongs_to :resource, :polymorphic => true	
 	
-	has_and_belongs_to_many :tags, :join_table => 'assets_tags'  
+	has_and_belongs_to_many :tags, :join_table => 'assets_tags'
   has_many :asset_employee_mappings
 	has_many :employees, :through => :asset_employee_mappings
 	

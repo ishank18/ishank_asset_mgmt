@@ -3,7 +3,7 @@ class EmployeesController < ApplicationController
 	before_filter :find_employee, :only => [:show, :edit, :update]
 	
   def index
-  	@employees ||= Employee.all 
+  	@employees ||= Employee.includes(:asset_employee_mappings) 
   end
 
   def show

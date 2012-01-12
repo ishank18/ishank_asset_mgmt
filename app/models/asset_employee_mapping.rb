@@ -14,7 +14,6 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	belongs_to :employee
 
 	
-	
 	def self.search asset_str, employee_str, status, category
 		sql = "SELECT"
 		if((!asset_str.blank? or !status.blank? or !category.blank?) && !employee_str.blank?)

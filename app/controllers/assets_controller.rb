@@ -4,7 +4,7 @@ class AssetsController < ApplicationController
   
   ## created_at desc
   def index
-  	@assets = Asset.paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
+  	@assets = Asset.includes(:asset_employee_mappings).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
   end
 
   ## Move in before_filter

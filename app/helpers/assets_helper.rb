@@ -1,11 +1,6 @@
 module AssetsHelper
 
-  ## Move in view
-	def show_asset_history asset
-		unless(asset.asset_employee_mappings.blank?)
-			link_to "History", history_asset_path(asset)
-		end
-	end
+  ## Move in view - (Done)
 	
 	def show_status asset
 		if(asset.status == "Assigned")
@@ -25,19 +20,6 @@ module AssetsHelper
 	end
 	
 	
-	def tag_class tag
-		tag_count = tag.assets.count
-		if(tag_count == 1)
-			"TagSizeOne TagSpan"
-		elsif(tag_count == 2)
-			"TagSizeTwo TagSpan"
-		elsif(tag_count == 3)
-			"TagSizeThree TagSpan"
-		elsif(tag_count == 4)
-			"TagSizeFour TagSpan"
-		else			
-			"TagSizeBig TagSpan"
-		end	
-	end
+
 	
 end
