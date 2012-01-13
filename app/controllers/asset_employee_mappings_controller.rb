@@ -38,27 +38,24 @@ class AssetEmployeeMappingsController < ApplicationController
 	## Will render the return asset form
 	def return_asset
 		if(params[:type].downcase == "employee")
-			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => "Assigned").joins(:asset).where("assets.status = ?", "Assigned")
+			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => "Assigned").joins(:asset).where("assets.status = ?", STATUS[4][1])
 		else
-			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned").joins(:asset).where("assets.status = ?", "Assigned")
+			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned").joins(:asset).where("assets.status = ?", STATUS[4][1])
 		end
-		
 		## Put above
 		@aem = @aem_array.first
-		
 		# Put in view
-	
 		redirect_to assets_path, :alert => "No asset is assigned to selected pair" if @aem.blank?
 	end
 	
 	## Will change the return form according to the selected asset to be returned - Using AJAX
 	def change_aem_form
-		@aem = AssetEmployeeMapping.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :status => "Assigned").first
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :status => STATUS[4][1]).first
 	end
 	
 	## Will populate the select box according to the category of asset and when the status is not assigned - Using AJAX
 	def populate_asset
-  	@assets = Asset.where("resource_type = ? and status != 'Assigned'", params[:category])
+  	@assets = Asset.where("resource_type = ? and status not in ('Assigned', 'repair') ", params[:category])
   end
 	
 end

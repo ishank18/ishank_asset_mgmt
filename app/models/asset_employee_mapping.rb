@@ -62,13 +62,13 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	
 	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status
-		self.status = "Assigned"
-		Asset.where(:id => self.asset_id).first.update_attributes(:status => "Assigned")
+		self.status = STATUS[4][1]
+		Asset.where(:id => asset_id).first.update_attributes(:status => STATUS[4][1])
 	end
 	
 	## Checks if the Issue date is not future
 	def check_future_issued_date		
-		if self.date_issued > DateTime.now
+		if date_issued > DateTime.now
 			errors.add(:base, "Issue date can't be future date")
 			return false
 		end
@@ -76,8 +76,8 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	
 	## Checks if the return date is not less than assigned date
 	def check_temp_assignment_date
-		unless(self.date_returned.blank?)
-			if(self.date_issued > self.date_returned)
+		unless(date_returned.blank?)
+			if(date_issued > date_returned)
 				errors.add(:base, 'Date Returned Cant be greater than date issued')
 				return false
 			end
@@ -87,7 +87,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	## Update the assets and AEM status when an asset is returned
 	def update_aem_asset
 		self.status = "returned"
-		self.asset.status = "spare"
+		self.asset.status = STATUS[2][1]
 		self.asset.save!
 	end
 	
