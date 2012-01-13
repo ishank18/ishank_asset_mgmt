@@ -88,7 +88,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	def update_aem_asset
 		self.status = "returned"
 		self.asset.status = STATUS[:Spare]
-		self.asset.save!
+		asset.save!
 	end
 	
 end
