@@ -16,6 +16,7 @@ class Asset < ActiveRecord::Base
 	
 	belongs_to :resource, :polymorphic => true	
 	
+	# Check ig join_table key is required
 	has_and_belongs_to_many :tags, :join_table => 'assets_tags'
   has_many :asset_employee_mappings
 	has_many :employees, :through => :asset_employee_mappings
@@ -27,6 +28,7 @@ class Asset < ActiveRecord::Base
 		asset_employee_mappings.where(:status => "Assigned").first.employee 
 	end
 	
+	## Refer using constant - through out the app
 	## Will only let the assets to be assigned if status is not assigned and repair
 	def can_be_assigned?
 		status != "Assigned" && status != "repair"
