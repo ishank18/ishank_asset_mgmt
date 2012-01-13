@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 		@tags = Tag.includes(:assets)
 	end
 	
-	## Optimize  
+	## Will search assets and employees and will filter it according to status and category
 	def search
 		@result = AssetEmployeeMapping.search params[:query_for_asset],  params[:query_for_emp], params[:status], params[:category]
 		unless(@result.blank?)
@@ -18,6 +18,7 @@ class HomeController < ApplicationController
 		end		
 	end
 	
+	## Will show assets in  the tags in the home page - Using AJAX
 	def show_tag
 		@tag = Tag.where(:id => params[:tag_id]).first
 	end

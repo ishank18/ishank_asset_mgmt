@@ -12,6 +12,7 @@ class EmployeesController < ApplicationController
   	end	
   end
 
+	## Will show the asset history of the Employee
 	def history
 		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "status asc"
 	end
@@ -45,7 +46,7 @@ class EmployeesController < ApplicationController
 		end
 	end
 	
-	## Used to solf delete the employees, will not let them delete if any asset is assigned to them
+	## Used to soft delete the employees, will not let them delete if any asset is assigned to them
 	def disable
 		aem = Employee.where(:id => params[:id]).first.asset_employee_mappings.collect { |a| a.status }
 		

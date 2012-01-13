@@ -4,6 +4,7 @@ class AdminsController < ApplicationController
   	@admin = Admin.new
   end
 
+	## Used to create new Admin and will send the confirmation mail to them
 	def create
 		@admin = Admin.new(:email => params[:email])
 		if @admin.save
@@ -13,10 +14,12 @@ class AdminsController < ApplicationController
 		end	
 	end
 	
+	## Form to edit password for the admin
   def reset
 		@admin = current_admin
 	end
 	
+	## Will update password of admin after filling the reset form
 	def update_password
 		@admin = current_admin
 		if(@admin.update_attributes(params[:admin]))

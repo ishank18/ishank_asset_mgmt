@@ -12,7 +12,8 @@ class AssetsController < ApplicationController
   def show
     
   end
-
+	
+	## Will show the employee history of the Asset 
 	def history
 		@aem = AssetEmployeeMapping.where(:asset_id => params[:id]).order 'status asc'
 	end
@@ -21,6 +22,7 @@ class AssetsController < ApplicationController
   	@asset = Asset.new
   end
   
+  ## Will render the asset assignment form
   def assign
   	@aem = AssetEmployeeMapping.new
   end
@@ -38,6 +40,7 @@ class AssetsController < ApplicationController
   def edit
   end
 
+	## Will change the new asset form wrt the category selected
 	def change_form_content  
 	end
 
