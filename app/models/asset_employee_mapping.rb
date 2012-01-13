@@ -84,6 +84,9 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		end	
 	end
 	
+	
+	## Use update_attributes
+		
 	## Update the assets and AEM status when an asset is returned
 	def update_aem_asset
 		self.status = "returned"
