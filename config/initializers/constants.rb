@@ -1,6 +1,6 @@
 CATEGORY = ['Laptop', 'Laptop'], ['Network Device', 'NetworkDevice'], ['Mobile Phone', 'MobilePhone']
 
-STATUS=['Operational', 'operational'], ['Recieved', 'recieved'], ['Spare', 'spare'], ['Repair', 'repair'], ['Assigned', 'Assigned']
+STATUS= {:Operational => 'operational', :Recieved => 'recieved', :Spare => 'spare', :Repair => 'repair', :Assigned => 'Assigned' }
 
 CATEGORY_CLASS=['Laptop', 'Laptop'], ['Network Device', 'NetworkDevice'], ['Mobile Phone', 'MobilePhone']
 

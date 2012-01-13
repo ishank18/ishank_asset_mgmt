@@ -25,7 +25,7 @@ class AssetEmployeeMappingsController < ApplicationController
   
 	def update
 		
-		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], :asset_id => params[:asset_employee_mapping][:asset_id], :status => 'Assigned').first
+		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], :asset_id => params[:asset_employee_mapping][:asset_id], :status => STATUS[:Assigned]).first
 		
 	  # put in callback
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
@@ -38,9 +38,9 @@ class AssetEmployeeMappingsController < ApplicationController
 	## Will render the return asset form
 	def return_asset
 		if(params[:type].downcase == "employee")
-			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => "Assigned").joins(:asset).where("assets.status = ?", STATUS[4][1])
+			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => STATUS[:Assigned]).joins(:asset).where("assets.status = ?", STATUS[:Assigned])
 		else
-			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => "Assigned").joins(:asset).where("assets.status = ?", STATUS[4][1])
+			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => STATUS[:Assigned]).joins(:asset).where("assets.status = ?", STATUS[:Assigned])
 		end
 		## Put above
 		@aem = @aem_array.first
@@ -50,12 +50,12 @@ class AssetEmployeeMappingsController < ApplicationController
 	
 	## Will change the return form according to the selected asset to be returned - Using AJAX
 	def change_aem_form
-		@aem = AssetEmployeeMapping.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :status => STATUS[4][1]).first
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :status => STATUS[:Assigned]).first
 	end
 	
 	## Will populate the select box according to the category of asset and when the status is not assigned - Using AJAX
 	def populate_asset
-  	@assets = Asset.where("resource_type = ? and status not in ('Assigned', 'repair') ", params[:category])
+  	@assets = Asset.where("resource_type = ? and status not in ('#{STATUS[:Assigned]}', '#{STATUS[:Repair]}') ", params[:category])
   end
 	
 end

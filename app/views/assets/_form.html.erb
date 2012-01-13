@@ -67,7 +67,7 @@ function delTag(currentTag) {
 			<% if @asset.status == "Assigned" %>
 				Assigned
 			<% else %>
-				<%= f.select(:status, options_for_select(STATUS[0...STATUS.length-1], @asset.status), :include_blank => "- Select -") %>
+				<%= f.select(:status, options_for_select(STATUS.to_a[0...STATUS.length-1], @asset.status), :include_blank => "- Select -") %>
 			<% end %>
 			</td>
 		</tr>

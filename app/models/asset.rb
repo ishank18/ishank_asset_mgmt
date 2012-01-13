@@ -25,13 +25,13 @@ class Asset < ActiveRecord::Base
 
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
-		asset_employee_mappings.where(:status => STATUS[4][1]).first.employee 
+		asset_employee_mappings.where(:status => STATUS[:Assigned]).first.employee 
 	end
 	
 	## Refer using constant - through out the app
 	## Will only let the assets to be assigned if status is not assigned and repair
 	def can_be_assigned?
-		status != STATUS[4][1] && status != STATUS[3][1]
+		(!status.include? STATUS[:Assigned]) && (!status.include? STATUS[:Repair])
 	end
   
   ## Checks that future purchase date is not alloted
