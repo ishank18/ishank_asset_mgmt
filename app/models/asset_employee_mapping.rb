@@ -22,7 +22,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 				INNER JOIN `assets` ON `assets`.`id` = `asset_employee_mappings`.`asset_id` 
 				INNER JOIN `employees` ON `employees`.`id` = `asset_employee_mappings`.`employee_id` 
 				where assets.name like '%#{asset_str}%' and employees.name like '%#{employee_str}%'
-				and asset_employee_mappings.status = '#{STATUS[:Assigned]}'
+				and asset_employee_mappings.status = '#{STATUS["Assigned"]}'
 			}
 			unless status.blank?
 				sql += %{
@@ -62,8 +62,8 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	
 	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status
-		self.status = STATUS[:Assigned]
-		Asset.where(:id => asset_id).first.update_attributes(:status => STATUS[:Assigned])
+		self.status = STATUS["Assigned"]
+		Asset.where(:id => asset_id).first.update_attributes(:status => STATUS["Assigned"])
 	end
 	
 	## Checks if the Issue date is not future
@@ -90,7 +90,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	## Update the assets and AEM status when an asset is returned
 	def update_aem_asset
 		self.status = "returned"
-		self.asset.status = STATUS[:Spare]
+		self.asset.status = STATUS["Spare"]
 		asset.save!
 	end
 	
