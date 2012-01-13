@@ -3,26 +3,14 @@ class EmployeesController < ApplicationController
 	before_filter :find_employee, :only => [:show, :edit, :update]
 	
   def index
-  	@employees ||= Employee.includes(:asset_employee_mappings) 
+  	@employees = Employee.includes(:asset_employee_mappings) 
   end
+
 
   def show
   	if(@employee.nil?)
   		@employee = Employee.only_deleted.where(:id => params[:id]).first
   	end	
-  end
-
-	## Will show the asset history of the Employee
-	def history
-		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "status asc"
-	end
-
-	def disabled
-  	@employees = Employee.only_deleted	
-  	render :action => "index"
-	end
-
-  def edit
   end
 
   def new
@@ -38,6 +26,12 @@ class EmployeesController < ApplicationController
 		end		
 	end
 
+
+  def edit
+  end
+
+
+
 	def update
 		if @employee.update_attributes(params[:employee])
 			redirect_to(@employee, :alert => 'Employee details successfully updated.')
@@ -46,11 +40,25 @@ class EmployeesController < ApplicationController
 		end
 	end
 	
+	
+	## Will show the asset history of the Employee
+	def history
+		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "status asc"
+	end
+
+
+	def disabled
+  	@employees = Employee.only_deleted	
+  	render :action => "index"
+	end
+	
+	
+	# Move to before_destroy
 	## Used to soft delete the employees, will not let them delete if any asset is assigned to them
 	def disable
 		aem = Employee.where(:id => params[:id]).first.asset_employee_mappings.collect { |a| a.status }
 		
-		if(aem.include? STATUS[:Assigned])
+		if(aem.include? STATUS["Assigned"])
 			redirect_to :back, :notice => "First remove all assigned Asset"
 		else
 			Employee.where(:id => params[:id]).first.destroy	

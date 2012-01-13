@@ -10,10 +10,11 @@
 	<% @employees.each do |emp| %>
 	<tr>
 		<td><%= emp.employee_id %></td>
-		<td><%= link_to emp.name, employee_path(emp.id) %></td>
+		<td><%= link_to emp.name, emp %></td>
 		<td><%= emp.email %></td>
+		
 		<td>
-			<%= show_disable_option emp.id %>
+			<%= show_disable_option emp %>
 			<%= link_to 'Edit', edit_employee_path(emp.id) unless Employee.where(:id => emp.id).blank? %>
 			<%= show_history emp %>
 		</td>
