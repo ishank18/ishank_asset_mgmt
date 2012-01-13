@@ -25,7 +25,7 @@ class AdminsController < ApplicationController
 		if(@admin.update_attributes(params[:admin]))
 			redirect_to root_path
 		else
-			render :action => "edit"
+			render :action => "reset"
 		end
 	end
 	
