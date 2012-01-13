@@ -21,16 +21,18 @@ class Asset < ActiveRecord::Base
 	has_many :employees, :through => :asset_employee_mappings
 	
 	accepts_nested_attributes_for :resource
-	
+
+	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
 		asset_employee_mappings.where(:status => "Assigned").first.employee 
 	end
 	
+	## Will only let the assets to be assigned if status is not assigned and repair
 	def can_be_assigned?
 		status != "Assigned" && status != "repair"
 	end
   
-  ## 2 conditions can be written together
+  ## Checks that future purchase date is not alloted
   def check_future_date
 		unless(purchase_date.blank?)  
 			if(purchase_date > Time.now)
@@ -39,6 +41,7 @@ class Asset < ActiveRecord::Base
 		end
   end
 
+	## Used to add resource to the asset table using polymorphic association
 	def build_resource params
 	 if(self.id.nil?)
 	 	 r = self.resource_type.constantize.new params
@@ -47,7 +50,8 @@ class Asset < ActiveRecord::Base
 		 self.resource.update_attributes params
 	 end	 
 	end
-   
+  
+  ## Used to add tags, and make enteries in assets_tags table, will also check if the tag exists or not
   def change_tags_to_array
   	unless tags_field.blank?
 			tags = self.tags_field.split(",")

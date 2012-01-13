@@ -13,7 +13,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	belongs_to :asset
 	belongs_to :employee
 
-	
+	## Used to search assets and employees, will also filter the result wrt status and category
 	def self.search asset_str, employee_str, status, category
 		sql = "SELECT"
 		if((!asset_str.blank? or !status.blank? or !category.blank?) && !employee_str.blank?)
@@ -60,11 +60,13 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		end
 	end
 	
+	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status
 		self.status = "Assigned"
 		Asset.where(:id => self.asset_id).first.update_attributes(:status => "Assigned")
 	end
 	
+	## Checks if the Issue date is not future
 	def check_future_issued_date		
 		if self.date_issued > DateTime.now
 			errors.add(:base, "Issue date can't be future date")
@@ -72,6 +74,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		end
 	end
 	
+	## Checks if the return date is not less than assigned date
 	def check_temp_assignment_date
 		unless(self.date_returned.blank?)
 			if(self.date_issued > self.date_returned)
@@ -81,6 +84,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		end	
 	end
 	
+	## Update the assets and AEM status when an asset is returned
 	def update_aem_asset
 		self.status = "returned"
 		self.asset.status = "spare"
