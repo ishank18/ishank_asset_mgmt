@@ -45,7 +45,8 @@ class Asset < ActiveRecord::Base
 
 	## Used to add resource to the asset table using polymorphic association
 	def build_resource params
-	 if(self.id.nil?)
+	  # use new_record?
+	 if (self.id.nil?)
 	 	 r = self.resource_type.constantize.new params
 	 	 self.resource = r
 	 else
