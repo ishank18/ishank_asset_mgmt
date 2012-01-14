@@ -1,0 +1,24 @@
+<table width="800" class="ShowTable" align='center'>
+	<tr>
+		<th>Employee Id</th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Action</th>
+	</tr>
+	<% employees.each do |emp| %>
+	<tr>
+		<td><%= emp.employee_id %></td>
+		<td><%= link_to emp.name, emp %></td>
+		<td><%= emp.email %></td>
+		<td>
+			<%= show_disable_option emp %>
+			<%= link_to 'Edit', edit_employee_path(emp) unless Employee.where(:id => emp.id).blank? %>
+			<%= show_history emp %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<script>
+	$(".ShowTable tr:odd").addClass("AlternateRow");
+</script>

@@ -10,4 +10,9 @@ class Employee < ActiveRecord::Base
   has_many :asset_employee_mappings
 	has_many :assets, :through => :asset_employee_mappings
 	
+	def can_be_disabled?
+		status_array = asset_employee_mappings.collect { |a| a.status }
+		!status_array.include? STATUS["Assigned"]
+	end
+		
 end

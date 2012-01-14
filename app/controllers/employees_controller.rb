@@ -48,17 +48,25 @@ class EmployeesController < ApplicationController
 
 
 	def disabled
-  	@employees = Employee.only_deleted	
-  	render :action => "index"
+  	@employees = Employee.only_deleted
 	end
 	
+	def enable
+		
+		employee = Employee.only_deleted.where(:id => params[:id]).first
+		if(employee.recover)
+			redirect_to employee, :alert => "Employee Successfully Enabled!"
+		else
+			redirect_to disabled_employees_path, :alert => "This Employee cant be deleted!"
+		end	
+	end
 	
 	# Move to before_destroy
 	## Used to soft delete the employees, will not let them delete if any asset is assigned to them
 	def disable
-		aem = Employee.where(:id => params[:id]).first.asset_employee_mappings.collect { |a| a.status }
-		
-		if(aem.include? STATUS["Assigned"])
+	
+		@employee = Employee.where(:id => params[:id]).first
+		unless @employee.can_be_disabled?
 			redirect_to :back, :notice => "First remove all assigned Asset"
 		else
 			Employee.where(:id => params[:id]).first.destroy	

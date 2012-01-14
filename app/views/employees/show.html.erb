@@ -16,7 +16,7 @@
 	<tr>
 		<td>Actions</td>
 		<td>
-			<%= show_disable_option @employee.id %> &nbsp;
+			<%= show_disable_option @employee %> &nbsp;
 			<%= link_to 'Edit', edit_employee_path(@employee) %> &nbsp;
 			<%= show_history @employee %> &nbsp;
 			<%= link_to 'Return Asset', return_asset_path(:type => "employee", :id => @employee.id) if @employee.asset_employee_mappings.collect { |aem| aem.status }.include? "Assigned" %>
