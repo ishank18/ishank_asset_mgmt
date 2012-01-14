@@ -6,13 +6,14 @@
 		<th>Action</th>
 	</tr>
 	<% employees.each do |emp| %>
+	<% p emp %>
 	<tr>
 		<td><%= emp.employee_id %></td>
-		<td><%= link_to emp.name, emp %></td>
+		<td><%= link_to emp.name, employee_path(emp) %></td>
 		<td><%= emp.email %></td>
 		<td>
 			<%= show_disable_option emp %>
-			<%= link_to 'Edit', edit_employee_path(emp) unless Employee.where(:id => emp.id).blank? %>
+			<%= link_to 'Edit', edit_employee_path(emp) unless emp.deleted? %>
 			<%= show_history emp %>
 		</td>
 	</tr>

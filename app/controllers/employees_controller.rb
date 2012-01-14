@@ -1,13 +1,14 @@
 class EmployeesController < ApplicationController
 	
-	before_filter :find_employee, :only => [:show, :edit, :update]
+	before_filter :find_employee, :only => [ :edit, :update]
 	
   def index
-  	@employees = Employee.includes(:asset_employee_mappings) 
+  	@employees = Employee.includes(:asset_employee_mappings)
+  	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
   end
 
-
   def show
+  	@employee = Employee.where(:id => params[:id]).first
   	if(@employee.nil?)
   		@employee = Employee.only_deleted.where(:id => params[:id]).first
   	end	
@@ -26,11 +27,8 @@ class EmployeesController < ApplicationController
 		end		
 	end
 
-
   def edit
   end
-
-
 
 	def update
 		if @employee.update_attributes(params[:employee])
@@ -46,9 +44,9 @@ class EmployeesController < ApplicationController
 		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "status asc"
 	end
 
-
 	def disabled
   	@employees = Employee.only_deleted
+  	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
 	end
 	
 	def enable
