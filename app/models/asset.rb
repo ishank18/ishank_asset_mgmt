@@ -6,7 +6,8 @@ class Asset < ActiveRecord::Base
 	validates :name, :presence => true
 	validates :status, :presence => true
 	validates :resource_type, :presence => true
-	validates :cost, :presence => true, :numericality => true, :length => {:maximum => 10}
+	validates :cost, :presence => true
+	validates :cost, :allow_blank => true, :numericality => true, :length => {:maximum => 10}
 	validates :serial_number, :presence => true, :uniqueness => true
 	validates :purchase_date, :presence => true
 	validates :vendor, :presence => true
