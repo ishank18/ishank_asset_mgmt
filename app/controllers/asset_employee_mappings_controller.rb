@@ -9,12 +9,12 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem = AssetEmployeeMapping.new(params[:asset_employee_mapping])
 		can_be_assigned = Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?)
 		
-		if (can_be_assigned && @aem.save)
+		if (@aem.save && can_be_assigned)
       # Put in after_create
 			redirect_to @aem.employee, :alert => "Asset Successfully Assigned"
 		else
       # set datepicker's default date
-			flash[:alert] = "This asset can not be assigned right now" unless can_be_assigned
+			#flash[:alert] = "This asset can not be assigned right now" unless can_be_assigned
 			render :template => "assets/assign"
 		end
 	end

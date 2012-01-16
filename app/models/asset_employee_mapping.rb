@@ -3,12 +3,13 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	before_create :update_status
 	before_create :check_future_issued_date
 	before_save :check_temp_assignment_date
-	before_update :update_aem_asset
+	before_create :temporarly_assignment_date
 
 	validates :date_issued, :presence => true
 	validates :asset_id, :presence => true
 	validates :employee_id, :presence => true
-
+	validate :check_presence_of_date_returned, :on => :update
+	validate :temporarly_assignment_date, :on => :create
 
 	belongs_to :asset
 	belongs_to :employee
@@ -83,15 +84,21 @@ class AssetEmployeeMapping < ActiveRecord::Base
 			end
 		end	
 	end
-	
-	
-	## Use update_attributes
 		
 	## Update the assets and AEM status when an asset is returned
 	def update_aem_asset
 		self.status = "returned"
-		self.asset.status = STATUS["Spare"]
+		asset.status = STATUS["Spare"]
 		asset.save!
+	end
+	
+	def check_presence_of_date_returned
+		errors.add(:base, 'Date Returned Cant be blank') if date_returned.blankQ
+	end
+	
+	def temporarly_assignment_date
+		
+		errors.add(:base, 'Date Returned cant be blank on Temporarly Assignment') if assignment_type == "Temporary" && date_returned.blank?
 	end
 	
 end

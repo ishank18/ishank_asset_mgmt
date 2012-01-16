@@ -45,7 +45,7 @@ function changeForm() {
 			<script>
 				$('#asset_employee_mapping_date_returned').datepicker({ dateFormat: "dd/mm/yy" })
 			</script>
-			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string @aem.date_returned}</b>".html_safe if @aem.assignment_type == "Temporary" %></span>
+			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string AssetEmployeeMapping.where(:id => @aem.id).first.date_returned}</b>".html_safe if @aem.assignment_type == "Temporary" %></span>
 			</td>
 	</tr>
 	<tr>
