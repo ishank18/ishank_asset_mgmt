@@ -10,7 +10,12 @@
 	</tr>
 	<% @aem.each do |aem| %>
 	<tr>
-		<td><%= link_to aem.employee.name, aem.employee %></td>
+		<% unless aem.employee.nil? %>
+			<% emp = aem.employee %>
+		<% else %>
+			<% emp = Employee.only_deleted.where(:id => aem.employee_id).first %>
+		<% end %>	
+		<td><%= link_to emp.name, employee_path(emp.id) %></td>
 		<td><%= date_to_string aem.date_issued %></td>
 		<td><%= date_to_string aem.date_returned %></td>
 		<td><%= aem.assignment_type.capitalize %></td>
