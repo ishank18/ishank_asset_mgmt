@@ -10,4 +10,6 @@
 ### Ensure admin with the same name os not created on running the seed after implementing suggestion.
 ### Use find_or_initialize
 
-Admin.create(:email => 'test@test.com', :password => 'vinsol', :password_confirmation => 'vinsol')
+@admin = Admin.create(:email => 'test@test.com', :password => 'vinsol', :password_confirmation => 'vinsol')
+@admin.skip_confirmation!
+@admin.save!

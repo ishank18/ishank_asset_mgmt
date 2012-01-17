@@ -15,7 +15,7 @@ class AssetsController < ApplicationController
 	
 	## Will show the employee history of the Asset 
 	def history
-		@aem = AssetEmployeeMapping.where(:asset_id => params[:id]).order 'status asc'
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:id]).includes(:employee)
 	end
 
   def new

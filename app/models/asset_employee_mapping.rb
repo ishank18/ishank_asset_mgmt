@@ -4,6 +4,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	before_create :check_future_issued_date
 	before_save :check_temp_assignment_date
 	before_create :temporarly_assignment_date
+	before_update :update_aem_asset
 
 	validates :date_issued, :presence => true
 	validates :asset_id, :presence => true
@@ -93,11 +94,10 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	end
 	
 	def check_presence_of_date_returned
-		errors.add(:base, 'Date Returned Cant be blank') if date_returned.blankQ
+		errors.add(:base, 'Date Returned Cant be blank') if date_returned.blank?
 	end
 	
 	def temporarly_assignment_date
-		
 		errors.add(:base, 'Date Returned cant be blank on Temporarly Assignment') if assignment_type == "Temporary" && date_returned.blank?
 	end
 	

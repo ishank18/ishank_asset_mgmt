@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
 	
   def index
   	@employees = Employee.includes(:asset_employee_mappings)
-  	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
+  	redirect_to root_path, :alert => "Employee list is empty!" if @employees.blank?
   end
 
   def show
@@ -41,7 +41,7 @@ class EmployeesController < ApplicationController
 	
 	## Will show the asset history of the Employee
 	def history
-		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).order "status asc"
+		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).includes(:asset)
 	end
 
 	def disabled

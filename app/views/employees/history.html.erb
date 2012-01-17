@@ -1,4 +1,8 @@
-<h2 align='center'>History - <%= @aem.first.employee.name %></h2>
+<% if @aem.first.employee.nil? %>
+	<h2 align='center'>History - <%= Employee.only_deleted.where(:id => @aem.first.employee_id).first.name %></h2>
+<% else %>	
+	<h2 align='center'>History - <%= @aem.first.employee.name %></h2>
+<% end %>	
 <table width="800" class="ShowTable" align='center'>
 	<tr>
 		<th>Asset Name</th>

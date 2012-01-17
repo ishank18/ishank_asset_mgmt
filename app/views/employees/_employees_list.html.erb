@@ -6,7 +6,6 @@
 		<th>Action</th>
 	</tr>
 	<% employees.each do |emp| %>
-	<% p emp %>
 	<tr>
 		<td><%= emp.employee_id %></td>
 		<td><%= link_to emp.name, employee_path(emp) %></td>
