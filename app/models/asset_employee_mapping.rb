@@ -2,7 +2,6 @@ class AssetEmployeeMapping < ActiveRecord::Base
 
 	before_create :update_status
 	before_update :update_aem_asset
-	before_create
 
 	validates :date_issued, :presence => true
 	validates :asset_id, :presence => true
