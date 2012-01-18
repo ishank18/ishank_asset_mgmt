@@ -9,7 +9,10 @@
 ### Create with new, after that skip confirmation mail, save
 ### Ensure admin with the same name os not created on running the seed after implementing suggestion.
 ### Use find_or_initialize
-@admin = Admin.create(:email => 'test@test.com', :password => 'vinsol', :password_confirmation => 'vinsol')
+
+@admin = Admin.find_or_initialize_by_email 'admin@vinsol.com'
+@admin.password = 'vinsol'
+@admin.password_confirmation = 'vinsol'
 
 @admin.skip_confirmation!
 @admin.save!
