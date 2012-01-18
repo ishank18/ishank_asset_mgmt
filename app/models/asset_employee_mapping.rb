@@ -1,20 +1,22 @@
 class AssetEmployeeMapping < ActiveRecord::Base
 
 	before_create :update_status
-	before_create :check_future_issued_date
-	before_save :check_temp_assignment_date
-	before_create :temporarly_assignment_date
 	before_update :update_aem_asset
+	before_create
 
 	validates :date_issued, :presence => true
 	validates :asset_id, :presence => true
 	validates :employee_id, :presence => true
-	validate :check_presence_of_date_returned, :on => :update
+	
+	validate :check_future_issued_date, :on => :create
 	validate :temporarly_assignment_date, :on => :create
+	validate :check_presence_of_date_returned, :on => :update
+	validate :check_temp_assignment_date
+	
 
 	belongs_to :asset
 	belongs_to :employee
-
+	
 	## Used to search assets and employees, will also filter the result wrt status and category
 	def self.search asset_str, employee_str, status, category
 		sql = "SELECT"
@@ -68,24 +70,6 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		Asset.where(:id => asset_id).first.update_attributes(:status => STATUS["Assigned"])
 	end
 	
-	## Checks if the Issue date is not future
-	def check_future_issued_date		
-		if date_issued > DateTime.now
-			errors.add(:base, "Issue date can't be future date")
-			return false
-		end
-	end
-	
-	## Checks if the return date is not less than assigned date
-	def check_temp_assignment_date
-		unless(date_returned.blank?)
-			if(date_issued > date_returned)
-				errors.add(:base, 'Date Returned Cant be greater than date issued')
-				return false
-			end
-		end	
-	end
-		
 	## Update the assets and AEM status when an asset is returned
 	def update_aem_asset
 		self.status = "returned"
@@ -93,10 +77,26 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		asset.save!
 	end
 	
+	## Checks if the Issue date is not future
+	def check_future_issued_date		
+		if (!date_issued.blank?) && (date_issued > DateTime.now)
+			errors.add(:base, "Issue date can't be future date")
+		end	
+	end
+	
+	## Checks if the return date is not less than assigned date
+	def check_temp_assignment_date
+		if (!date_returned.blank? & !date_issued.blank?) && (date_issued > date_returned)
+			errors.add(:base, 'Date Returned Cant be smaller than date issued')
+		end	
+	end
+	
+	## Checks the presence of return date of update action
 	def check_presence_of_date_returned
 		errors.add(:base, 'Date Returned Cant be blank') if date_returned.blank?
 	end
 	
+	## Checks if the date_returned is not blank if assignment type is temporary
 	def temporarly_assignment_date
 		errors.add(:base, 'Date Returned cant be blank on Temporarly Assignment') if assignment_type == "Temporary" && date_returned.blank?
 	end

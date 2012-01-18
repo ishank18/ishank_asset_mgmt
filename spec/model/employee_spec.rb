@@ -35,7 +35,9 @@ describe Employee do
 	end
 	
 	it "should have a employee id" do
-		@employee.should validate_presence_of :employee_id
+		@employee.employee_id = nil
+		@employee.should_not be_valid
+		@employee.errors[:employee_id].should == ["Id cannot be blank"]
 	end
 	
 	it "should have a integer employee id" do
