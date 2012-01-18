@@ -8,6 +8,7 @@ gem 'rails3_acts_as_paranoid', '0.1.1'
 gem 'rspec-rails','~> 2.6'
 gem 'shoulda-matchers', '1.0.0'
 gem 'will_paginate', '>= 3.0.pre'
+gem "bullet", :group => "development"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

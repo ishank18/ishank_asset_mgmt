@@ -25,7 +25,8 @@ class AssetEmployeeMappingsController < ApplicationController
   
 	def update
 		
-		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], :asset_id => params[:asset_employee_mapping][:asset_id], :status => STATUS["Assigned"]).first
+		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], 
+		:asset_id => params[:asset_employee_mapping][:asset_id], :status => STATUS["Assigned"]).first
 		
 	  # put in callback
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
