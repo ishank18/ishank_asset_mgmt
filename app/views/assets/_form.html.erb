@@ -55,14 +55,14 @@ function delTag(currentTag) {
 	<table id='assetTable' width="800" class="ShowTable" align='center'>
 	
 		<tr>
-			<td>Category</td>
+			<td>Category <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 			<td>
 			<%= show_category @asset %>
 			</td>
 		</tr>
 
 		<tr>
-			<td><%= f.label :status %></td>
+			<td><%= f.label :status %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 			<td>
 			<% if @asset.status == "Assigned" %>
 				Assigned
@@ -73,12 +73,12 @@ function delTag(currentTag) {
 		</tr>
 
 		<tr>
-			<td><%= f.label :name %></td>
+			<td><%= f.label :name %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 			<td><%= f.text_field :name %></td>
 		</tr>
 		
 		<tr>
-			<td><%= f.label :cost %></td>
+			<td><%= f.label :cost %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 			<td>
 				<label><%= f.select(:currency_unit, options_for_select(CURRENCY, @asset.currency_unit)) %></label>
 				<%= f.text_field :cost %>
@@ -86,17 +86,17 @@ function delTag(currentTag) {
 		</tr>
 		
 		<tr>
-			<td><%= f.label :serial_number %></td>
+			<td><%= f.label :serial_number %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 			<td><%= f.text_field :serial_number %></td>
 		</tr>
 		
 		<tr>
-			<td><%= f.label :vendor %></td>
+			<td><%= f.label :vendor %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 			<td><%= f.text_field :vendor %></td>
 		</tr>
 		
 		<tr>
-			<td><%= f.label :purchase_date %></td>
+			<td><%= f.label :purchase_date %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 			<td><%= f.text_field :purchase_date, :value => @asset.purchase_date.try(:strftime, "%d/%m/%Y") %></td>
 			
 			<script>

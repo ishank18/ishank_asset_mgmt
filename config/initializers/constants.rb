@@ -5,3 +5,5 @@ STATUS = {"Operational" => 'operational', "Recieved" => 'recieved', "Spare" => '
 CATEGORY_CLASS = ['Laptop', 'Laptop'], ['Network Device', 'NetworkDevice'], ['Mobile Phone', 'MobilePhone']
 
 CURRENCY = ['INR', '&#8377;'], ['USD', '&#36;'], ['GBP', '&#163;']
+
+MANDATORY = "*"

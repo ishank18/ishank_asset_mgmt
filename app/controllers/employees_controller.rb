@@ -45,7 +45,7 @@ class EmployeesController < ApplicationController
 	end
 
 	def disabled
-  	@employees = Employee.only_deleted
+  	@employees = Employee.only_deleted.includes(:asset_employee_mappings)
   	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
 	end
 	

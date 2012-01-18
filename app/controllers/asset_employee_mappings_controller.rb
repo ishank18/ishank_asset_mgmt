@@ -39,9 +39,9 @@ class AssetEmployeeMappingsController < ApplicationController
 	## Will render the return asset form
 	def return_asset
 		if(params[:type].downcase == "employee")
-			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => STATUS["Assigned"]).joins(:asset).where("assets.status = ?", STATUS["Assigned"])
+			@aem_array = AssetEmployeeMapping.where(:employee_id => params[:id], :status => STATUS["Assigned"]).joins(:asset).where("assets.status = ?", STATUS["Assigned"]).includes(:asset)
 		else
-			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => STATUS["Assigned"]).joins(:asset).where("assets.status = ?", STATUS["Assigned"])
+			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id], :status => STATUS["Assigned"]).joins(:asset).where("assets.status = ?", STATUS["Assigned"]).includes(:asset)
 		end
 		## Put above
 		@aem = @aem_array.first

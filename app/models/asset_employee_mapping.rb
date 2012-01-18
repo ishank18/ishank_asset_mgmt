@@ -10,8 +10,8 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	validate :check_future_issued_date, :on => :create
 	validate :temporarly_assignment_date, :on => :create
 	validate :check_presence_of_date_returned, :on => :update
+	validate :return_date_not_future, :on => :update
 	validate :check_temp_assignment_date
-	
 
 	belongs_to :asset
 	belongs_to :employee
@@ -98,6 +98,13 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	## Checks if the date_returned is not blank if assignment type is temporary
 	def temporarly_assignment_date
 		errors.add(:base, 'Date Returned cant be blank on Temporarly Assignment') if assignment_type == "Temporary" && date_returned.blank?
+	end
+	
+	## Checks if the return date is not future on update action
+	def return_date_not_future
+		if(!date_returned.blank?) && (date_returned > DateTime.now)
+			errors.add(:base, "Return date can't be future date")
+		end	
 	end
 	
 end

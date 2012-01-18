@@ -6,17 +6,17 @@
 <table id='assetTable' width="800" class="ShowTable" align='center'>
 
 	<tr>
-		<td>Employee Id</td>
+		<td>Employee Id <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 		<td><%= f.text_field :employee_id %></td>
 	</tr>
 
 	<tr>
-		<td><%= f.label :name %></td>
+		<td><%= f.label :name %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 		<td><%= f.text_field :name %></td>
 	</tr>
 	
 	<tr>
-		<td><%= f.label :email %></td>
+		<td><%= f.label :email %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
 		<td><%= f.email_field :email %></td>
 	</tr>
 	

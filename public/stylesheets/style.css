@@ -21,6 +21,7 @@ a:active { color:#FFf; }
 .TagSizeThree { font-size:18px; }
 .TagSizeFour { font-size:21px; }
 .TagSizeBig { font-size:24px; }
+.Mandatory { color:red; }
 .highlighted { color:green; }
 .notice { color:#9186E0; text-align:center; }
 .error { color:red; text-align:center; }
