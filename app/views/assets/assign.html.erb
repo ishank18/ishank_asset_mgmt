@@ -4,6 +4,8 @@ function populateAsset() {
     url: '<%= populate_asset_asset_employee_mappings_path %>', 
     dataType: 'script',
     type: 'get', 
+    beforeSend: function() { showProgress() },
+    complete: function() { endProgress() },
     data: 'category='+$("#category").attr("value")
   });
 }

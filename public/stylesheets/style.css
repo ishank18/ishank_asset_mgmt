@@ -45,3 +45,6 @@ a:active { color:#FFf; }
 .pagination span.current { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #000099; font-weight: bold; background-color: #000099; color: #FFF; }
 .pagination span.disabled { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #555; color: #555; }
 .table_container { width:800px; }
+.progress { position: fixed; width: 100%; z-index: 10;  background: grey; left: 0px; top: 0px; height: 100%; opacity: 0.4; filter: alpha(opacity=40);}
+.loadingText { position: fixed; top: 43%; left: 42%; padding: 10px; background: #000; color: #fff; opacity: 1; font-size: 40px; z-index: 50; }
+

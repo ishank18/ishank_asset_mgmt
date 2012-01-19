@@ -5,9 +5,12 @@ function changeForm() {
     url: '<%= change_form_content_assets_path %>', 
     dataType: 'script',
     type: 'get', 
+    beforeSend: function() { showProgress() },
+    complete: function() { endProgress() },
     data: 'resource_type='+$("#asset_resource_type").attr("value")
 	});
 }
+
 
 function addTags() {
 	var tagsArray = $("#asset_tags_field").attr("value").split(",");

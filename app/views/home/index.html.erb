@@ -5,12 +5,14 @@ function showTag(tag_id) {
     url: '<%= show_tag_path %>', 
     dataType: 'script',
     type: 'get', 
+    beforeSend: function() { showProgress() },
+    complete: function() { endProgress() },
     data: 'tag_id='+tag_id
   });
 }
 
 </script>
-
+<div id="progressContainer" align="center"></div>
 <h1 align='center'>Welcome Admin!</h1>
 
 <div id="container">

@@ -5,6 +5,8 @@ function changeForm() {
     url: '<%= change_aem_form_asset_employee_mappings_path %>', 
     dataType: 'script',
     type: 'get', 
+    beforeSend: function() { showProgress() },
+    complete: function() { endProgress() },
     data: 'employee_id=<%= @aem.employee_id %>&asset_id='+$("#asset_employee_mapping_asset_id").attr("value")
   });
 }
