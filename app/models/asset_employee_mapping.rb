@@ -16,6 +16,14 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	belongs_to :asset
 	belongs_to :employee
 	
+	## Scope which will return assets which are assigned after checking Asset & AEM status
+	scope :assigned_assets, lambda { 
+		where(:status => "Assigned").
+		joins(:asset).
+		where("assets.status = ?", STATUS["Assigned"]).
+		includes(:asset)
+	}		 
+	
 	## Used to search assets and employees, will also filter the result wrt status and category
 	def self.search asset_str, employee_str, status, category
 		sql = "SELECT"

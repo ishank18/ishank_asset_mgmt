@@ -50,7 +50,6 @@ class EmployeesController < ApplicationController
 	end
 	
 	def enable
-		
 		employee = Employee.only_deleted.where(:id => params[:id]).first
 		if(employee.recover)
 			redirect_to employee, :alert => "Employee Successfully Enabled!"
