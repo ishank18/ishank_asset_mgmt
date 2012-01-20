@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
 	
-	before_filter :find_employee, :only => [ :edit, :update]
+	before_filter :find_employee, :only => [:edit, :update]
 	
   def index
   	@employees = Employee.includes(:asset_employee_mappings)

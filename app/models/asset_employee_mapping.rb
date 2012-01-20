@@ -87,31 +87,31 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	## Checks if the Issue date is not future
 	def check_future_issued_date		
 		if (!date_issued.blank?) && (date_issued > DateTime.now)
-			errors.add(:base, "Issue date can't be future date")
+			errors.add(:date_issued, " can't be future date")
 		end	
 	end
 	
 	## Checks if the return date is not less than assigned date
 	def check_temp_assignment_date
 		if (!date_returned.blank? & !date_issued.blank?) && (date_issued > date_returned)
-			errors.add(:base, 'Date Returned Cant be smaller than date issued')
+			errors.add(:base, "Date Returned can't be smaller than date issued")
 		end	
 	end
 	
 	## Checks the presence of return date of update action
 	def check_presence_of_date_returned
-		errors.add(:base, 'Date Returned Cant be blank') if date_returned.blank?
+		errors.add(:date_returned, " can't be blank") if date_returned.blank?
 	end
 	
 	## Checks if the date_returned is not blank if assignment type is temporary
 	def temporarly_assignment_date
-		errors.add(:base, 'Date Returned cant be blank on Temporarly Assignment') if assignment_type == "Temporary" && date_returned.blank?
+		errors.add(:date_returned, " can't be blank on Temporarly Assignment") if assignment_type == "Temporary" && date_returned.blank?
 	end
 	
 	## Checks if the return date is not future on update action
 	def return_date_not_future
 		if(!date_returned.blank?) && (date_returned > DateTime.now)
-			errors.add(:base, "Return date can't be future date")
+			errors.add(:date_returned, " can't be future date")
 		end	
 	end
 	

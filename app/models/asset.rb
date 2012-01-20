@@ -37,10 +37,8 @@ class Asset < ActiveRecord::Base
   
   ## Checks that future purchase date is not alloted
   def check_future_date
-		unless(purchase_date.blank?)  
-      if(purchase_date > Time.now)
-        errors.add(:base, 'Future Purchase date is not allowed')
-      end
+		if (!purchase_date.blank?) && (purchase_date > Time.now)
+      errors.add(:purchase_date, 'cant be a future date')
 		end
   end
 

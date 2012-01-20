@@ -10,11 +10,12 @@ describe HomeController do
   	@assets = [@asset]
 		@admin = mock_model(Admin, :save => true, :email => "admin@example.com", :password => "password", :password_confirmation => "password")
 		controller.stub!(:current_admin).and_return(@admin)
+		controller.stub!(:authenticate_admin!).and_return(@admin)
   end
   
   describe "INDEX" do
     it "get request should be successful" do
-      Tag.should_receive(:all).and_return(@tags)
+      Tag.should_receive(:includes).and_return(@tags)
       @tag.should_receive(:assets).and_return(@assets)
       get :index
       response.should be_success
