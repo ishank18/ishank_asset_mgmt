@@ -7,10 +7,9 @@ class AssetsController < ApplicationController
   	@assets = Asset.includes(:asset_employee_mappings).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
   end
 
-  ## Move in before_filter
-  ## redirect somewhere if asset not found
+  ## Move in before_filter - Done
+  ## redirect somewhere if asset not found - Done
   def show
-    
   end
 	
 	## Will show the employee history of the Asset 
@@ -22,7 +21,7 @@ class AssetsController < ApplicationController
   	@asset = Asset.new
   end
   
-  ## Will render the asset assignment form
+  ## Will render the asset assignment form 
   def assign
   	@aem = AssetEmployeeMapping.new
   end
@@ -30,7 +29,6 @@ class AssetsController < ApplicationController
   def create
 		@asset = Asset.new params[:asset]
 		if(@asset.save)
-			#add_tags params[:tagsTextField]
 			redirect_to @asset, :alert => "Asset Successfully Added!"
 		else
 			render :action => "new"
@@ -46,8 +44,7 @@ class AssetsController < ApplicationController
 
 	def update
 		if @asset.update_attributes(params[:asset])
-		  ## Should clubbed with params[:asset]			
-			#add_tags params['tagsTextField']
+		  ## Should clubbed with params[:asset]	 - Done
 			redirect_to @asset, :alert => "Asset Successfully updated"
 		else
 			render :action => "edit"

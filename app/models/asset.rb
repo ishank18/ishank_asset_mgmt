@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
 
   ### validates presens of purchase date  
-  before_save :change_tags_to_array
+  before_save :add_tags
   
 	validates :name, :presence => true
 	validates :status, :presence => true
@@ -54,7 +54,7 @@ class Asset < ActiveRecord::Base
 	end
   
   ## Used to add tags, and make enteries in assets_tags table, will also check if the tag exists or not
-  def change_tags_to_array
+  def add_tags
   	unless tags_field.blank?
 			tags = tags_field.split(",")
 			tags.each do |tag|

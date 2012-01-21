@@ -10,11 +10,10 @@ class AssetEmployeeMappingsController < ApplicationController
 		can_be_assigned = Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?)
 		
 		if (@aem.save && can_be_assigned)
-      # Put in after_create
+      # Put in after_create - Done
 			redirect_to @aem.employee, :alert => "Asset Successfully Assigned"
 		else
-      # set datepicker's default date
-			#flash[:alert] = "This asset can not be assigned right now" unless can_be_assigned
+      # set datepicker's default date - Done
 			render :template => "assets/assign"
 		end
 	end
@@ -28,7 +27,7 @@ class AssetEmployeeMappingsController < ApplicationController
 		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], 
 		:asset_id => params[:asset_employee_mapping][:asset_id], :status => STATUS["Assigned"]).first
 		
-	  # put in callback
+	  # put in callback - Done
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
 			redirect_to employee_path(@aem.employee), :alert => "Asset Successfully Returned!"
 		else
@@ -43,9 +42,9 @@ class AssetEmployeeMappingsController < ApplicationController
 		else
 			@aem_array = AssetEmployeeMapping.where(:asset_id => params[:id]).assigned_assets
 		end
-		## Put above
+		## Put above - Done
 		@aem = @aem_array.first
-		# Put in view
+		# Put in view -Done
 		redirect_to assets_path, :alert => "No asset is assigned to selected pair" if @aem.blank?
 	end
 	
