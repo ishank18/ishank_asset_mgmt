@@ -45,7 +45,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 					and assets.resource_type = '#{category}'
 				}
 			end	
-			AssetEmployeeMapping.find_by_sql(sql)
+			AssetEmployeeMapping.find_by_sql(sql).collect {|aem| aem.asset}
 		elsif(!asset_str.blank? or !status.blank? or !category.blank?)
 			sql += %{
 				id, name from assets where name like "%#{asset_str}%"

@@ -14,7 +14,7 @@ function disableTo(currEle) {
 	var returned = $("#asset_employee_mapping_date_returned");
 	if(currEle.value == "Temporary") {
 		returned.attr("disabled", false);
-		returned.datepicker({"disabled":false, dateFormat: "dd/mm/yy" });
+		returned.datepicker({"disabled": false, dateFormat: "dd/mm/yy" });
 	}
 	else {
 		returned.attr("disabled", true);

@@ -58,7 +58,7 @@ class EmployeesController < ApplicationController
 		end	
 	end
 	
-	# Move to before_destroy
+	# Move to before_destroy - Done
 	## Used to soft delete the employees, will not let them delete if any asset is assigned to them
 	def disable
 	
