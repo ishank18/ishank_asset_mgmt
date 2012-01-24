@@ -39,12 +39,14 @@ function showTag(tag_id) {
 	<br>
 		<%= link_to "Search", search_path %><br><br>
 		<%= link_to "Disabled Employees", disabled_employees_path %><br><br>
-		<span class='TagListHead'>Tag List</span>
-		<div class='TagList'>
-		<% @tags.each do |tag| %>
-			<span class='<%= tag_class tag %>' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
-		<% end %>
-		</div>
+		<% unless @tags.empty? %>
+			<span class='TagListHead'>Tag List</span>
+			<div class='TagList'>
+			<% @tags.each do |tag| %>
+				<span class='<%= tag_class tag %>' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
+			<% end %>
+			</div>
+		<% end %>	
 		<br>
 	</div>
 	<div class='Clear'></div>

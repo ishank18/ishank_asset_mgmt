@@ -5,6 +5,7 @@ class AssetsController < ApplicationController
   ## created_at desc
   def index
   	@assets = Asset.includes(:asset_employee_mappings).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
+ 		redirect_to root_path, :notice => "Could not find assets, first add new asset" if @assets.empty?
   end
 
   ## Move in before_filter - Done
