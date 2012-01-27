@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124081625) do
+ActiveRecord::Schema.define(:version => 20120127071536) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(:version => 20120124081625) do
     t.string   "status"
   end
 
+  add_index "asset_employee_mappings", ["asset_id"], :name => "index_asset_employee_mappings_on_asset_id"
+  add_index "asset_employee_mappings", ["employee_id"], :name => "index_asset_employee_mappings_on_employee_id"
+
   create_table "assets", :force => true do |t|
     t.string   "name"
     t.string   "status"
@@ -61,10 +64,15 @@ ActiveRecord::Schema.define(:version => 20120124081625) do
     t.string   "currency_unit"
   end
 
+  add_index "assets", ["resource_id", "resource_type"], :name => "index_assets_on_resource_id_and_resource_type"
+
   create_table "assets_tags", :id => false, :force => true do |t|
     t.integer "asset_id"
     t.integer "tag_id"
   end
+
+  add_index "assets_tags", ["asset_id"], :name => "index_assets_tags_on_asset_id"
+  add_index "assets_tags", ["tag_id"], :name => "index_assets_tags_on_tag_id"
 
   create_table "employees", :force => true do |t|
     t.string   "name"

@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
 	
   def index
   	@employees = Employee.includes(:asset_employee_mappings)
-  	redirect_to root_path, :alert => "Employee list is empty!" if @employees.blank?
+  	redirect_to root_path, :notice => "Could not find employees, first add new employee" if @employees.empty?
   end
 
   def show

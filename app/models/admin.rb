@@ -21,6 +21,7 @@ class Admin < ActiveRecord::Base
 	def only_if_unconfirmed
 		unless_confirmed {yield}
 	end
+	
 	def password_required?
 		# Password is required if it is being set, but not for new records
 		if !persisted? 
