@@ -10,6 +10,7 @@ gem 'shoulda-matchers', '1.0.0'
 gem 'will_paginate', '>= 3.0.pre'
 gem "bullet", :group => "development"
 gem 'capistrano'
+gem 'date_validator', '0.6.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

@@ -41,6 +41,8 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     columnize (0.3.6)
+    date_validator (0.6.3)
+      activemodel (~> 3.0)
     devise (1.5.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -133,6 +135,7 @@ PLATFORMS
 DEPENDENCIES
   bullet
   capistrano
+  date_validator (= 0.6.3)
   devise (= 1.5.1)
   jquery-rails (>= 1.0.12)
   jquery_datepicker (= 0.3.2)

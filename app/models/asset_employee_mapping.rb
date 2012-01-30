@@ -5,16 +5,15 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	before_create :update_status
 	before_update :update_aem_asset
 
-	validates :date_issued, :presence => true
 	validates :asset_id, :presence => true
 	validates :employee_id, :presence => true
+	validates :date_returned, :on => :update, :presence => true
+	validates :date_issued, :presence => true, :date => { :before => Proc.new { DateTime.now } }, :allow_blank => true
+	validates :date_returned, :on => :update, :date => { :before => Proc.new { DateTime.now } }, :allow_blank => true
+	validates :date_returned, :date => { :after => :date_issued }, :allow_blank => true
 	
-	validate :check_future_issued_date, :on => :create
 	validate :temporarly_assignment_date, :on => :create
-	validate :check_presence_of_date_returned, :on => :update
-	validate :return_date_not_future, :on => :update
-	validate :check_temp_assignment_date
-
+	
 	belongs_to :asset
 	belongs_to :employee
 	
@@ -89,40 +88,10 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		asset.status = STATUS["Spare"]
 		asset.save!
 	end
-	
-  # Move to validation
-	## Checks if the Issue date is not future
-	def check_future_issued_date		
-		if (!date_issued.blank?) && (date_issued > DateTime.now)
-			errors.add(:date_issued, " can't be future date")
-		end	
-	end
-	
-	# Move to validation
-	## Checks if the return date is not less than assigned date
-	def check_temp_assignment_date
-		if (!date_returned.blank? & !date_issued.blank?) && (date_issued > date_returned)
-			errors.add(:base, "Date Returned can't be smaller than date issued")
-		end	
-	end
-	
-	## Checks the presence of return date of update action
-  # Use validates return_date presence =? true, :on => :update
-	def check_presence_of_date_returned
-		errors.add(:date_returned, " can't be blank") if date_returned.blank?
-	end
-	
-	
+
 	## Checks if the date_returned is not blank if assignment type is temporary
 	def temporarly_assignment_date
 		errors.add(:date_returned, " can't be blank on Temporarly Assignment") if assignment_type == "Temporary" && date_returned.blank?
-	end
-	
-	## Checks if the return date is not future on update action
-	def return_date_not_future
-		if(!date_returned.blank?) && (date_returned > DateTime.now)
-			errors.add(:date_returned, " can't be future date")
-		end	
 	end
 	
 end

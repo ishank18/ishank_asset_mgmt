@@ -4,6 +4,6 @@ class AddAssignmentTypeAssetEmployeeMapping < ActiveRecord::Migration
   end
 
   def self.down
-  	drop_column :asset_employee_mappings, :assignment_type
+  	remove_column :asset_employee_mappings, :assignment_type
   end
 end
