@@ -12,7 +12,7 @@ function populateAsset() {
 
 function disableTo(currEle) {
 	var returned = $("#asset_employee_mapping_date_returned");
-	if(currEle.value == "Temporary") {
+	if(currEle.value == "false") {
 		returned.attr("disabled", false);
 		returned.datepicker({"disabled": false, dateFormat: "dd/mm/yy" });
 	}
@@ -49,8 +49,8 @@ function disableTo(currEle) {
 		<tr>
 			<td><%= f.label :assignment_type %></td>
 			<td>
-				<label><%= f.radio_button :assignment_type, 'Permanent', :checked => true, :onclick => "disableTo(this)" %> Permanent</label>
-				<label><%= f.radio_button :assignment_type, 'Temporary', :onclick => "disableTo(this)" %> Temporary</label>
+				<label><%= f.radio_button :assignment_type, true, :checked => true, :onclick => "disableTo(this)" %> Permanent</label>
+				<label><%= f.radio_button :assignment_type, false, :onclick => "disableTo(this)" %> Temporary</label>
 			</td>
 		</tr>
 		
@@ -69,7 +69,7 @@ function disableTo(currEle) {
 			<td>
 				<%= f.text_field :date_returned, :disabled => true %>
 				<script>
-					if(($("input[name='asset_employee_mapping[assignment_type]']:checked").attr("value")) == "Temporary") {
+					if(($("input[name='asset_employee_mapping[assignment_type]']:checked").attr("value")) == "false") {
 						$("#asset_employee_mapping_date_returned").attr( "disabled", false );
 						$("#asset_employee_mapping_date_returned").datepicker({ dateFormat: "dd/mm/yy" });
 					}

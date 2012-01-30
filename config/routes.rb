@@ -18,25 +18,29 @@ IshankAssetMgmt::Application.routes.draw do
 
   resources :employees do
   	get "disabled", :on => :collection
-  	put "disable", :on => :member
-  	put "enable", :on => :member
-  	get "history", :on => :member
+  	member do
+			put :disable
+			put :enable
+			get :history
+		end	
   end
   
   resources :asset_employee_mappings do
-  	get "change_aem_form", :on => :collection
-  	get 'populate_asset', :action => "populate_asset", :as => "populate_asset", :on => :collection
+  	get :change_aem_form, :on => :collection
+  	get :populate_asset, :action => "populate_asset", :as => "populate_asset", :on => :collection
   end
   
   get ":type/:id/return", :to => "asset_employee_mappings#return_asset", :as => "return_asset"
   
 	resources :assets do
-		get "change_form_content", :action => "change_form_content", :on => :collection
-		get "history", :on => :member
-		get "assign", :on => :collection
+		collection do
+			get :change_form_content
+			get :assign
+		end
+		get :history, :on => :member
 	end
 	
-	get 'show_tag', :to => "home#show_tag", :as => :show_tag
+	get :show_tag, :to => "home#show_tag", :as => :show_tag
 	
 	root :to => "home#index"
 	

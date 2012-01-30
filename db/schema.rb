@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130114333) do
+ActiveRecord::Schema.define(:version => 20120130142504) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20120130114333) do
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "assignment_type"
+    t.boolean  "assignment_type"
     t.boolean  "is_active",       :default => true
   end
 

@@ -39,7 +39,7 @@ function changeForm() {
 	</tr>
 	<tr>
 		<td>Assignment Type</td>
-		<td id='assignment_type'><%= @aem.assignment_type %></td>
+		<td id='assignment_type'><%= @aem.assignment_type ? "Permanent" : "Temporary" %></td>
 	</tr>
 	<tr>
 		<td>Return date <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
@@ -49,7 +49,7 @@ function changeForm() {
 				$('#asset_employee_mapping_date_returned').datepicker({ dateFormat: "dd/mm/yy" })
 			</script>
 			<!-- Rmove query - use relation -->
-			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string AssetEmployeeMapping.where(:id => @aem.id).first.date_returned}</b>".html_safe if @aem.assignment_type == "Temporary" %></span>
+			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string AssetEmployeeMapping.where(:id => @aem.id).first.date_returned}</b>".html_safe unless @aem.assignment_type %></span>
 			</td>
 	</tr>
 	<tr>
