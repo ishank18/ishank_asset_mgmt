@@ -1,3 +1,5 @@
+# status shoud be boolean and default value true
+
 class AssetEmployeeMapping < ActiveRecord::Base
 
 	before_create :update_status
@@ -74,16 +76,21 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status
 		self.status = STATUS["Assigned"]
+    # asset.update_attributes(:status => STATUS["Assigned"]) - Use relation
 		Asset.where(:id => asset_id).first.update_attributes(:status => STATUS["Assigned"])
 	end
 	
 	## Update the assets and AEM status when an asset is returned
+	## after_update
 	def update_aem_asset
+    # status should be false
 		self.status = "returned"
+    # use update_attributes
 		asset.status = STATUS["Spare"]
 		asset.save!
 	end
 	
+  # Move to validation
 	## Checks if the Issue date is not future
 	def check_future_issued_date		
 		if (!date_issued.blank?) && (date_issued > DateTime.now)
@@ -91,6 +98,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 		end	
 	end
 	
+	# Move to validation
 	## Checks if the return date is not less than assigned date
 	def check_temp_assignment_date
 		if (!date_returned.blank? & !date_issued.blank?) && (date_issued > date_returned)
@@ -99,9 +107,11 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	end
 	
 	## Checks the presence of return date of update action
+  # Use validates return_date presence =? true, :on => :update
 	def check_presence_of_date_returned
 		errors.add(:date_returned, " can't be blank") if date_returned.blank?
 	end
+	
 	
 	## Checks if the date_returned is not blank if assignment type is temporary
 	def temporarly_assignment_date
