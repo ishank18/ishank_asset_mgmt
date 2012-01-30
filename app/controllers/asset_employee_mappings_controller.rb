@@ -25,7 +25,7 @@ class AssetEmployeeMappingsController < ApplicationController
 	def update
 		
 		@aem = AssetEmployeeMapping.where(:employee_id => params[:asset_employee_mapping][:employee_id], 
-		:asset_id => params[:asset_employee_mapping][:asset_id], :status => STATUS["Assigned"]).first
+		:asset_id => params[:asset_employee_mapping][:asset_id], :is_active => true).first
 		
 	  # put in callback - Done
 		if(@aem.update_attributes(params[:asset_employee_mapping]))
@@ -50,7 +50,7 @@ class AssetEmployeeMappingsController < ApplicationController
 	
 	## Will change the return form according to the selected asset to be returned - Using AJAX
 	def change_aem_form
-		@aem = AssetEmployeeMapping.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :status => STATUS["Assigned"]).first
+		@aem = AssetEmployeeMapping.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :is_active => true).first
 	end
 	
 	## Will populate the select box according to the category of asset and when the status is not assigned - Using AJAX

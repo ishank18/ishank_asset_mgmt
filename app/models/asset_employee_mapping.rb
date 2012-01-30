@@ -2,14 +2,14 @@
 
 class AssetEmployeeMapping < ActiveRecord::Base
 
-	before_create :update_status
-	before_update :update_aem_asset
+	after_create :update_status
+	after_update :update_aem_asset
 
 	validates :asset_id, :presence => true
 	validates :employee_id, :presence => true
 	validates :date_returned, :on => :update, :presence => true
-	validates :date_issued, :presence => true, :date => { :before => Proc.new { DateTime.now } }, :allow_blank => true
-	validates :date_returned, :on => :update, :date => { :before => Proc.new { DateTime.now } }, :allow_blank => true
+	validates :date_issued, :presence => true, :date => { :before => Proc.new { Time.zone.now } }, :allow_blank => true
+	validates :date_returned, :on => :update, :date => { :before => Proc.new { Time.zone.now } }, :allow_blank => true
 	validates :date_returned, :date => { :after => :date_issued }, :allow_blank => true
 	
 	validate :temporarly_assignment_date, :on => :create
@@ -19,7 +19,7 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	
 	## Scope which will return assets which are assigned after checking Asset & AEM status
 	scope :assigned_assets, lambda { 
-		where(:status => "Assigned").
+		where(:is_active => true).
 		joins(:asset).
 		where("assets.status = ?", STATUS["Assigned"]).
 		includes(:asset)
@@ -74,19 +74,16 @@ class AssetEmployeeMapping < ActiveRecord::Base
 	
 	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status
-		self.status = STATUS["Assigned"]
-    # asset.update_attributes(:status => STATUS["Assigned"]) - Use relation
-		Asset.where(:id => asset_id).first.update_attributes(:status => STATUS["Assigned"])
+    # asset.update_attributes(:status => STATUS["Assigned"]) - Use relation - Done
+		asset.update_attributes(:status => STATUS["Assigned"])
 	end
 	
 	## Update the assets and AEM status when an asset is returned
 	## after_update
 	def update_aem_asset
-    # status should be false
-		self.status = "returned"
-    # use update_attributes
-		asset.status = STATUS["Spare"]
-		asset.save!
+    # status should be false - Done
+    # use update_attributes - Done
+		asset.update_attributes(:status => STATUS["Spare"])
 	end
 
 	## Checks if the date_returned is not blank if assignment type is temporary

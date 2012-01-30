@@ -19,7 +19,7 @@
 		<td><%= date_to_string aem.date_issued %></td>
 		<td><%= date_to_string aem.date_returned %></td>
 		<td><%= aem.assignment_type.capitalize %></td>
-		<td><%= aem.status.capitalize %></td>
+		<td><%= aem.is_active ? "Assigned" : "Returned" %></td>
 		<td><%= aem.remark %></td>
 	</tr>
 	<% end %>

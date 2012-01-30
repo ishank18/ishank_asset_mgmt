@@ -26,6 +26,7 @@ function changeForm() {
 		<td>
 			<%= @aem.employee.name %>
 			<%= f.hidden_field :employee_id %>
+			<%= f.hidden_field :is_active, :value => "false" %>
 		</td>
 	</tr>
 	<tr>

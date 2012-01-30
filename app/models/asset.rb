@@ -10,8 +10,7 @@ class Asset < ActiveRecord::Base
 	validates :serial_number, :presence => true, :uniqueness => true
 	validates :purchase_date, :presence => true
 	validates :vendor, :presence => true
-	
-	validate :check_future_date		
+	validates :purchase_date, :date => { :before => Proc.new { Time.zone.now } }, :allow_blank => true
 	
 	attr_accessor :tags_field
 	
@@ -25,20 +24,13 @@ class Asset < ActiveRecord::Base
 
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
-		asset_employee_mappings.where(:status => STATUS["Assigned"]).first.employee 
+		asset_employee_mappings.where(:is_active => true).first.employee 
 	end
 	
 	## Will only let the assets to be assigned if status is not assigned and repair
 	def can_be_assigned?
 		(!status.include? STATUS["Assigned"]) && (!status.include? STATUS["Repair"])
 	end
-  
-  ## Checks that future purchase date is not alloted
-  def check_future_date
-		if (!purchase_date.blank?) && (purchase_date > Time.now)
-      errors.add(:purchase_date, 'cant be a future date')
-		end
-  end
 
 	## Used to add resource to the asset table using polymorphic association
 	def build_resource params
@@ -55,13 +47,8 @@ class Asset < ActiveRecord::Base
   	unless tags_field.blank?
 			tags = tags_field.split(",")
 			tags.each do |tag|
-        # Use find_or_initialize by name
-				if(tag_element = Tag.find_by_name(tag.strip))
-					self.tags << tag_element
-				else
-					new_tag = Tag.create(:name => tag.strip)
-					self.tags << new_tag				
-				end	
+        # Use find_or_initialize by name - Done
+        self.tags << Tag.find_or_initialize_by_name(tag.strip)
 			end
 		end	
   end
