@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
 	
-	before_filter :find_employee, :only => [:edit, :update]
+	before_filter :find_employee, :only => [:edit, :update, :disable]
 	
   def index
   	@employees = Employee.includes(:asset_employee_mappings)
@@ -8,10 +8,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
-  	@employee = Employee.where(:id => params[:id]).first
-  	if(@employee.nil?)
-  		@employee = Employee.only_deleted.where(:id => params[:id]).first
-  	end	
+  	@employee = Employee.with_deleted.where(:id => params[:id]).first
   end
 
   def new
@@ -42,7 +39,7 @@ class EmployeesController < ApplicationController
 	## Will show the asset history of the Employee
   # Write as employee.asset_mapping
 	def history
-		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).includes(:asset)
+		@aem = Employee.with_deleted.where(:id => params[:id]).first.asset_employee_mappings.includes(:asset)
 	end
 
 	def disabled
@@ -64,7 +61,6 @@ class EmployeesController < ApplicationController
   # Why is before_filter not used?
 	def disable
 	
-		@employee = Employee.where(:id => params[:id]).first
 		unless @employee.can_be_disabled?
 			redirect_to :back, :notice => "First remove all assigned Asset"
 		else
