@@ -40,6 +40,7 @@ class EmployeesController < ApplicationController
 	
 	
 	## Will show the asset history of the Employee
+  # Write as employee.asset_mapping
 	def history
 		@aem = (AssetEmployeeMapping.where :employee_id => params[:id]).includes(:asset)
 	end
@@ -48,6 +49,7 @@ class EmployeesController < ApplicationController
   	@employees = Employee.only_deleted.includes(:asset_employee_mappings)
   	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
 	end
+
 	
 	def enable
 		employee = Employee.only_deleted.where(:id => params[:id]).first
@@ -58,8 +60,8 @@ class EmployeesController < ApplicationController
 		end	
 	end
 	
-	# Move to before_destroy - Done
 	## Used to soft delete the employees, will not let them delete if any asset is assigned to them
+  # Why is before_filter not used?
 	def disable
 	
 		@employee = Employee.where(:id => params[:id]).first

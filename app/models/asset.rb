@@ -1,6 +1,5 @@
 class Asset < ActiveRecord::Base
 
-  ### validates presens of purchase date  -  Done
   before_save :add_tags
   
 	validates :name, :presence => true
@@ -18,7 +17,6 @@ class Asset < ActiveRecord::Base
 	
 	belongs_to :resource, :polymorphic => true	
 	
-	# Check ig join_table key is required - Done
 	has_and_belongs_to_many :tags
   has_many :asset_employee_mappings
 	has_many :employees, :through => :asset_employee_mappings
@@ -30,7 +28,6 @@ class Asset < ActiveRecord::Base
 		asset_employee_mappings.where(:status => STATUS["Assigned"]).first.employee 
 	end
 	
-	## Refer using constant - through out the app - Done
 	## Will only let the assets to be assigned if status is not assigned and repair
 	def can_be_assigned?
 		(!status.include? STATUS["Assigned"]) && (!status.include? STATUS["Repair"])
@@ -45,7 +42,6 @@ class Asset < ActiveRecord::Base
 
 	## Used to add resource to the asset table using polymorphic association
 	def build_resource params
-	  # use new_record? - Done
 	 if(new_record?)
 	 	 r = resource_type.constantize.new params
 	 	 self.resource = r
@@ -59,6 +55,7 @@ class Asset < ActiveRecord::Base
   	unless tags_field.blank?
 			tags = tags_field.split(",")
 			tags.each do |tag|
+        # Use find_or_initialize by name
 				if(tag_element = Tag.find_by_name(tag.strip))
 					self.tags << tag_element
 				else
