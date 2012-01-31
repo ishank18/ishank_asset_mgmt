@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(:version => 20120130142504) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120130142504) do
     t.string   "currency_unit"
   end
 
+  add_index "assets", ["name"], :name => "index_assets_on_name"
   add_index "assets", ["resource_id", "resource_type"], :name => "index_assets_on_resource_id_and_resource_type"
 
   create_table "assets_tags", :id => false, :force => true do |t|

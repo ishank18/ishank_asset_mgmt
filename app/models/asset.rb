@@ -47,7 +47,6 @@ class Asset < ActiveRecord::Base
   	unless tags_field.blank?
 			tags = tags_field.split(",")
 			tags.each do |tag|
-        # Use find_or_initialize by name - Done
         self.tags << Tag.find_or_initialize_by_name(tag.strip)
 			end
 		end	
