@@ -1,9 +1,17 @@
+<script>
+$().ready(function() {
+    $('#remark').jTruncate({
+        length: 50
+    });
+});
+</script>
+
 <% if @aem.first.employee.nil? %>
 	<h2 align='center'>History - <%= Employee.only_deleted.where(:id => @aem.first.employee_id).first.name %></h2>
 <% else %>	
 	<h2 align='center'>History - <%= @aem.first.employee.name %></h2>
 <% end %>	
-<table width="800" class="ShowTable" align='center'>
+<table width="800" class="ShowTable" align='center' id='historyTable'>
 	<tr>
 		<th>Asset Name</th>
 		<th>Issue Date</th>
@@ -19,7 +27,7 @@
 		<td><%= date_to_string aem.date_returned %></td>
 		<td><%= aem.assignment_type ? "Permanent" : "Temporary" %></td>
 		<td><%= aem.is_active ? "Assigned" : "Returned" %></td>
-		<td><%= aem.remark %></td>
+		<td><span id='remark'><%= aem.remark %></span></td>
 	</tr>
 	<% end %>
 </table>

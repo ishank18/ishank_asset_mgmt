@@ -66,13 +66,7 @@ function delTag(currentTag) {
 
 		<tr>
 			<td><%= f.label :status %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
-			<td>
-			<% if @asset.status == "Assigned" %>
-				Assigned
-			<% else %>
-				<%= f.select(:status, options_for_select(STATUS.to_a[0...STATUS.length-1], @asset.status), :include_blank => "- Select -") %>
-			<% end %>
-			</td>
+			<td><%= show_status_field f %></td>
 		</tr>
 
 		<tr>

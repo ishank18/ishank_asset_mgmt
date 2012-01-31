@@ -1,5 +1,14 @@
+<script>
+$().ready(function() {
+    $('#remark').jTruncate({
+        length: 50
+    });
+});
+</script>
+
 <h2 align='center'>History - <%= @aem.first.asset.name %></h2>
-<table width="800" class="ShowTable" align='center'>
+
+<table width="800" class="ShowTable" align='center' id='historyTable'>
 	<tr>
 		<th>Employee Name</th>
 		<th>Issue Date</th>
@@ -20,7 +29,7 @@
 		<td><%= date_to_string aem.date_returned %></td>
 		<td><%= aem.assignment_type ? "Permanent" : "Temporary" %></td>
 		<td><%= aem.is_active ? "Assigned" : "Returned" %></td>
-		<td><%= aem.remark %></td>
+		<td><span id='remark'><%= aem.remark %></span></td>
 	</tr>
 	<% end %>
 </table>

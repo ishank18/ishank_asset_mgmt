@@ -30,17 +30,17 @@ function disableTo(currEle) {
   <%= render :partial => "shared/errors", :locals => { :obj => @aem } %>
 
 	<table id='assetTable' width="800" class="ShowTable" align='center'>
-
+		
 		<tr>
 			<td><label>Product Category</label> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
-			<td>
-				<%= select_tag "category", options_for_select(CATEGORY), :include_blank => "- Select -", :onChange => "populateAsset()" %>
+			<td>	
+				<%= select_tag "category", options_for_select(CATEGORY, params[:category]), :include_blank => "- Select -", :onChange => "populateAsset()" %>
 			</td>
 		</tr>
 
 		<tr>
 			<td><%= f.label :asset %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
-			<td><%= f.select(:asset_id, [], :include_blank => "- Select -") %></td>
+			<td><%= f.select(:asset_id, fetch_assets, :include_blank => "- Select -") %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :employee %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
