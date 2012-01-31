@@ -1,0 +1,52 @@
+<script>
+$().ready(function() {
+<% @histories.each do |history| %>
+	$('#remark_<%= history.id %>').jTruncate({
+		length: 50
+	});
+<% end %>	
+});
+</script>
+
+<% if params[:type] == "employee" %>
+	<% if @histories.first.employee.nil? %>
+		<h2 align='center'>History - <%= Employee.only_deleted.where(:id => @histories.first.employee_id).first.name %></h2>
+	<% else %>	
+		<h2 align='center'>History - <%= @histories.first.employee.name %></h2>
+	<% end %>	
+<% else %>
+	<h2 align='center'>History - <%= @histories.first.asset.name %></h2>
+<% end %>
+<table width="800" class="ShowTable" align='center' id='historyTable'>
+	<tr>
+		<th><%= params[:type].capitalize %> Name</th>
+		<th>Issue Date</th>
+		<th>Return Date</th>
+		<th>Assignment Type</th>
+		<th>Status</th>
+		<th>Remark</th>
+	</tr>
+	<% @histories.each do |history| %>
+	<tr>
+		<% if params[:type] == "asset" %>
+			<% unless history.employee.nil? %>
+				<% emp = history.employee %>
+			<% else %>
+				<% emp = Employee.only_deleted.where(:id => history.employee_id).first %>
+			<% end %>	
+			<td><%= link_to emp.name, employee_path(emp.id) %></td>
+		<% else %>
+			<td><%= link_to history.asset.name, asset_path(history.asset.id) %></td>
+		<% end %>
+		<td><%= date_to_string history.date_issued %></td>
+		<td><%= date_to_string history.date_returned %></td>
+		<td><%= history.assignment_type ? "Permanent" : "Temporary" %></td>
+		<td><%= history.is_active ? "Assigned" : "Returned" %></td>
+		<td><span id='remark_<%= history.id %>'><%= history.remark %></span></td>
+	</tr>
+	<% end %>
+</table>
+
+<script>
+	$(".ShowTable tr:odd").addClass("AlternateRow");
+</script>

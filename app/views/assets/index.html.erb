@@ -19,7 +19,7 @@
 				<td><%= asset.status == "Assigned" ? (link_to asset.assigned_employee.name, asset.assigned_employee) : "-" %> </td>
 				<td>
 					<%= link_to 'Edit', edit_asset_path(asset) %>
-					<%= link_to "History", history_asset_path(asset) unless asset.asset_employee_mappings.blank? %>
+					<%= link_to "History", histories_path(:type => "asset", :id => asset.id) unless asset.asset_employee_mappings.blank? %>
 				</td>
 			</tr>
 			<% end %>

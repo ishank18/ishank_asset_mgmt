@@ -40,6 +40,8 @@ IshankAssetMgmt::Application.routes.draw do
 		get :history, :on => :member
 	end
 	
+	get "histories/:type/:id", :to => "histories#index", :as => "histories"
+	
 	get :show_tag, :to => "home#show_tag", :as => :show_tag
 	
 	root :to => "home#index"
