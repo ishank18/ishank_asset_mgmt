@@ -1,7 +1,6 @@
 class ChangeAssignmmentTypeOfAem < ActiveRecord::Migration
 
   def self.up
-  	AssetEmployeeMapping.reset_column_information
   	AssetEmployeeMapping.all.each do |aem|
 			if(aem.assignment_type == "Permanent")
 				@sql = "update asset_employee_mappings set assignment_type = '1' where id = '#{aem.id}'"
@@ -10,6 +9,7 @@ class ChangeAssignmmentTypeOfAem < ActiveRecord::Migration
 			end
 			execute(@sql) 
   	end
+  	AssetEmployeeMapping.reset_column_information
   	change_column :asset_employee_mappings, :assignment_type, :boolean
   end
 
