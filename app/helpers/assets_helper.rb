@@ -15,11 +15,9 @@ module AssetsHelper
 			"Assigned"
 		else 
 			if @asset.new_record?
-				status_wo_recieved = STATUS.dup
-				status_wo_recieved.delete("Recieved")
-				f.select(:status, options_for_select(status_wo_recieved.to_a[0...status_wo_recieved.length-1], @asset.status), :include_blank => "- Select -")
+				f.select(:status, options_for_select(STATUS.to_a - [["Recieved", "recieved"], ["Assigned", "Assigned"]], @asset.status), :include_blank => "- Select -")
 			else
-				f.select(:status, options_for_select(STATUS.to_a[0...STATUS.length-1], @asset.status), :include_blank => "- Select -")
+				f.select(:status, options_for_select(STATUS.to_a - [["Assigned", "Assigned"]], @asset.status), :include_blank => "- Select -")
 			end
 		end
 	end
@@ -34,11 +32,8 @@ module AssetsHelper
 
 	def fetch_assets
 		options = []
-		Asset.where(%{resource_type = ? and status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')}, params[:category]).each do |asset|
-				currOpt = []
-				currOpt << "#{asset.id} - #{asset.name}"
-				currOpt << asset.id
-				options << currOpt
+		Asset.can_be_assigned(params[:category]).each do |asset|
+				options << ["#{asset.id} - #{asset.name}", asset.id]
 		end
 		options
 	end	

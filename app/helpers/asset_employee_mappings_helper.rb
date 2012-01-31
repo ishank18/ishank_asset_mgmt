@@ -20,10 +20,7 @@ module AssetEmployeeMappingsHelper
 	def options_for_asset
 		options = []
 		@aem_array.each do |aem|
-				currOpt = []
-				currOpt << "#{aem.asset.id} - #{aem.asset.name}"
-				currOpt << aem.asset_id
-				options << currOpt
+				options << ["#{aem.asset.id} - #{aem.asset.name}", aem.asset_id]
 		end
 		options
 	end

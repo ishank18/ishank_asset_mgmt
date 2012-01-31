@@ -22,6 +22,10 @@ class Asset < ActiveRecord::Base
 	
 	accepts_nested_attributes_for :resource
 
+	scope :can_be_assigned, lambda { |category|
+		where(%{resource_type = ? and status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')}, category)
+	}
+
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
 		asset_employee_mappings.where(:is_active => true).first.employee 
