@@ -55,7 +55,7 @@ class AssetEmployeeMappingsController < ApplicationController
 	
 	## Will populate the select box according to the category of asset and when the status is not assigned - Using AJAX
 	def populate_asset
-  	@assets = Asset.can_be_assigned
+  	@assets = Asset.can_be_assigned params[:category]
   end
 	
 end
