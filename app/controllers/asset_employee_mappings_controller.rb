@@ -1,11 +1,6 @@
 class AssetEmployeeMappingsController < ApplicationController
-
-  def new
-  	@aem = AssetEmployeeMapping.new
-  end
   
 	def create
-	
 		@aem = AssetEmployeeMapping.new(params[:asset_employee_mapping])
 		can_be_assigned = Asset.where(:id => params[:asset_employee_mapping][:asset_id]).first.try(:can_be_assigned?)
 		
@@ -17,10 +12,6 @@ class AssetEmployeeMappingsController < ApplicationController
 			render :template => "assets/assign"
 		end
 	end
-	
-	def edit
-  end
-  
   
 	def update
 		
