@@ -1,9 +1,11 @@
 <script>
 $().ready(function() {
-    $('#remark').jTruncate({
-        length: 50
-    });
-});
+<% @aem.each do |aem| %>
+	$('#remark_<%= aem.id %>').jTruncate({
+		length: 50
+	});
+<% end %>	
+});   
 </script>
 
 <% if @aem.first.employee.nil? %>
@@ -27,7 +29,7 @@ $().ready(function() {
 		<td><%= date_to_string aem.date_returned %></td>
 		<td><%= aem.assignment_type ? "Permanent" : "Temporary" %></td>
 		<td><%= aem.is_active ? "Assigned" : "Returned" %></td>
-		<td><span id='remark'><%= aem.remark %></span></td>
+		<td><span id='remark_<%= aem.id %>'><%= aem.remark %></span></td>
 	</tr>
 	<% end %>
 </table>
