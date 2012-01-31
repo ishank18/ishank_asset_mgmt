@@ -6,4 +6,3 @@ CATEGORY_CLASS = ['Laptop', 'Laptop'], ['Network Device', 'NetworkDevice'], ['Mo
 
 CURRENCY = ['INR', '&#8377;'], ['USD', '&#36;'], ['GBP', '&#163;']
 
-MANDATORY = "*"

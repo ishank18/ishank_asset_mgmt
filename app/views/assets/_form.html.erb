@@ -11,42 +11,6 @@ function changeForm() {
 	});
 }
 
-
-function addTags() {
-	var tagsArray = $("#asset_tags_field").attr("value").split(",");
-	$("#asset_tags_field").attr("value", "") 
-	var tagsHTML = ""
-	var previousTags = $(".DelTag").get()
-	$.each(previousTags, function(key, currEle) { 
- 		tagsHTML += "<span onclick='delTag(this)' class='DelTag'>"+currEle.innerHTML+"</span>";
-	});
-	$.each(tagsArray, function(key, value) { 
-		if(value.trim() != "") {
- 			tagsHTML += "<span onclick='delTag(this)' class='DelTag'>"+value+"</span>";
- 		}
-	});
-	$("#tags").html(tagsHTML)
-}
-	
-function fillTagContent() {
-	addTags()
-	var previousTags = $(".DelTag").get()
-	var tags = ""
-	$.each(previousTags, function(key, currEle) {
-		if(key != previousTags.length-1) { 
-	 		tags += currEle.innerHTML+",";
-	 	}
-	 	else {
-	 		tags += currEle.innerHTML
-	 	}
-	});
-	$("#asset_tags_field").attr("value", tags)
-}
-
-function delTag(currentTag) {
-	 $(currentTag).remove();
-}
-
 </script>
 
 
@@ -58,24 +22,24 @@ function delTag(currentTag) {
 	<table id='assetTable' width="800" class="ShowTable" align='center'>
 	
 		<tr>
-			<td>Category <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td>Category *</td>
 			<td>
 			<%= show_category @asset %>
 			</td>
 		</tr>
 
 		<tr>
-			<td><%= f.label :status %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :status %> <%= mark_required(@asset, :status) %></td>
 			<td><%= show_status_field f %></td>
 		</tr>
 
 		<tr>
-			<td><%= f.label :name %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :name %> <%= mark_required(@asset, :name) %></td>
 			<td><%= f.text_field :name %></td>
 		</tr>
 		
 		<tr>
-			<td><%= f.label :cost %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :cost %> <%= mark_required(@asset, :cost) %></td>
 			<td>
 				<label><%= f.select(:currency_unit, options_for_select(CURRENCY, @asset.currency_unit)) %></label>
 				<%= f.text_field :cost %>
@@ -83,17 +47,17 @@ function delTag(currentTag) {
 		</tr>
 		
 		<tr>
-			<td><%= f.label :serial_number %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :serial_number %> <%= mark_required(@asset, :serial_number) %></td>
 			<td><%= f.text_field :serial_number %></td>
 		</tr>
 		
 		<tr>
-			<td><%= f.label :vendor %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :vendor %> <%= mark_required(@asset, :vendor) %></td>
 			<td><%= f.text_field :vendor %></td>
 		</tr>
 		
 		<tr>
-			<td><%= f.label :purchase_date %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :purchase_date %> <%= mark_required(@asset, :purchase_date) %></td>
 			<td><%= f.text_field :purchase_date, :value => @asset.purchase_date.try(:strftime, "%d/%m/%Y") %></td>
 			
 			<script>
@@ -112,12 +76,12 @@ function delTag(currentTag) {
 		</tr>
 		
 		<tr>
-			<td><%= f.label :description %></td>
+			<td><%= f.label :description %> <%= mark_required(@asset, :description) %></td>
 			<td><%= f.text_area :description, :rows => 3, :columns => 80 %></td>
 		</tr>
 		
 		<tr>
-			<td><%= f.label :additional_info %></td>
+			<td><%= f.label :additional_info %><%= mark_required(@asset, :additional_info) %></td>
 			<td><%= f.text_area :additional_info, :rows => 3, :columns => 80  %></td>
 		</tr>
 		

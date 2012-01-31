@@ -9,6 +9,54 @@ function endProgress() {
 	$("#progressContainer").html("")
 }
 
+function addTags() {
+	var tagsArray = $("#asset_tags_field").attr("value").split(",");
+	$("#asset_tags_field").attr("value", "") 
+	var tagsHTML = ""
+	var previousTags = $(".DelTag").get()
+	$.each(previousTags, function(key, currEle) { 
+ 		tagsHTML += "<span onclick='delTag(this)' class='DelTag'>"+currEle.innerHTML+"</span>";
+	});
+	$.each(tagsArray, function(key, value) { 
+		if(value.trim() != "") {
+ 			tagsHTML += "<span onclick='delTag(this)' class='DelTag'>"+value+"</span>";
+ 		}
+	});
+	$("#tags").html(tagsHTML)
+}
+	
+function fillTagContent() {
+	addTags()
+	var previousTags = $(".DelTag").get()
+	var tags = ""
+	$.each(previousTags, function(key, currEle) {
+		if(key != previousTags.length-1) { 
+	 		tags += currEle.innerHTML+",";
+	 	}
+	 	else {
+	 		tags += currEle.innerHTML
+	 	}
+	});
+	$("#asset_tags_field").attr("value", tags)
+}
+
+function delTag(currentTag) {
+	 $(currentTag).remove();
+}
+
+function disableTo(currEle) {
+	var returned = $("#asset_employee_mapping_date_returned");
+	if(currEle.value == "false") {
+		returned.attr("disabled", false);
+		returned.datepicker({"disabled": false, dateFormat: "dd/mm/yy" });
+	}
+	else {
+		returned.attr("disabled", true);
+		returned.attr("value", "");
+		returned.datepicker({"disabled":true});
+	}	
+}
+
 (function($){
 	$.fn.jTruncate = function(options) {
 	   

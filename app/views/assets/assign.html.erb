@@ -9,21 +9,8 @@ function populateAsset() {
     data: 'category='+$("#category").attr("value")
   });
 }
-
-function disableTo(currEle) {
-	var returned = $("#asset_employee_mapping_date_returned");
-	if(currEle.value == "false") {
-		returned.attr("disabled", false);
-		returned.datepicker({"disabled": false, dateFormat: "dd/mm/yy" });
-	}
-	else {
-		returned.attr("disabled", true);
-		returned.attr("value", "");
-		returned.datepicker({"disabled":true});
-	}	
-}
-
 </script>
+
 <h2 align='center'>Assign asset</h2>
 <%= form_for(@aem) do |f| %>
  
@@ -32,22 +19,22 @@ function disableTo(currEle) {
 	<table id='assetTable' width="800" class="ShowTable" align='center'>
 		
 		<tr>
-			<td><label>Product Category</label> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><label>Product Category</label> *</td>
 			<td>	
 				<%= select_tag "category", options_for_select(CATEGORY, params[:category]), :include_blank => "- Select -", :onChange => "populateAsset()" %>
 			</td>
 		</tr>
 
 		<tr>
-			<td><%= f.label :asset %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :asset_id %> <%= mark_required(@aem, :asset_id) %></td>
 			<td><%= f.select(:asset_id, fetch_assets, :include_blank => "- Select -") %></td>
 		</tr>
 		<tr>
-			<td><%= f.label :employee %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :employee_id %> <%= mark_required(@aem, :employee_id) %></td>
 			<td><%= f.select(:employee_id, get_all_employees, :include_blank => "- Select -") %></td>
 		</tr>
 		<tr>
-			<td><%= f.label :assignment_type %></td>
+			<td><%= f.label :assignment_type %> </td>
 			<td>
 				<label><%= f.radio_button :assignment_type, true, :checked => true, :onclick => "disableTo(this)" %> Permanent</label>
 				<label><%= f.radio_button :assignment_type, false, :onclick => "disableTo(this)" %> Temporary</label>
@@ -55,7 +42,7 @@ function disableTo(currEle) {
 		</tr>
 		
 		<tr>
-			<td><%= f.label :from %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+			<td><%= f.label :from %> *</td>
 			<td><%= f.text_field :date_issued %></td>
 			<script>
 				$(function() {
@@ -65,7 +52,7 @@ function disableTo(currEle) {
 		</tr>
 	
 		<tr>
-			<td><%= f.label :to %></td>
+			<td><%= f.label :to %> *</td>
 			<td>
 				<%= f.text_field :date_returned, :disabled => true %>
 				<script>

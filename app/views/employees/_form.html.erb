@@ -6,17 +6,17 @@
 <table id='assetTable' width="800" class="ShowTable" align='center'>
 
 	<tr>
-		<td>Employee Id <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+		<td>Employee Id <%= mark_required(@employee, :employee_id) %></td>
 		<td><%= f.text_field :employee_id %></td>
 	</tr>
 
 	<tr>
-		<td><%= f.label :name %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+		<td><%= f.label :name %> <%= mark_required(@employee, :name) %></td>
 		<td><%= f.text_field :name %></td>
 	</tr>
 	
 	<tr>
-		<td><%= f.label :email %> <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+		<td><%= f.label :email %> <%= mark_required(@employee, :email) %></td>
 		<td><%= f.email_field :email %></td>
 	</tr>
 	

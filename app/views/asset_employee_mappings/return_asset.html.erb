@@ -42,7 +42,7 @@ function changeForm() {
 		<td id='assignment_type'><%= @aem.assignment_type ? "Permanent" : "Temporary" %></td>
 	</tr>
 	<tr>
-		<td>Return date <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+		<td>Return date *</td>
 		<td>
 			<%= f.text_field :date_returned, :value => "" %>
 			<script>
