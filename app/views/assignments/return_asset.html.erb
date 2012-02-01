@@ -49,7 +49,7 @@ function changeForm() {
 				$('#assignment_date_returned').datepicker({ dateFormat: "dd/mm/yy" })
 			</script>
 			<!-- Rmove query - use relation -->
-			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string AssetEmployeeMapping.where(:id => @assignment.id).first.date_returned}</b>".html_safe unless @assignment.assignment_type %></span>
+			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string Assignment.where(:id => @assignment.id).first.date_returned}</b>".html_safe unless @assignment.assignment_type %></span>
 			</td>
 	</tr>
 	<tr>

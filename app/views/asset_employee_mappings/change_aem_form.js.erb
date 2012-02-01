@@ -1,4 +1,0 @@
-$("#assignment_type").html("<%= escape_javascript(@aem.assignment_type ? "Permanent" : "Temporary") %>")
-$("#issued_on").html("<%= escape_javascript(date_to_string @aem.date_issued) %>")
-$("#scheduled_date").html("<%= escape_javascript(%{ Original Return Date : <b>#{date_to_string @aem.date_returned}</b>}.html_safe) unless @aem.assignment_type %>")
-$("#asset_employee_mapping_remark").attr("value", "<%= escape_javascript(@aem.remark) %>")
