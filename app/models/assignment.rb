@@ -76,15 +76,10 @@ class Assignment < ActiveRecord::Base
 	
 	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status
-    # asset.update_attributes(:status => STATUS["Assigned"]) - Use relation - Done
 		asset.update_attributes(:status => STATUS["Assigned"])
 	end
 	
-	## Update the assets and AEM status when an asset is returned
-	## after_update
 	def update_aem_asset
-    # status should be false - Done
-    # use update_attributes - Done
 		asset.update_attributes(:status => STATUS["Spare"])
 	end
 

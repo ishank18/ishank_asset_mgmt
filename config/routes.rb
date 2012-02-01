@@ -17,7 +17,7 @@ IshankAssetMgmt::Application.routes.draw do
   resources :tags
 
   resources :employees do
-  	get "disabled", :on => :collection
+  	get :disabled, :on => :collection
   	member do
 			put :disable
 			put :enable

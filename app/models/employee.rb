@@ -12,8 +12,9 @@ class Employee < ActiveRecord::Base
   has_many :assignments
 	has_many :assets, :through => :assignments
 	
+  # Optimize
 	def can_be_disabled?
-		status_array = assignments.collect { |a| a.is_active }
+		status_array = assignments.any? { |a| a.is_active }
 		!status_array.any?
 	end
 		
