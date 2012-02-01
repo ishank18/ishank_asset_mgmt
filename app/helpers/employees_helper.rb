@@ -2,7 +2,7 @@ module EmployeesHelper
 
 	def show_history employee
     # employee.assets
-		unless(employee.asset_employee_mappings.blank?)
+		unless(employee.assignments.blank?)
 			link_to "History", history_employee_path(employee)
 		end
 	end

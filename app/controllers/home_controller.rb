@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 	
 	## Will search assets and employees and will filter it according to status and category
 	def search
-		@result = AssetEmployeeMapping.search params[:query_for_asset],  params[:query_for_emp], params[:status], params[:category]		
+		@result = Assignment.search params[:query_for_asset],  params[:query_for_emp], params[:status], params[:category]		
 	end
 	
 	## Will show assets in  the tags in the home page - Using AJAX

@@ -1,0 +1,4 @@
+$("#assignment_asset_id").children().remove()
+<% @assets.each do |asset| %>
+	$("#assignment_asset_id").append(new Option("<%= asset.id.to_s+" - "+asset.name.to_s %>", "<%= asset.id %>"));
+<% end %>	

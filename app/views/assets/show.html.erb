@@ -69,7 +69,7 @@
 		<td>Actions</td>
 		<td>
 			<%= link_to 'Edit', edit_asset_path(@asset) %>
-			<%= link_to "History", histories_path(:type => "asset", :id => @asset.id) unless @asset.asset_employee_mappings.blank? %>
+			<%= link_to "History", histories_path(:type => "asset", :id => @asset.id) unless @asset.assignments.blank? %>
 			<%= link_to 'Return Asset', return_asset_path(:type => "asset", :id => @asset.id.to_s) if @asset.status == "Assigned" %>
 		</td>
 	</tr>

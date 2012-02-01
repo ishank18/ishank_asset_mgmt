@@ -1,0 +1,83 @@
+<script>
+function populateAsset() {
+	$.ajax({
+    url: '<%= populate_asset_assignments_path %>', 
+    dataType: 'script',
+    type: 'get', 
+    beforeSend: function() { showProgress() },
+    complete: function() { endProgress() },
+    data: 'category='+$("#category").attr("value")
+  });
+}
+</script>
+
+<h2 align='center'>Assign asset</h2>
+<%= form_for(@assignment) do |f| %>
+ 
+  <%= render :partial => "shared/errors", :locals => { :obj => @assignment } %>
+
+	<table id='assetTable' width="800" class="ShowTable" align='center'>
+		
+		<tr>
+			<td><label>Product Category</label> *</td>
+			<td>	
+				<%= select_tag "category", options_for_select(CATEGORY, params[:category]), :include_blank => "- Select -", :onChange => "populateAsset()" %>
+			</td>
+		</tr>
+
+		<tr>
+			<td><%= f.label :asset_id %> <%= mark_required(@assignment, :asset_id) %></td>
+			<td><%= f.select(:asset_id, fetch_assets, :include_blank => "- Select -") %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :employee_id %> <%= mark_required(@assignment, :employee_id) %></td>
+			<td><%= f.select(:employee_id, get_all_employees, :include_blank => "- Select -") %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :assignment_type %> </td>
+			<td>
+				<label><%= f.radio_button :assignment_type, true, :checked => true, :onclick => "disableTo(this)" %> Permanent</label>
+				<label><%= f.radio_button :assignment_type, false, :onclick => "disableTo(this)" %> Temporary</label>
+			</td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :from %> *</td>
+			<td><%= f.text_field :date_issued %></td>
+			<script>
+				$(function() {
+					$("#assignment_date_issued").datepicker({ dateFormat: "dd/mm/yy" });
+				});
+			</script>
+		</tr>
+	
+		<tr>
+			<td><%= f.label :to %> *</td>
+			<td>
+				<%= f.text_field :date_returned, :disabled => true %>
+				<script>
+					if(($("input[name='assignment[assignment_type]']:checked").attr("value")) == "false") {
+						$("#assignment_date_returned").attr( "disabled", false );
+						$("#assignment_date_returned").datepicker({ dateFormat: "dd/mm/yy" });
+					}
+				</script>
+			</td>
+		</tr>
+	
+		<tr>
+			<td><%= f.label :remark %></td>
+			<td><%= f.text_area :remark, :rows => 3, :columns => 80  %></td>
+		</tr>
+	
+		<tr>
+			<td></td>
+			<td><%= f.submit "Assign Asset" %></td>
+		</tr>
+	
+	</table>
+<% end %>
+
+
+<script>
+	$(".ShowTable tr:even").addClass("AlternateRow");
+</script>

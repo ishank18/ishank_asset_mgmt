@@ -45,7 +45,7 @@ function delTag(currentTag) {
 }
 
 function disableTo(currEle) {
-	var returned = $("#asset_employee_mapping_date_returned");
+	var returned = $("#assignment_date_returned");
 	if(currEle.value == "false") {
 		returned.attr("disabled", false);
 		returned.datepicker({"disabled": false, dateFormat: "dd/mm/yy" });

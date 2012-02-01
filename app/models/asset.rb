@@ -17,8 +17,8 @@ class Asset < ActiveRecord::Base
 	belongs_to :resource, :polymorphic => true	
 	
 	has_and_belongs_to_many :tags
-  has_many :asset_employee_mappings
-	has_many :employees, :through => :asset_employee_mappings
+  has_many :assignments
+	has_many :employees, :through => :assignments
 	
 	accepts_nested_attributes_for :resource
 
@@ -28,7 +28,7 @@ class Asset < ActiveRecord::Base
 
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
-		asset_employee_mappings.where(:is_active => true).first.employee 
+		assignments.where(:is_active => true).first.employee 
 	end
 	
 	## Will only let the assets to be assigned if status is not assigned and repair

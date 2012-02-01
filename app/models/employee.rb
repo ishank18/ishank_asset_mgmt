@@ -9,11 +9,11 @@ class Employee < ActiveRecord::Base
 	validates :employee_id, :numericality => { :only_integer => true, :greater_than => 0, :message => " Id must be positive"}, :allow_blank => true
 	validates :name, :presence => true
 	
-  has_many :asset_employee_mappings
-	has_many :assets, :through => :asset_employee_mappings
+  has_many :assignments
+	has_many :assets, :through => :assignments
 	
 	def can_be_disabled?
-		status_array = asset_employee_mappings.collect { |a| a.is_active }
+		status_array = assignments.collect { |a| a.is_active }
 		!status_array.any?
 	end
 		

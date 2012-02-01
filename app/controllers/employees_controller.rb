@@ -3,7 +3,7 @@ class EmployeesController < ApplicationController
 	before_filter :find_employee, :only => [:edit, :update, :disable]
 	
   def index
-  	@employees = Employee.includes(:asset_employee_mappings)
+  	@employees = Employee.includes(:assignments)
   	redirect_to root_path, :notice => "Could not find employees, first add new employee" if @employees.empty?
   end
 
@@ -36,7 +36,7 @@ class EmployeesController < ApplicationController
 	end
 
 	def disabled
-  	@employees = Employee.only_deleted.includes(:asset_employee_mappings)
+  	@employees = Employee.only_deleted.includes(:assignments)
   	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
 	end
 

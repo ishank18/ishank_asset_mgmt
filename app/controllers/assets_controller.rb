@@ -3,7 +3,7 @@ class AssetsController < ApplicationController
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy]
   
   def index
-  	@assets = Asset.includes(:asset_employee_mappings).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
+  	@assets = Asset.includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
  		redirect_to root_path, :notice => "Could not find assets, first add new asset" if @assets.empty?
   end
 
@@ -12,11 +12,6 @@ class AssetsController < ApplicationController
 
   def new
   	@asset = Asset.new
-  end
-  
-  ## Will render the asset assignment form 
-  def assign
-  	@aem = AssetEmployeeMapping.new
   end
   
   def create

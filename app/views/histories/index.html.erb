@@ -9,14 +9,11 @@ $().ready(function() {
 </script>
 
 <% if params[:type] == "employee" %>
-	<% if @histories.first.employee.nil? %>
-		<h2 align='center'>History - <%= Employee.only_deleted.where(:id => @histories.first.employee_id).first.name %></h2>
-	<% else %>	
-		<h2 align='center'>History - <%= @histories.first.employee.name %></h2>
-	<% end %>	
+		<h2 align='center'>History - <%= @employee.name %></h2>
 <% else %>
-	<h2 align='center'>History - <%= @histories.first.asset.name %></h2>
+	<h2 align='center'>History - <%= @asset.name %></h2>
 <% end %>
+
 <table width="800" class="ShowTable" align='center' id='historyTable'>
 	<tr>
 		<th><%= params[:type].capitalize %> Name</th>
@@ -29,11 +26,7 @@ $().ready(function() {
 	<% @histories.each do |history| %>
 	<tr>
 		<% if params[:type] == "asset" %>
-			<% unless history.employee.nil? %>
-				<% emp = history.employee %>
-			<% else %>
-				<% emp = Employee.only_deleted.where(:id => history.employee_id).first %>
-			<% end %>	
+			<% emp = Employee.with_deleted.where(:id => history.employee_id).first %>
 			<td><%= link_to emp.name, employee_path(emp.id) %></td>
 		<% else %>
 			<td><%= link_to history.asset.name, asset_path(history.asset.id) %></td>

@@ -11,7 +11,7 @@ IshankAssetMgmt::Application.routes.draw do
 	
 	resources :admins do
 		get 'password/reset', :action => 'reset', :on => :collection
-		put 'update_password', :on => :collection
+		put :update_password, :on => :collection
 	end
 	
   resources :tags
@@ -24,12 +24,12 @@ IshankAssetMgmt::Application.routes.draw do
 		end	
   end
   
-  resources :asset_employee_mappings do
+  resources :assignments do
   	get :change_aem_form, :on => :collection
   	get :populate_asset, :action => "populate_asset", :as => "populate_asset", :on => :collection
   end
   
-  get ":type/:id/return", :to => "asset_employee_mappings#return_asset", :as => "return_asset"
+  get ":type/:id/return", :to => "assignments#return_asset", :as => "return_asset"
   
 	resources :assets do
 		collection do
@@ -38,7 +38,7 @@ IshankAssetMgmt::Application.routes.draw do
 		end
 	end
 	
-	get "histories/:type/:id", :to => "histories#index", :as => "histories"
+	get ":type/:id/histories", :to => "histories#index", :as => "histories"
 	
 	get :show_tag, :to => "home#show_tag", :as => :show_tag
 	

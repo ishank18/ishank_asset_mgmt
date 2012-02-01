@@ -13,7 +13,7 @@
 		<td>
 			<%= show_disable_option emp %>
 			<%= link_to 'Edit', edit_employee_path(emp) unless emp.deleted? %>
-			<%= link_to "History", histories_path(:type => "employee", :id => emp.id) unless(emp.asset_employee_mappings.blank?) %>
+			<%= link_to "History", histories_path(:type => "employee", :id => emp.id) unless(emp.assignments.blank?) %>
 		</td>
 	</tr>
 	<% end %>

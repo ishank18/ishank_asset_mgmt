@@ -1,9 +1,11 @@
 class HistoriesController < ApplicationController
 	def index
 		if(params[:type] == "employee")
-			@histories = AssetEmployeeMapping.where(:employee_id => params[:id]).includes(:asset).includes(:employee)
+		  @employee = Employee.with_deleted.where(:id => params[:id]).first
+			@histories = @employee.assignments.includes(:asset)
 		else
-			@histories = AssetEmployeeMapping.where(:asset_id => params[:id]).includes(:asset).includes(:employee)
+			@asset = Asset.where(:id => params[:id]).first
+			@histories = @asset.assignments.includes(:employee)
 		end	
 	end
 end

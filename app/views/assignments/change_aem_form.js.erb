@@ -1,0 +1,4 @@
+$("#assignment_type").html("<%= escape_javascript(@assignment.assignment_type ? "Permanent" : "Temporary") %>")
+$("#issued_on").html("<%= escape_javascript(date_to_string @assignment.date_issued) %>")
+$("#scheduled_date").html("<%= escape_javascript(%{ Original Return Date : <b>#{date_to_string @assignment.date_returned}</b>}.html_safe) unless @assignment.assignment_type %>")
+$("#assignment_remark").attr("value", "<%= escape_javascript(@assignment.remark) %>")
