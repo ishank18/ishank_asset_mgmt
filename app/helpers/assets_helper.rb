@@ -21,7 +21,7 @@ module AssetsHelper
 	end
 	
 	def show_category asset
-		if !asset.new_record?
+		unless asset.new_record?
 			asset.resource_type
 		else
 			select_tag "asset[resource_type]", options_for_select(CATEGORY, @asset.resource_type), :include_blank => "- Select -", :onchange => "changeForm()"	

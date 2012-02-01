@@ -2,6 +2,7 @@ module ApplicationHelper
 	include Devise::TestHelpers
 	
 	def date_to_string date_obj
+    # use blank?
   	if(date_obj != "" && date_obj != nil)
   		date_obj.strftime("%B %d, %Y")
   	else
@@ -23,6 +24,7 @@ module ApplicationHelper
 		"highlighted" if params[:controller] == controller && params[:action] == action
 	end
 	
+  # Please correct
 	def get_all_employees
 		options_for_emp = []
 		Employee.all.each do |emp|
