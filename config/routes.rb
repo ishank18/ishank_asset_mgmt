@@ -11,7 +11,7 @@ IshankAssetMgmt::Application.routes.draw do
 	
 	resources :admins do
 		get 'password/reset', :action => 'reset', :on => :collection
-		put 'update_password', :on => :collection
+		put :update_password, :on => :collection
 	end
 	
   resources :tags
