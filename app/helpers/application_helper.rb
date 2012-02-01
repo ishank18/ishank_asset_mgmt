@@ -2,12 +2,8 @@ module ApplicationHelper
 	include Devise::TestHelpers
 	
 	def date_to_string date_obj
-    # use blank?
-  	if(date_obj != "" && date_obj != nil)
-  		date_obj.strftime("%B %d, %Y")
-  	else
-  		""	
-  	end	
+    # use blank? - Done
+    date_obj.blank? ? "" : date_obj.strftime("%B %d, %Y")
   end
 
 	def flash_message
@@ -24,16 +20,9 @@ module ApplicationHelper
 		"highlighted" if params[:controller] == controller && params[:action] == action
 	end
 	
-  # Please correct
+  # Please correct - Done
 	def get_all_employees
-		options_for_emp = []
-		Employee.all.each do |emp|
-  		currOpt = []
-  		currOpt << emp.name
-  		currOpt << emp.id
-  		options_for_emp << currOpt
-  	end
-  	options_for_emp
+		Employee.all.collect { |emp| [emp.name, emp.id] }
 	end	
 
 	def mark_required(object, attribute)

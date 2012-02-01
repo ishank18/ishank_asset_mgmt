@@ -28,12 +28,5 @@ module AssetsHelper
 		end
 	end
 
-	def fetch_assets
-		options = []
-		Asset.can_be_assigned(params[:category]).each do |asset|
-				options << ["#{asset.id} - #{asset.name}", asset.id]
-		end
-		options
-	end	
 		
 end

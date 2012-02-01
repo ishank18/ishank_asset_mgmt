@@ -13,6 +13,8 @@ module AssignmentsHelper
 		@assignment_array.collect { |assignment| ["#{assignment.asset.id} - #{assignment.asset.name}", assignment.asset_id] }
 	end
 	
-
+	def fetch_assets
+		Asset.can_be_assigned_from_category(params[:category]).collect { |asset| ["#{asset.id} - #{asset.name}", asset.id] }
+	end	
 	
 end
