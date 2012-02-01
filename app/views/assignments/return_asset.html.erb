@@ -46,7 +46,7 @@ function changeForm() {
 		<td>
 			<%= f.text_field :date_returned, :value => "" %>
 			<script>
-				$('#assignment_date_returned').datepicker({ dateFormat: "dd/mm/yy" })
+				$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" })
 			</script>
 			<!-- Rmove query - use relation -->
 			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string Assignment.where(:id => @assignment.id).first.date_returned}</b>".html_safe unless @assignment.assignment_type %></span>

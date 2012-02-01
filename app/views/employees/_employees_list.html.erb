@@ -1,3 +1,7 @@
+<div align='center'>
+<div style='width:800px;'>
+<div id="pageEnteriesInfo" align='right'><%= page_entries_info @products %></div><br>
+
 <table width="800" class="ShowTable" align='center'>
 	<tr>
 		<th>Employee Id</th>
@@ -17,8 +21,10 @@
 		</td>
 	</tr>
 	<% end %>
-</table>
-
+</table><br>
+<div id='pagination' align='left'><%= will_paginate @assets %></div>
+</div>
+</div>
 <script>
 	$(".ShowTable tr:odd").addClass("AlternateRow");
 </script>

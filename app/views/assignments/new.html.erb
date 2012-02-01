@@ -45,7 +45,7 @@ function populateAsset() {
 			<td><%= f.text_field :date_issued %></td>
 			<script>
 				$(function() {
-					$("#assignment_date_issued").datepicker({ dateFormat: "dd/mm/yy" });
+					$("#assignment_date_issued").datepicker({ maxDate: new Date, dateFormat: "dd/mm/yy" });
 				});
 			</script>
 		</tr>

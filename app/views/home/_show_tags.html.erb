@@ -1,5 +1,10 @@
 <h2>Tag - <%= @tag.name %></h2>
 
-<% @tag.assets.each do |asset| %>
+<% @assets.each do |asset| %>
 	<%= link_to "#{asset.id} - #{asset.name}", asset %><br>
 <% end %>
+<br><br>
+<div id='pagination' align='left'><%= will_paginate @assets %></div>
+
+<script> $('.pagination a').attr('data-remote', 'true'); </script>
+

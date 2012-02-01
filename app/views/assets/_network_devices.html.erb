@@ -1,6 +1,6 @@
 <table>
 	<tr>
-		<td>Location <%= content_tag(:span, MANDATORY, :class => "Mandatory") %></td>
+		<td>Location *</td>
 		<td>
 
 				<%= text_field_tag "asset[resource_attributes][location]", @asset.try(:resource).try(:location) %>
