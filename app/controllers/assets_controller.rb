@@ -9,10 +9,6 @@ class AssetsController < ApplicationController
 
   def show
   end
-	
-	def history
-		@aem = AssetEmployeeMapping.where(:asset_id => params[:id]).includes(:employee)
-	end
 
   def new
   	@asset = Asset.new

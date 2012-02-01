@@ -34,13 +34,6 @@ class EmployeesController < ApplicationController
 			render :action => "edit"
 		end
 	end
-	
-	
-	## Will show the asset history of the Employee
-  # Write as employee.asset_mapping
-	def history
-		@aem = Employee.with_deleted.where(:id => params[:id]).first.asset_employee_mappings.includes(:asset)
-	end
 
 	def disabled
   	@employees = Employee.only_deleted.includes(:asset_employee_mappings)

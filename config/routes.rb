@@ -21,7 +21,6 @@ IshankAssetMgmt::Application.routes.draw do
   	member do
 			put :disable
 			put :enable
-			get :history
 		end	
   end
   
@@ -37,7 +36,6 @@ IshankAssetMgmt::Application.routes.draw do
 			get :change_form_content
 			get :assign
 		end
-		get :history, :on => :member
 	end
 	
 	get "histories/:type/:id", :to => "histories#index", :as => "histories"
