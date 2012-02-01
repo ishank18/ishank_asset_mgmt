@@ -22,6 +22,7 @@ class Asset < ActiveRecord::Base
 	
 	accepts_nested_attributes_for :resource
 
+  # can_be_assigned_from_category
 	scope :can_be_assigned, lambda { |category|
 		where(%{resource_type = ? and status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')}, category)
 	}

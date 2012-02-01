@@ -6,10 +6,10 @@ class AssignmentsController < ApplicationController
   
 	def create
 		@assignment = Assignment.new(params[:assignment])
+
 		can_be_assigned = Asset.where(:id => params[:assignment][:asset_id]).first.try(:can_be_assigned?)
 		
 		if (@assignment.save && can_be_assigned)
-      # Put in after_create - Done
 			redirect_to @assignment.employee, :alert => "Asset Successfully Assigned"
 		else
       # set datepicker's default date - Done

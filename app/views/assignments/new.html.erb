@@ -20,8 +20,7 @@ function populateAsset() {
 		
 		<tr>
 			<td><label>Product Category</label> *</td>
-			<td>	
-				<%= select_tag "category", options_for_select(CATEGORY, params[:category]), :include_blank => "- Select -", :onChange => "populateAsset()" %>
+			<td>	<%= select_tag "category", options_for_select(CATEGORY, params[:category]), :include_blank => "- Select -", :onChange => "populateAsset()" %>
 			</td>
 		</tr>
 
