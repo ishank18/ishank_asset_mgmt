@@ -1,4 +1,3 @@
-class Laptop < ActiveRecord::Base
-	has_one :asset, :as => :resource
+class Laptop < Asset
 	validates :operating_system, :presence => true
 end

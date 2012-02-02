@@ -2,7 +2,7 @@
 	<tr>
 		<td>Operating System *</td>
 		<td>
-			<%= text_field_tag "asset[resource_attributes][operating_system]", @asset.try(:resource).try(:operating_system) %>
+			<%= text_field_tag "asset[operating_system]", @asset.try(:operating_system) %>
 		</td>
 	</tr>
 </table>

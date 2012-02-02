@@ -14,7 +14,7 @@ class AdminsController < ApplicationController
 		end	
 	end
 	
-	## Form to edit password for the admin
+	## Form to edit password for the admins
   def reset
 		@admin = current_admin
 	end

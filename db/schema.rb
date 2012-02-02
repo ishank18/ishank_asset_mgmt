@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130142504) do
+ActiveRecord::Schema.define(:version => 20120202112236) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -51,21 +51,22 @@ ActiveRecord::Schema.define(:version => 20120130142504) do
   create_table "assets", :force => true do |t|
     t.string   "name"
     t.string   "status"
-    t.decimal  "cost",            :precision => 12, :scale => 2
+    t.decimal  "cost",             :precision => 12, :scale => 2
     t.string   "serial_number"
     t.datetime "purchase_date"
     t.text     "additional_info"
     t.text     "description"
-    t.integer  "resource_id"
-    t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "vendor"
     t.string   "currency_unit"
+    t.string   "type"
+    t.string   "operating_system"
+    t.string   "location"
+    t.boolean  "has_bag"
   end
 
   add_index "assets", ["name"], :name => "index_assets_on_name"
-  add_index "assets", ["resource_id", "resource_type"], :name => "index_assets_on_resource_id_and_resource_type"
 
   create_table "assets_tags", :id => false, :force => true do |t|
     t.integer "asset_id"
@@ -85,25 +86,6 @@ ActiveRecord::Schema.define(:version => 20120130142504) do
   end
 
   add_index "employees", ["name"], :name => "index_employees_on_name"
-
-  create_table "laptops", :force => true do |t|
-    t.string   "operating_system"
-    t.boolean  "has_bag"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "mobile_phones", :force => true do |t|
-    t.string   "operating_system"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "network_devices", :force => true do |t|
-    t.string   "location"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "tags", :force => true do |t|
     t.string   "name"

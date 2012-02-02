@@ -18,7 +18,7 @@
 				<td><%= asset.status.capitalize %></td>
 				<td><%= asset.status == "Assigned" ? (link_to asset.assigned_employee.name, asset.assigned_employee) : "-" %> </td>
 				<td>
-					<%= link_to 'Edit', edit_asset_path(asset) %>
+					<%= link_to 'Edit', edit_polymorphic_path(asset) %>
 					<%= link_to "History", histories_path(:type => "asset", :id => asset.id) unless asset.assignments.blank? %>
 				</td>
 			</tr>

@@ -20,11 +20,11 @@ module AssetsHelper
 		end
 	end
 	
-	def show_category asset
+	def show_category asset, f, type
 		unless asset.new_record?
-			asset.resource_type
+			params[:type].tableize.humanize
 		else
-			select_tag "asset[resource_type]", options_for_select(CATEGORY, @asset.resource_type), :include_blank => "- Select -", :onchange => "changeForm()"	
+			f.select(:type, options_for_select(CATEGORY, type), :include_blank => "- Select -")
 		end
 	end
 

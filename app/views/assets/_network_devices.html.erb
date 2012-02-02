@@ -2,9 +2,7 @@
 	<tr>
 		<td>Location *</td>
 		<td>
-
-				<%= text_field_tag "asset[resource_attributes][location]", @asset.try(:resource).try(:location) %>
-
+			<%= text_field_tag "asset[location]", @asset.try(:location) %>
 		</td>
 	</tr>
 </table>	

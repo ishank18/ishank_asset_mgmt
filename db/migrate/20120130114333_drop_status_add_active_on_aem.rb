@@ -1,8 +1,8 @@
 class DropStatusAddActiveOnAem < ActiveRecord::Migration
   def self.up
   	add_column :asset_employee_mappings, :is_active, :boolean, :default => true
-  	AssetEmployeeMapping.reset_column_information
-  	AssetEmployeeMapping.all.each do |aem|
+  	Assignment.reset_column_information
+  	Assignment.all.each do |aem|
 			if(aem.status == "Assigned")
 				@sql = "update asset_employee_mappings set is_active = '1' where id = '#{aem.id}'"
 			else
@@ -16,8 +16,8 @@ class DropStatusAddActiveOnAem < ActiveRecord::Migration
   def self.down
 		add_column :asset_employee_mappings, :status, :string
 		
-  	AssetEmployeeMapping.reset_column_information
-  	AssetEmployeeMapping.all.each do |aem|
+  	Assignment.reset_column_information
+  	Assignment.all.each do |aem|
 			if(aem.is_active)
 				@sql = "update asset_employee_mappings set status = 'Assigned' where id = '#{aem.id}'"
 			else

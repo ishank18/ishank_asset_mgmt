@@ -29,7 +29,7 @@ $().ready(function() {
 			<% emp = Employee.with_deleted.where(:id => history.employee_id).first %>
 			<td><%= link_to emp.name, employee_path(emp.id) %></td>
 		<% else %>
-			<td><%= link_to history.asset.name, asset_path(history.asset.id) %></td>
+			<td><%= link_to history.asset.name, history.asset %></td>
 		<% end %>
 		<td><%= date_to_string history.date_issued %></td>
 		<td><%= date_to_string history.date_returned %></td>

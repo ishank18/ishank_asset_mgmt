@@ -11,11 +11,11 @@ class AssetsController < ApplicationController
   end
 
   def new
-  	@asset = Asset.new
+  	@asset = Asset.new()
   end
   
   def create
-		@asset = Asset.new params[:asset]
+		@asset = params[:asset][:type].constantize.new params[:asset]
 		if(@asset.save)
 			redirect_to @asset, :alert => "Asset Successfully Added!"
 		else

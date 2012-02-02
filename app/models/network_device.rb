@@ -1,4 +1,3 @@
-class NetworkDevice < ActiveRecord::Base
-		has_one :asset, :as => :resource
-		validates :location, :presence => true
+class NetworkDevice < Asset
+	validates :location, :presence => true
 end

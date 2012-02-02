@@ -18,7 +18,7 @@
 	</tr>
 	<tr>
 		<td>Category</td>
-		<td><%= @asset.resource_type %></td>
+		<td><%= params[:type].tableize.humanize %></td>
 	</tr>
 	<tr >
 		<td>Serial Number</td>
@@ -33,24 +33,24 @@
 		<td><%= date_to_string @asset.purchase_date %></td>
 	</tr>
 	
-	<% if(@asset.resource_type == "MobilePhone" || @asset.resource_type == "Laptop" ) %>
+	<% if(params[:type] == "MobilePhone" || params[:type] == "Laptop" ) %>
 		<tr >
 			<td>Operating System</td>
-			<td><%= @asset.resource.operating_system %></td>
+			<td><%= @asset.operating_system %></td>
 		</tr>
 	<% end %>
 	
-	<% if(@asset.resource_type == "Laptop" ) %>
+	<% if(params[:type] == "Laptop" ) %>
 		<tr>
 			<td>Has Bag</td>
-			<td><%= ( @asset.resource.has_bag ? "Yes" : "No" ).to_s %></td>
+			<td><%= ( @asset.has_bag ? "Yes" : "No" ).to_s %></td>
 		</tr>
 	<% end %>
 	
-	<% if(@asset.resource_type == "NetworkDevice" ) %>
+	<% if(params[:type] == "NetworkDevice" ) %>
 		<tr >
 			<td >Location</td>
-			<td><%= @asset.resource.location %></td>
+			<td><%= @asset.location %></td>
 		</tr>
 	<% end %>
 	
@@ -68,7 +68,7 @@
 	<tr>
 		<td>Actions</td>
 		<td>
-			<%= link_to 'Edit', edit_asset_path(@asset) %>
+			<%= link_to 'Edit', edit_polymorphic_path(@asset) %>
 			<%= link_to "History", histories_path(:type => "asset", :id => @asset.id) unless @asset.assignments.blank? %>
 			<%= link_to 'Return Asset', return_asset_path(:type => "asset", :id => @asset.id.to_s) if @asset.status == "Assigned" %>
 		</td>
