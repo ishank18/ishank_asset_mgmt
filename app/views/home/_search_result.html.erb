@@ -8,3 +8,7 @@
 		<%= link_to "#{res.id} - #{res.name}", res %><br>
 	<% end %>
 <% end %>
+<br><br>
+<div id='pagination' align='left'><%= will_paginate @result %></div>
+
+<script> $('.pagination a').attr('data-remote', 'true'); </script>
