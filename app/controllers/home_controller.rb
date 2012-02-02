@@ -4,12 +4,17 @@ class HomeController < ApplicationController
 		@tags = Tag.includes(:assets)
 	end
 	
+	## Optimize
+  # pagination
 	## Will search assets and employees and will filter it according to status and category
 	def search
 		asset, employee, status, category = params[:query_for_asset],  params[:query_for_emp], params[:status], params[:category]	
 		if(asset.present? or category.present? or status.present?)		
 			@result = Asset.where("assets.name like ?", "%#{asset}%")
 			if(category.present?)
+			  
+        # (category.present? ? Asset : @result).where("assets.resource_type = ?", category) # Use send if required
+			  
 				if(@result.blank?)
 					@result = Asset.where("assets.resource_type = ?", category)
 				else
