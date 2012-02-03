@@ -22,9 +22,8 @@ class Assignment < ActiveRecord::Base
 	belongs_to :employee
 	
 	## Scope which will return assets which are assigned after checking Asset & AEM status
-	scope :assigned_assets, where("asset_employee_mappings.date_returned is NULL").
-		                      joins(:asset).
-		                      where("assets.status = ?", STATUS["Assigned"])	
+	scope :assigned_assets, joins(:asset).
+		                      where("assets.status = ? AND asset_employee_mappings.date_returned is NULL", STATUS["Assigned"])	
 	
 	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status
