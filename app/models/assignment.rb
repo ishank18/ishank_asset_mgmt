@@ -44,7 +44,6 @@ class Assignment < ActiveRecord::Base
 
 	## Checks if the date_returned is not blank if assignment type is temporary
 	def temporarly_assignment_date
-		p assignment_type
 		errors.add(:expected_return_date, " can't be blank on Temporarly Assignment") if assignment_type == "false" && expected_return_date.blank?
 	end
 	
