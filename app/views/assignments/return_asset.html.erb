@@ -26,7 +26,6 @@ function changeForm() {
 		<td>
 			<%= @assignment.employee.name %>
 			<%= f.hidden_field :employee_id %>
-			<%= f.hidden_field :is_active, :value => "false" %>
 		</td>
 	</tr>
 	<tr>
@@ -39,7 +38,7 @@ function changeForm() {
 	</tr>
 	<tr>
 		<td>Assignment Type</td>
-		<td id='assignment_type'><%= @assignment.assignment_type ? "Permanent" : "Temporary" %></td>
+		<td id='assignment_type'><%= @assignment.expected_return_date? ? "Temporary" : "Permanent" %></td>
 	</tr>
 	<tr>
 		<td>Return date *</td>
@@ -49,7 +48,8 @@ function changeForm() {
 				$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" })
 			</script>
 			<!-- Rmove query - use relation -->
-			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string Assignment.where(:id => @assignment.id).first.date_returned}</b>".html_safe unless @assignment.assignment_type %></span>
+			<% p @assignment.expected_return_date %>
+			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string Assignment.where(:id => @assignment.id).first.expected_return_date}</b>".html_safe if @assignment.expected_return_date? %></span>
 			</td>
 	</tr>
 	<tr>

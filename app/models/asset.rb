@@ -11,8 +11,7 @@ class Asset < ActiveRecord::Base
 	validates :vendor, :presence => true
 	validates :purchase_date, :date => { :before => Proc.new { Time.zone.now } }, :allow_blank => true
 	
-	attr_accessor :tags_field, :type
-
+	attr_accessor :tags_field
 	
 	has_and_belongs_to_many :tags
   has_many :assignments
@@ -24,13 +23,10 @@ class Asset < ActiveRecord::Base
 
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
-		assignments.where(:is_active => true).first.employee 
+		assignments.where(:date_returned => nil).first.employee 
 	end
 	
 	## Will only let the assets to be assigned if status is not assigned and repair
-	
-  # Can be written like this
-  # ![STATUS["Assigned"], STATUS["Repair"]].include?(status) - Done
 	def can_be_assigned?
 		![STATUS["Assigned"], STATUS["Repair"]].include?(status)
 	end

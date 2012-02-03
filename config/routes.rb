@@ -25,8 +25,10 @@ IshankAssetMgmt::Application.routes.draw do
   end
   
   resources :assignments do
-  	get :change_aem_form, :on => :collection
-  	get :populate_asset, :action => "populate_asset", :as => "populate_asset", :on => :collection
+  	collection do
+			get :change_aem_form
+			get :populate_asset
+  	end
   end
   
   get ":type/:id/return", :to => "assignments#return_asset", :as => "return_asset"

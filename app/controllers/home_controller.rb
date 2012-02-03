@@ -4,8 +4,6 @@ class HomeController < ApplicationController
 		@tags = Tag.includes(:assets)
 	end
 	
-	## Optimize
-  # pagination
 	## Will search assets and employees and will filter it according to status and category
 	def search
 		@result = []
@@ -19,7 +17,7 @@ class HomeController < ApplicationController
 				@result = (@result.blank? ? Asset : @result).where("assets.status = ?", status)
 			end
 			if(employee.present?)
-				@result = @result.joins(:assignments).joins(:employees).where("employees.name like ? and asset_employee_mappings.is_active = '1'", "%#{employee}%")
+				@result = @result.joins(:assignments).joins(:employees).where("employees.name like ? and asset_employee_mappings.date_returned is NULL", "%#{employee}%")
 			end
 		elsif(employee.present?)
 			@result = Employee.where("employees.name like ?", "%#{employee}%")

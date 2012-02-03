@@ -19,7 +19,7 @@
 			<%= show_disable_option @employee %> &nbsp;
 			<%= link_to 'Edit', edit_employee_path(@employee) unless @employee.deleted? %> &nbsp;
 			<%= link_to "History", histories_path(:type => "employee", :id => @employee.id) unless(@employee.assignments.blank?) %> &nbsp;
-			<%= link_to 'Return Asset', return_asset_path(:type => "employee", :id => @employee.id) if @employee.assignments.collect { |assignment| assignment.is_active }.any? %>
+			<%= link_to 'Return Asset', return_asset_path(:type => "employee", :id => @employee.id) if @employee.assignments.collect { |assignment| (!assignment.date_returned?) }.any? %>
 		</td>
 	</tr>
 </table>

@@ -9,6 +9,6 @@
 	<% end %>
 <% end %>
 <br><br>
-<div id='pagination' align='left'><%= will_paginate @result %></div>
+<div id='pagination' align='left'><%= will_paginate @result if @result.present? %></div>
 
 <script> $('.pagination a').attr('data-remote', 'true'); </script>

@@ -44,19 +44,6 @@ function delTag(currentTag) {
 	 $(currentTag).remove();
 }
 
-function disableTo(currEle) {
-	var returned = $("#assignment_date_returned");
-	if(currEle.value == "false") {
-		returned.attr("disabled", false);
-		returned.datepicker({"disabled": false, dateFormat: "dd/mm/yy" });
-	}
-	else {
-		returned.attr("disabled", true);
-		returned.attr("value", "");
-		returned.datepicker({"disabled":true});
-	}	
-}
-
 (function($){
 	$.fn.jTruncate = function(options) {
 	   

@@ -6,11 +6,7 @@ class AssignmentsController < ApplicationController
   
 	def create
 		@assignment = Assignment.new(params[:assignment])
-    
-    # Move to before_save
-		can_be_assigned = Asset.where(:id => params[:assignment][:asset_id]).first.try(:can_be_assigned?)
-		
-		if (@assignment.save && can_be_assigned)
+		if (@assignment.save)
 			redirect_to @assignment.employee, :alert => "Asset Successfully Assigned"
 		else
 			render :action => 'new'
@@ -33,7 +29,7 @@ class AssignmentsController < ApplicationController
 	def update
     # Use id to find 
 		@assignment = Assignment.where(:employee_id => params[:assignment][:employee_id], 
-		:asset_id => params[:assignment][:asset_id], :is_active => true).first
+		:asset_id => params[:assignment][:asset_id], :date_returned => nil).first
 		
 		if(@assignment.update_attributes(params[:assignment]))
 			redirect_to employee_path(@assignment.employee), :alert => "Asset Successfully Returned!"
@@ -45,7 +41,7 @@ class AssignmentsController < ApplicationController
 	
 	## Will change the return form according to the selected asset to be returned - Using AJAX
 	def change_aem_form
-		@assignment = Assignment.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :is_active => true).first
+		@assignment = Assignment.where(:asset_id => params[:asset_id], :employee_id => params[:employee_id], :date_returned => nil).first
 	end
 	
 	## Will populate the select box according to the category of asset and when the status is not assigned - Using AJAX

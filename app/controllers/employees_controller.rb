@@ -51,7 +51,6 @@ class EmployeesController < ApplicationController
 	end
 	
 	## Used to soft delete the employees, will not let them delete if any asset is assigned to them
-  # Why is before_filter not used? - Done
 	def disable
 	
 		unless @employee.can_be_disabled?
