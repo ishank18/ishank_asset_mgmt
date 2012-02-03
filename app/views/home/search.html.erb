@@ -1,31 +1,20 @@
-<script>
-	function ajaxSearch() {
-		$.ajax({
-		  url: '<%= search_path %>', 
-		  dataType: 'script',
-		  type: 'get', 
-		  beforeSend: function() { showProgress() },
-		  complete: function() { endProgress() },
-		  data: 'asset='+$("#query_for_asset").attr("value")+"&employee="+$("#query_for_emp").attr("value")+'&category='+$("#category").attr("value")+'&status='+$("#status").attr("value")
-		});
-	}
-</script>
 <div id="progressContainer" align="center"></div>
 <h2 align='center'>Search</h2>
+<% form_tag search_path, :remote => true, :method => :get do %>
 <table width="800" class="ShowTable" align='center'>
 	<tr >
 		<td >Asset :</td>
-		<td> <%= text_field_tag 'query_for_asset' %>  </td>
+		<td> <%= text_field_tag 'asset' %>  </td>
 		<td> <%= select_tag "status", options_for_select(STATUS.to_a), :include_blank => "- Select Status -" %> <%= select_tag "category", options_for_select(CATEGORY_CLASS), :include_blank => "- Select Category -" %> </td>
 	</tr>
 	<tr>
 		<td>Employee :</td>
-		<td><%= text_field_tag 'query_for_emp' %> </td>
+		<td><%= text_field_tag 'employee' %> </td>
 		<td></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="button" value="Search!" onclick="ajaxSearch();" /></td>
+		<td><input type="submit" value="Search!" /></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -34,8 +23,7 @@
 		</td>
 	</tr>
 </table>
-
-
+<% end %>
 <script>
 	$(".ShowTable tr:even").addClass("AlternateRow");
 </script>
