@@ -19,6 +19,9 @@ class Asset < ActiveRecord::Base
 
 	scope :assignable, where(%{status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')})
 	
+	scope :search, lambda { |asset, employee, status, category|
+		
+	}
 
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
