@@ -6,7 +6,7 @@
 		  type: 'get', 
 		  beforeSend: function() { showProgress() },
 		  complete: function() { endProgress() },
-		  data: 'query_for_asset='+$("#query_for_asset").attr("value")+"&query_for_emp="+$("#query_for_emp").attr("value")+'&category='+$("#category").attr("value")+'&status='+$("#status").attr("value")
+		  data: 'asset='+$("#query_for_asset").attr("value")+"&employee="+$("#query_for_emp").attr("value")+'&category='+$("#category").attr("value")+'&status='+$("#status").attr("value")
 		});
 	}
 </script>

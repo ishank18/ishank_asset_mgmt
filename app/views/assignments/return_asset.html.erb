@@ -11,6 +11,10 @@ function changeForm() {
   });
 }
 
+$(function() {
+	$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" })
+})
+
 </script>
 
 <h2 align='center'>Return Asset</h2>
@@ -43,9 +47,6 @@ function changeForm() {
 		<td>Return date *</td>
 		<td>
 			<%= f.text_field :date_returned, :value => "" %>
-			<script>
-				$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" })
-			</script>
 			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string Assignment.where(:id => @assignment.id).first.expected_return_date}</b>".html_safe if @assignment.expected_return_date? %></span>
 			</td>
 	</tr>

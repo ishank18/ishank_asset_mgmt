@@ -23,7 +23,7 @@
 	<tr>
 		<td></td>
 		<td>
-			<% if @employee.id.nil? %>
+			<% if @employee.new_record? %>
 					<%= f.submit "Add Employee!" %>
 				<% else %>	
 					<%= f.submit "Update Employee!" %>

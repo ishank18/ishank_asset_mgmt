@@ -13,8 +13,9 @@
 		<div id="tabs">
 			<% if admin_signed_in? %>
 				<span style='float:right'>
-					<%= link_to 'Edit Password', password_reset_admins_path %>		
-					<%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %>
+					| <%= link_to 'Search', search_path %> | 
+					<%= link_to 'Edit Password', password_reset_admins_path %> |
+					<%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %> |
 				</span>
 				<br><br>
 				<ul>
