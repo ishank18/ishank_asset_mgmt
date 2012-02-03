@@ -5,7 +5,7 @@
 	<tr >
 		<td >Asset :</td>
 		<td> <%= text_field_tag 'asset' %>  </td>
-		<td> <%= select_tag "status", options_for_select(STATUS.to_a), :include_blank => "- Select Status -" %> <%= select_tag "category", options_for_select(CATEGORY_CLASS), :include_blank => "- Select Category -" %> </td>
+		<td> <%= select_tag "status", options_for_select(STATUS), :include_blank => "- Select Status -" %> <%= select_tag "category", options_for_select(CATEGORY_CLASS), :include_blank => "- Select Category -" %> </td>
 	</tr>
 	<tr>
 		<td>Employee :</td>
