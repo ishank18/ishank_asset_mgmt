@@ -23,6 +23,12 @@ $(function() {
 			returned.datepicker({"disabled":true});
 		}	
 	});
+	$("#assignment_date_issued").datepicker({ maxDate: new Date, dateFormat: "dd/mm/yy" });
+	$(".ShowTable tr:even").addClass("AlternateRow");
+	if(($("input[name='assignment[assignment_type]']:checked").attr("value")) == "false") {
+		$("#assignment_expected_return_date").attr( "disabled", false );
+		$("#assignment_expected_return_date").datepicker({ dateFormat: "dd/mm/yy" });
+	}
 })
 
 </script>
@@ -31,7 +37,7 @@ $(function() {
 <%= form_for(@assignment) do |f| %>
  
   <%= render :partial => "shared/errors", :locals => { :obj => @assignment } %>
-	<% p type = params[:assignment][:assignment_type] if params[:assignment] %>
+	
 	<table id='assetTable' width="800" class="ShowTable" align='center'>
 		
 		<tr>
@@ -51,6 +57,7 @@ $(function() {
 		<tr>
 			<td><%= f.label :assignment_type %> </td>
 			<td>
+				<% type = params[:assignment][:assignment_type] if params[:assignment] %>
 				<label><%= radio_button_tag "assignment[assignment_type]", true, (type != "false") %> Permanent</label>
 				<label><%= radio_button_tag "assignment[assignment_type]", false, (type == "false") %> Temporary</label>
 			</td>
@@ -59,23 +66,12 @@ $(function() {
 		<tr>
 			<td><%= f.label :from %> *</td>
 			<td><%= f.text_field :date_issued %></td>
-			<script>
-				$(function() {
-					$("#assignment_date_issued").datepicker({ maxDate: new Date, dateFormat: "dd/mm/yy" });
-				});
-			</script>
 		</tr>
 	
 		<tr>
 			<td><%= f.label :to %> *</td>
 			<td>
 				<%= f.text_field :expected_return_date, :disabled => true %>
-				<script>
-					if(($("input[name='assignment[assignment_type]']:checked").attr("value")) == "false") {
-						$("#assignment_expected_return_date").attr( "disabled", false );
-						$("#assignment_expected_return_date").datepicker({ dateFormat: "dd/mm/yy" });
-					}
-				</script>
 			</td>
 		</tr>
 	
@@ -91,8 +87,3 @@ $(function() {
 	
 	</table>
 <% end %>
-
-
-<script>
-	$(".ShowTable tr:even").addClass("AlternateRow");
-</script>

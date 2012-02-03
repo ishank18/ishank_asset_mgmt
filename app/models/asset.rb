@@ -17,7 +17,7 @@ class Asset < ActiveRecord::Base
   has_many :assignments
 	has_many :employees, :through => :assignments
 
-	scope :can_be_assigned, where(%{type = ? and status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')})
+	scope :assignable, where(%{status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')})
 	
 
 	## Will return an active relation of employees to whome any asset is asssigned	
