@@ -5,14 +5,11 @@ $().ready(function() {
 		length: 50
 	});
 <% end %>	
+$(".ShowTable tr:odd").addClass("AlternateRow");
 });
 </script>
 
-<% if params[:type] == "employee" %>
-		<h2 align='center'>History - <%= @employee.name %></h2>
-<% else %>
-	<h2 align='center'>History - <%= @asset.name %></h2>
-<% end %>
+<h2 align='center'>History - <%= @record.name %></h2>
 
 <table width="800" class="ShowTable" align='center' id='historyTable'>
 	<tr>
@@ -25,6 +22,7 @@ $().ready(function() {
 	</tr>
 	<% @histories.each do |history| %>
 	<tr>
+		<!-- Change -->
 		<% if params[:type] == "asset" %>
 			<% emp = Employee.with_deleted.where(:id => history.employee_id).first %>
 			<td><%= link_to emp.name, employee_path(emp.id) %></td>
@@ -39,7 +37,3 @@ $().ready(function() {
 	</tr>
 	<% end %>
 </table>
-
-<script>
-	$(".ShowTable tr:odd").addClass("AlternateRow");
-</script>

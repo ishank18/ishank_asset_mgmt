@@ -34,7 +34,8 @@ class EmployeesController < ApplicationController
 			render :action => "edit"
 		end
 	end
-
+  
+  # index action
 	def disabled
   	@employees = Employee.only_deleted.includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
   	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
@@ -52,7 +53,6 @@ class EmployeesController < ApplicationController
 	
 	## Used to soft delete the employees, will not let them delete if any asset is assigned to them
 	def disable
-	
 		unless @employee.can_be_disabled?
 			redirect_to :back, :notice => "First remove all assigned Asset"
 		else
