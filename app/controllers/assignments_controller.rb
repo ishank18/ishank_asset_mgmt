@@ -34,7 +34,7 @@ class AssignmentsController < ApplicationController
 		if(@assignment.update_attributes(params[:assignment]))
 			redirect_to employee_path(@assignment.employee), :alert => "Asset Successfully Returned!"
 		else
-			render :action => :return_asset
+			render :action => 'return_asset'
 		end
 	end
 	
@@ -46,8 +46,8 @@ class AssignmentsController < ApplicationController
 	
 	## Will populate the select box according to the category of asset and when the status is not assigned - Using AJAX
 	def populate_asset
-    # Can be written as - paramss[:category].constantize.where ..
-  	@assets = Asset.can_be_assigned_from_category params[:category]
+    # Can be written as - params[:category].constantize.where ..
+  	@assets = params[:category].constantize.can_be_assigned#_from_category params[:category]
   end
 	
 end
