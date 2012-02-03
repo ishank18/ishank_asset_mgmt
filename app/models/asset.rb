@@ -30,9 +30,9 @@ class Asset < ActiveRecord::Base
 	## Will only let the assets to be assigned if status is not assigned and repair
 	
   # Can be written like this
-  # ![STATUS["Assigned"], STATUS["Repair"]].include?(status) 
+  # ![STATUS["Assigned"], STATUS["Repair"]].include?(status) - Done
 	def can_be_assigned?
-		(!status.include? STATUS["Assigned"]) && (!status.include? STATUS["Repair"])
+		![STATUS["Assigned"], STATUS["Repair"]].include?(status)
 	end
 
   ## Used to add tags, and make enteries in assets_tags table, will also check if the tag exists or not
