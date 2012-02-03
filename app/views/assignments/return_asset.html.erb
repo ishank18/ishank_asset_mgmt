@@ -15,7 +15,6 @@ function changeForm() {
 
 <h2 align='center'>Return Asset</h2>
 
-
 <%= form_for(@assignment) do |f| %>
 
 <%= render :partial => "shared/errors", :locals => { :obj => @assignment } %>
@@ -47,8 +46,6 @@ function changeForm() {
 			<script>
 				$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" })
 			</script>
-			<!-- Rmove query - use relation -->
-			<% p @assignment.expected_return_date %>
 			<span id='scheduled_date'><%= " Original Return Date : <b>#{date_to_string Assignment.where(:id => @assignment.id).first.expected_return_date}</b>".html_safe if @assignment.expected_return_date? %></span>
 			</td>
 	</tr>

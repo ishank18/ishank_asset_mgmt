@@ -1,5 +1,3 @@
-# status shoud be boolean and default value true
-
 class Assignment < ActiveRecord::Base
 
 	set_table_name "asset_employee_mappings"
@@ -16,18 +14,17 @@ class Assignment < ActiveRecord::Base
 	validates :date_returned, :date => { :after => :date_issued }, :allow_blank => true
 	
 	validate :temporarly_assignment_date, :on => :create
+	
+  # What does this do?
 	attr_accessor :assignment_type
 	
 	belongs_to :asset
 	belongs_to :employee
 	
 	## Scope which will return assets which are assigned after checking Asset & AEM status
-	scope :assigned_assets, lambda { 
-		where("asset_employee_mappings.date_returned is NULL").
-		joins(:asset).
-		where("assets.status = ?", STATUS["Assigned"]).
-		includes(:asset)
-	}		 
+	scope :assigned_assets, where("asset_employee_mappings.date_returned is NULL").
+		                      joins(:asset).
+		                      where("assets.status = ?", STATUS["Assigned"])	
 	
 	## Used to update status of AEM and assets when a new asset is assigned
 	def update_status

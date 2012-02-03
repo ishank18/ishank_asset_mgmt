@@ -16,9 +16,9 @@ class AssignmentsController < ApplicationController
 
 	def return_asset
 		if(params[:type].downcase == "employee")
-			@assignment_array = Assignment.where(:employee_id => params[:id]).assigned_assets
+			@assignment_array = Assignment.where(:employee_id => params[:id]).assigned_assets.includes(:asset)
 		else
-			@assignment_array = Assignment.where(:asset_id => params[:id]).assigned_assets
+			@assignment_array = Assignment.where(:asset_id => params[:id]).assigned_assets.includes(:asset)
 		end
 
 		@assignment = @assignment_array.first
