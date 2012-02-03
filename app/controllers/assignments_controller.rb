@@ -46,6 +46,7 @@ class AssignmentsController < ApplicationController
 	
 	## Will populate the select box according to the category of asset and when the status is not assigned - Using AJAX
 	def populate_asset
+    # Can be written as - paramss[:category].constantize.where ..
   	@assets = Asset.can_be_assigned_from_category params[:category]
   end
 	
