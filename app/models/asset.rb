@@ -22,7 +22,7 @@ class Asset < ActiveRecord::Base
 
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
-		assignments.where(:date_returned => nil).first.employee 
+		assignments.where(:date_returned => nil).first.try(:employee) 
 	end
 	
 	## Will only let the assets to be assigned if status is not assigned and repair
