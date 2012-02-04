@@ -9,10 +9,7 @@ class HomeController < ApplicationController
 	def search
 		asset, employee, status, category = params[:asset],  params[:employee], params[:status], params[:category]	
 		if(asset.present? or category.present? or status.present?)
-			@result = Asset.where("assets.name like ?", "%#{asset}%") if asset.present?
-			@result = (asset.blank? ? Asset : @result).where("assets.type = ?", category) if category.present?
-			@result = ((asset.blank? && category.blank?) ? Asset : @result).where("assets.status = ?", status) if status.present?
-			@result = @result.joins(:assignments => :employee).where("employees.name like ? and asset_employee_mappings.date_returned is NULL", "%#{employee}%") if employee.present?
+			@result = Asset.search asset, status, category, employee
 		elsif(employee.present?)
 			@result = Employee.where("employees.name like ?", "%#{employee}%")
 		end

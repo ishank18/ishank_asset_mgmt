@@ -19,10 +19,15 @@ class Asset < ActiveRecord::Base
 
 	scope :assignable, where(%{status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')})
 	
-	scope :search, lambda { |asset, employee, status, category|
-		
-	}
-
+	## Will return the search result according to the params provided
+	def self.search asset, status, category, employee
+		result = self.where("assets.name like ?", "%#{asset}%") if asset.present?
+		result = (asset.blank? ? self : result).where("assets.type = ?", category) if category.present?
+		result = ((asset.blank? && category.blank?) ? self : result).where("assets.status = ?", status) if status.present?
+		result = result.joins(:assignments => :employee).where("employees.name like ? and asset_employee_mappings.date_returned is NULL", "%#{employee}%") if employee.present?
+		result
+	end	
+	
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee
 		assignments.where(:date_returned => nil).first.try(:employee) 
