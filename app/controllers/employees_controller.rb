@@ -3,8 +3,8 @@ class EmployeesController < ApplicationController
 	before_filter :find_employee, :only => [:edit, :update, :disable]
 	
   def index
-  	@employees = Employee.includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
-  	redirect_to root_path, :notice => "Could not find employees, first add new employee" if @employees.empty?
+ 		@employees = Employee.try((params[:type]) ? :only_deleted : :order ).includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
+  	redirect_to root_path, :notice => "Could not find employees" if @employees.empty?
   end
 
   def show
@@ -35,12 +35,7 @@ class EmployeesController < ApplicationController
 		end
 	end
   
-  # index action
-	def disabled
-  	@employees = Employee.only_deleted.includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
-  	redirect_to root_path, :alert => "Disabled Employee list is empty!" if @employees.blank?
-	end
-
+  # index action - Done
 	
 	def enable
 		employee = Employee.only_deleted.where(:id => params[:id]).first

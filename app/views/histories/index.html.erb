@@ -13,7 +13,7 @@ $(".ShowTable tr:odd").addClass("AlternateRow");
 
 <table width="800" class="ShowTable" align='center' id='historyTable'>
 	<tr>
-		<th><%= params[:type].capitalize %> Name</th>
+		<th><%= (params[:type] == "employee") ? "Asset" : "Employee" %> Name</th>
 		<th>Issue Date</th>
 		<th>Return Date</th>
 		<th>Assignment Type</th>
@@ -22,10 +22,9 @@ $(".ShowTable tr:odd").addClass("AlternateRow");
 	</tr>
 	<% @histories.each do |history| %>
 	<tr>
-		<!-- Change -->
+		<!-- Change - Done -->
 		<% if params[:type] == "asset" %>
-			<% emp = Employee.with_deleted.where(:id => history.employee_id).first %>
-			<td><%= link_to emp.name, employee_path(emp.id) %></td>
+			<td><%= show_employee history %></td>
 		<% else %>
 			<td><%= link_to history.asset.name, history.asset %></td>
 		<% end %>

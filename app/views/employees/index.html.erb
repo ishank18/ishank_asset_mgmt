@@ -1,2 +1,31 @@
-<h2 align='center'>All Employees</h2>
-<%= render :partial => "employees_list", :locals => { :employees => @employees } %>
+<h2 align='center'><%= (params[:type]) ? "Disabled" : "All" %> Employees</h2>
+<div align='center'>
+<div style='width:800px;'>
+<div id="pageEnteriesInfo" align='right'><%= page_entries_info @employees %></div><br>
+
+<table width="800" class="ShowTable" align='center'>
+	<tr>
+		<th>Employee Id</th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Action</th>
+	</tr>
+	<% @employees.each do |emp| %>
+	<tr>
+		<td><%= emp.employee_id %></td>
+		<td><%= link_to emp.name, emp %></td>
+		<td><%= emp.email %></td>
+		<td>
+			<%= show_disable_option emp %>
+			<%= link_to 'Edit', edit_employee_path(emp) unless emp.deleted? %>
+			<%= link_to "History", histories_path(:type => "employee", :id => emp.id) unless(emp.assignments.blank?) %>
+		</td>
+	</tr>
+	<% end %>
+</table><br>
+<div id='pagination' align='left'><%= will_paginate @employees %></div>
+</div>
+</div>
+<script>
+	$(".ShowTable tr:odd").addClass("AlternateRow");
+</script>
