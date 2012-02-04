@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 	end
 	
 	## Will search assets and employees and will filter it according to status and category
-  # Optimize
+  # Optimize - Done
 	def search
 		asset, employee, status, category = params[:asset],  params[:employee], params[:status], params[:category]	
 		if(asset.present? or category.present? or status.present?)

@@ -3,8 +3,8 @@ class EmployeesController < ApplicationController
 	before_filter :find_employee, :only => [:edit, :update, :disable]
 	
   def index
- 		@employees = Employee.try((params[:type]) ? :only_deleted : :order ).includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
-  	redirect_to root_path, :notice => "Could not find employees" if @employees.empty?
+ 		@employees = Employee.try((params[:type]) ? :only_deleted : :scoped ).includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
+  	redirect_to root_path, :notice => "Could not find #{params[:type]} employees" if @employees.empty?
   end
 
   def show

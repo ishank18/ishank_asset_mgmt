@@ -13,7 +13,7 @@ class Employee < ActiveRecord::Base
 	has_many :assets, :through => :assignments
 
 	def can_be_disabled?
-		assignments.any? { |a| a.date_returned? }
+		assignments.all? { |a| a.date_returned? }
 	end
 		
 end
