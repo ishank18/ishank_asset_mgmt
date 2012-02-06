@@ -2,6 +2,7 @@ class AssignmentsController < ApplicationController
   
   def new
   	@assignment = Assignment.new
+  	@assignment.build_comment
   end
   
 	def create
@@ -9,6 +10,7 @@ class AssignmentsController < ApplicationController
 		if (@assignment.save)
 			redirect_to @assignment.employee, :alert => "Asset Successfully Assigned"
 		else
+			@assignment.build_comment unless @assignment.comment
 			render :action => 'new'
 		end
 	end
@@ -20,8 +22,8 @@ class AssignmentsController < ApplicationController
 		else
 			@assignments = Assignment.where(:asset_id => params[:id]).assigned_assets.includes(:asset)
 		end
-
 		@assignment = @assignments.first
+		@assignment.build_comment unless @assignment.comment
 		redirect_to assets_path, :alert => "No asset is assigned to selected pair" if @assignment.blank?
 	end
 
@@ -32,6 +34,7 @@ class AssignmentsController < ApplicationController
 		if(@assignment.update_attributes(params[:assignment]))
 			redirect_to employee_path(@assignment.employee), :alert => "Asset Successfully Returned!"
 		else
+			@assignment.build_comment unless @assignment.comment
 			render :action => 'return_asset'
 		end
 	end

@@ -52,7 +52,13 @@ $(function() {
 	</tr>
 	<tr>
 		<td>Remark</td>
-		<td><%= f.text_area :remark, :rows => 3, :columns => 80 %></td>
+			<%= f.fields_for :comment do |c| %>
+			<td>
+			<%= c.text_area :body, :rows => 3, :columns => 80 %>
+			<%= c.check_box '_destroy' %>
+      <%= c.label '_destroy', 'Remove' %></td>
+			
+			<% end %>
 	</tr>
 	<tr>
 		<td></td>

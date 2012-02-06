@@ -18,8 +18,12 @@ class Assignment < ActiveRecord::Base
   # What does this do?
 	attr_accessor :assignment_type
 	
+	
+	has_one :comment, :as => :resource
 	belongs_to :asset
 	belongs_to :employee
+	
+	accepts_nested_attributes_for :comment, :allow_destroy => true, :reject_if => proc { |attribute| attribute[:body].blank?  }
 	
 	## Scope which will return assets which are assigned after checking Asset & AEM status
 	scope :assigned_assets, joins(:asset).

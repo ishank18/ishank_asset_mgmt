@@ -77,7 +77,9 @@ $(function() {
 	
 		<tr>
 			<td><%= f.label :remark %></td>
-			<td><%= f.text_area :remark, :rows => 3, :columns => 80  %></td>
+			<%= f.fields_for :comment do |c| %>
+			<td><%= c.text_area :body, :rows => 3, :columns => 80  %></td>
+			<% end %>
 		</tr>
 	
 		<tr>

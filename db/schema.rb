@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203074114) do
+ActiveRecord::Schema.define(:version => 20120206102650) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20120203074114) do
 
   add_index "assets_tags", ["asset_id"], :name => "index_assets_tags_on_asset_id"
   add_index "assets_tags", ["tag_id"], :name => "index_assets_tags_on_tag_id"
+
+  create_table "comments", :force => true do |t|
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "employees", :force => true do |t|
     t.string   "name"

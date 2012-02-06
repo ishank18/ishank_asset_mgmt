@@ -3,7 +3,6 @@ class CreateAssetsTags < ActiveRecord::Migration
   	create_table :assets_tags, {:id => false} do |t|
   		t.integer :asset_id
   		t.integer :tag_id
-  		
   	end
   end
 

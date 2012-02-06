@@ -31,7 +31,7 @@ $(".ShowTable tr:odd").addClass("AlternateRow");
 		<td><%= date_to_string history.date_returned %></td>
 		<td><%= history.expected_return_date? ? "Temporary" : "Permanent" %></td>
 		<td><%= history.date_returned? ? "Returned" : "Assigned" %></td>
-		<td><span id='remark_<%= history.id %>'><%= history.remark %></span></td>
+		<td><span id='remark_<%= history.id %>'><%= history.comment.body if history.comment %></span></td>
 	</tr>
 	<% end %>
 </table>
