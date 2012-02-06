@@ -12,6 +12,12 @@ function changeForm() {
 }
 
 $(function() {
+	$("#assignment_comment_attributes__destroy").click( function() {
+		 $('#assignment_comment_attributes_body').attr("readonly", this.checked)		
+	});
+})
+
+$(function() {
 	$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" })
 })
 
@@ -54,9 +60,10 @@ $(function() {
 		<td>Remark</td>
 			<%= f.fields_for :comment do |c| %>
 			<td>
-			<%= c.text_area :body, :rows => 3, :columns => 80 %>
-			<%= c.check_box '_destroy' %>
-      <%= c.label '_destroy', 'Remove' %></td>
+				<%= c.text_area :body, :rows => 3, :columns => 80 %>
+				<%= c.check_box '_destroy' %>
+		    <%= c.label '_destroy', 'Remove' %>
+      </td>
 			
 			<% end %>
 	</tr>
