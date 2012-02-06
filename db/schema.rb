@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120206102650) do
+ActiveRecord::Schema.define(:version => 20120206114301) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(:version => 20120206102650) do
     t.integer  "employee_id"
     t.datetime "date_issued"
     t.datetime "date_returned"
-    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "expected_return_date"
