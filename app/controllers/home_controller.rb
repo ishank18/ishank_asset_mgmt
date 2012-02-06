@@ -5,6 +5,7 @@ class HomeController < ApplicationController
 	end
 	
 	## Will search assets and employees and will filter it according to status and category
+	## Optimize
 	def search
 		if request.xhr?
   		asset, employee, status, category = params[:asset],  params[:employee], params[:status], params[:category]	
