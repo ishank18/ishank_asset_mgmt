@@ -3,7 +3,7 @@ class AssetsController < ApplicationController
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy]
   
   def index
-  	@assets = Asset.includes(:assignments).paginate :page => params[:page], :order => 'created_at asc', :per_page => 20
+  	@assets = Asset.find_by_category(params[:type]).includes(:assignments).paginate :page => params[:page], :per_page => 20
  		redirect_to root_path, :notice => "Could not find assets, first add new asset" if @assets.empty?
   end
 
