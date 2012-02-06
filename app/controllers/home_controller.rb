@@ -13,7 +13,7 @@ class HomeController < ApplicationController
 		elsif(employee.present?)
 			@result = Employee.where("employees.name like ?", "%#{employee}%")
 		end
-		@result = @result.try(:paginate, :page => params[:page], :per_page => 2)
+		@result = @result.paginate :page => params[:page], :per_page => 2
 	end
 	
 	## Will show assets in  the tags in the home page - Using AJAX
