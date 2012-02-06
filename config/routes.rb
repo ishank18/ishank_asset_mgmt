@@ -5,7 +5,7 @@ IshankAssetMgmt::Application.routes.draw do
 		match '/admins/confirmation' => 'confirmations#update', :via => :put, :as => :update_admin_confirmation
 	end
 	
-	devise_for :admins, :controllers => { :registrations => "admin/registrations", :confirmations => "confirmations" }
+	devise_for :admins, :controllers => { :confirmations => "confirmations" }
 	
 	get 'search', :to => "home#search", :as => :search
 	
