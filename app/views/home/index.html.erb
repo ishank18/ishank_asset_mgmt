@@ -33,7 +33,7 @@ function showTag(tag_id) {
 			<tr>
 			<td>
 			<% CATEGORY.each do |category| %>
-				<%= link_to category[0], polymorphic_path(category[1].constantize) %><br />
+				<%= link_to category[0].pluralize, polymorphic_path(category[1].constantize) %><br />
 			<% end %>
 			</td>
 			<td></td>

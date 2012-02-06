@@ -19,10 +19,6 @@ class Asset < ActiveRecord::Base
 
 	scope :assignable, where(%{status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')})
 	
-	scope :find_by_category, lambda { |category|
-		{ :conditions => (["type = '#{category}'"] if category) }
-	}
-	
 	## Will return the search result according to the params provided
 	def self.search asset, status, category, employee
 		result = self.where("assets.name like ?", "%#{asset}%") if asset.present?
