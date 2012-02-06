@@ -22,7 +22,6 @@ $(".ShowTable tr:odd").addClass("AlternateRow");
 	</tr>
 	<% @histories.each do |history| %>
 	<tr>
-		<!-- Change - Done -->
 		<% if params[:type] == "asset" %>
 			<td><%= show_employee history %></td>
 		<% else %>
