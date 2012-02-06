@@ -1,3 +1,13 @@
+<script>
+$(function() { 
+	$('#search_button').click( function() {
+		if(!$('#asset').val() && !$('#category').val() && !$('#status').val() && !$('#employee').val()) {
+			alert("Please select/fill atleast one field");
+			return false;
+		}
+	})
+})
+</script>
 <div id="progressContainer" align="center"></div>
 <h2 align='center'>Search</h2>
 <% form_tag search_path, :remote => true, :method => :get do %>
@@ -15,7 +25,7 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit" value="Search!" /></td>
+		<td><%= submit_tag "Search", :id => "search_button"%></td>
 		<td></td>
 	</tr>
 	<tr>
