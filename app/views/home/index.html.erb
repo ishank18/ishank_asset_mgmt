@@ -31,13 +31,13 @@ function showTag(tag_id) {
 				<td><%= link_to 'Add new admin', new_admin_path %></td>
 			</tr>
 			<tr>
-				<td><%= link_to 'Laptops', laptops_path %></td>
-				<td><%= link_to 'Network Devices', network_devices_path %></td>
-			</tr>
-			<tr>
-				<td><%= link_to 'Mobile Phones', mobile_phones_path %></td>
-				<td></td>
-			</tr>
+			<td>
+			<% CATEGORY.each do |category| %>
+				<%= link_to category[0], polymorphic_path(category[1].constantize) %><br />
+			<% end %>
+			</td>
+			<td></td>
+			</td>
 		</table>
 	
 	</div>
