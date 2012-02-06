@@ -27,9 +27,8 @@ class AssignmentsController < ApplicationController
 
 
 	def update
-    # Use id to find 
-		@assignment = Assignment.where(:employee_id => params[:assignment][:employee_id], 
-		:asset_id => params[:assignment][:asset_id], :date_returned => nil).first
+    # Use id to find - Done
+		@assignment = Assignment.where(:id => params[:id]).first
 		
 		if(@assignment.update_attributes(params[:assignment]))
 			redirect_to employee_path(@assignment.employee), :alert => "Asset Successfully Returned!"
