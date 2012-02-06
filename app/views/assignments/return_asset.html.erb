@@ -15,11 +15,13 @@ $(function() {
 	$("#assignment_comment_attributes__destroy").click( function() {
 		 $('#assignment_comment_attributes_body').attr("readonly", this.checked)
 	});
-	$('#assignment_comment_attributes_body').attr("readonly", $("#assignment_comment_attributes__destroy").get(0).checked)
-})
-
-$(function() {
-	$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" })
+	$('#assignment_comment_attributes_body').attr("readonly", $("#assignment_comment_attributes__destroy").get(0).checked);
+	$('#assignment_date_returned').datepicker({maxDate: new Date, dateFormat: "dd/mm/yy" });
+	$('#assignment_submit').click(function() {
+		if(!$('#assignment_comment_attributes_body').val()) {
+			$("#assignment_comment_attributes__destroy").attr("checked", "true")
+		}
+	});
 })
 
 </script>
