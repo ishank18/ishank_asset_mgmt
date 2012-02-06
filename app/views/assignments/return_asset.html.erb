@@ -13,8 +13,9 @@ function changeForm() {
 
 $(function() {
 	$("#assignment_comment_attributes__destroy").click( function() {
-		 $('#assignment_comment_attributes_body').attr("readonly", this.checked)		
+		 $('#assignment_comment_attributes_body').attr("readonly", this.checked)
 	});
+	$('#assignment_comment_attributes_body').attr("readonly", $("#assignment_comment_attributes__destroy").get(0).checked)
 })
 
 $(function() {
