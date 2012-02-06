@@ -16,18 +16,17 @@ class AssignmentsController < ApplicationController
 
 	def return_asset
 		if(params[:type].downcase == "employee")
-			@assignment_array = Assignment.where(:employee_id => params[:id]).assigned_assets.includes(:asset)
+			@assignments = Assignment.where(:employee_id => params[:id]).assigned_assets.includes(:asset)
 		else
-			@assignment_array = Assignment.where(:asset_id => params[:id]).assigned_assets.includes(:asset)
+			@assignments = Assignment.where(:asset_id => params[:id]).assigned_assets.includes(:asset)
 		end
 
-		@assignment = @assignment_array.first
+		@assignment = @assignments.first
 		redirect_to assets_path, :alert => "No asset is assigned to selected pair" if @assignment.blank?
 	end
 
 
 	def update
-    # Use id to find - Done
 		@assignment = Assignment.where(:id => params[:id]).first
 		
 		if(@assignment.update_attributes(params[:assignment]))

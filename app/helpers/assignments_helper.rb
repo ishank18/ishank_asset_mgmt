@@ -10,7 +10,7 @@ module AssignmentsHelper
 	end
 	
 	def options_for_asset
-		@assignment_array.collect { |assignment| ["#{assignment.asset.id} - #{assignment.asset.name}", assignment.asset_id] }
+		@assignments.collect { |assignment| ["#{assignment.asset.id} - #{assignment.asset.name}", assignment.asset_id] }
 	end
 	
 	def fetch_assets
