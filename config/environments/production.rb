@@ -49,8 +49,8 @@ IshankAssetMgmt::Application.configure do
   config.action_mailer.default_url_options = { :host => 'ham.vinsol.com' }
 	config.action_mailer.delivery_method = :smtp
 	ActionMailer::Base.smtp_settings = {
-	 :enable_starttls_auto => false,
-	 :openssl_verify_mode  => 'none'
+		:enable_starttls_auto => false,
+		:openssl_verify_mode  => 'none'
 	}
 
 end

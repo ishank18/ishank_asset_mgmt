@@ -7,7 +7,7 @@ set :repository,  "git@github.com:ishank18/ishank_asset_mgmt.git"
 set :scm, :git
 set :user, "ishank"
 
-set :branch, "master"
+set :branch, "STI"
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
