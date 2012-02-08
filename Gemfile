@@ -12,6 +12,7 @@ gem "bullet", :group => "development"
 gem 'capistrano'
 gem 'date_validator', '0.6.3'
 
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
