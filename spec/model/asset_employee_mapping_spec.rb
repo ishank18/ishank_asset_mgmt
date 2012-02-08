@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AssetEmployeeMapping do 
+describe Assignment do 
 	before(:each) do
 		@valid_attributes = {
 			:asset_id => 15, 
@@ -8,9 +8,8 @@ describe AssetEmployeeMapping do
 			:assignment_type => "Temporary", 
 			:date_issued => DateTime.now - 6,
 			:date_returned => DateTime.now + 6,
-			:remark => "test Remark"
 		}
-		@aem = AssetEmployeeMapping.new @valid_attributes
+		@aem = Assignment.new @valid_attributes
 	end
 	
 	it "should have a date issued" do

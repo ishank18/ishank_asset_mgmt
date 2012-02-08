@@ -11,12 +11,12 @@ class AdminsController < ApplicationController
 			redirect_to :root, :alert => "Confirmation mail has been successfully send!"
 		else
 			render :action => "new"
-		end	
+		end
 	end
-	
+
 	## Form to edit password for the admins
   def reset
-		@admin = current_admin
+  		@admin = current_admin
 	end
 	
 	## Will update password of admin after filling the reset form
@@ -28,5 +28,5 @@ class AdminsController < ApplicationController
 			render :action => "reset"
 		end
 	end
-	
+
 end

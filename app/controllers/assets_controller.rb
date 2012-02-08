@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController
-  
+
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -21,7 +21,7 @@ class AssetsController < ApplicationController
 		else
 			render :action => "new"
 		end			
-	end	
+	end
   
   def edit
   end
@@ -45,6 +45,5 @@ class AssetsController < ApplicationController
 	  @asset = Asset.where(:id => params[:id]).first
 	  redirect_to root_path, :notice => "Could not find asset" unless @asset
 	end
-	
-	
+		
 end

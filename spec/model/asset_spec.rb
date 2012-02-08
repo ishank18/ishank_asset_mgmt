@@ -12,8 +12,8 @@ describe Asset do
 			:purchase_date => DateTime.now - 6, 
 			:description => "Test Desc", 
 			:additional_info => "Test ADD Info",
-			:resource_type => "Laptop",
-			:resource_id => 1
+			:location => "asasas",
+			:type => "NetworkDevice"
 		}
 		@asset = Asset.new @valid_attributes
 	end
@@ -48,8 +48,8 @@ describe Asset do
 		@asset.should validate_presence_of :cost
 	end	
 	
-	it "should have a resource type" do
-		@asset.should validate_presence_of :resource_type
+	it "should have type" do
+		@asset.should validate_presence_of :type
 	end
 	
 	it "should have a unique serial number" do
@@ -79,12 +79,8 @@ describe Asset do
 		@asset.should be_valid
 	end
 	
-	it "should have one resource" do
-		@asset.should belong_to :resource
-	end
-	
-	it "should have many asset employee mapping" do
-		@asset.should have_many :asset_employee_mappings
+	it "should have many assignments" do
+		@asset.should have_many :assignments
 	end
 	
 	it "should have many employee" do
@@ -94,5 +90,5 @@ describe Asset do
 	it "should have and belong to many tags" do
 		@asset.should have_and_belong_to_many :tags
 	end
-	
-end	
+
+end

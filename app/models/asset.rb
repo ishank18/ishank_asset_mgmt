@@ -10,6 +10,7 @@ class Asset < ActiveRecord::Base
 	validates :purchase_date, :presence => true
 	validates :vendor, :presence => true
 	validates :purchase_date, :date => { :before => Proc.new { Time.zone.now } }, :allow_blank => true
+	validates :type, :presence => true
 	
 	attr_accessor :tags_field
 	
