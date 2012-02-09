@@ -49,6 +49,8 @@ IshankAssetMgmt::Application.routes.draw do
 	resources :laptops, :controller => "assets", :type => "Laptop"
 	resources :network_devices, :controller => "assets", :type => "NetworkDevice"
 	resources :mobile_phones, :controller => "assets", :type => "MobilePhone"
+	resources :tablets, :controller => "assets", :type => "Tablet"
+	resources :others, :controller => "assets", :type => "Other"
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.

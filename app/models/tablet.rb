@@ -1,0 +1,2 @@
+class Tablet < Asset
+end
