@@ -1,0 +1,37 @@
+<div class="row">
+	<% if admin_signed_in? %>
+	<div class="span5"><h3>Asset Management</h3></div>
+	<div class="span7">
+		<div class="btn-group user_actions">
+			<%= link_to 'Search', search_path, :class => "btn btn-mini btn-info" %>
+			<%= link_to 'Edit Password', password_reset_admins_path, :class => "btn btn-mini" %>
+			<%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete, :class => "btn btn-mini" %>
+		</div>
+	</div>
+</div>
+<div class="row">	
+	<div class="span12">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<ul class="nav">
+					<li class="<%= class_name("home", "index") %>"><%= link_to 'Home', root_path %></li>
+					<li class="<%= class_name("assets", "index") %>">
+						<!-- <div class="dropdown"> -->
+							<%= link_to 'Assets'.html_safe, assets_path %>
+							<!-- <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+															<li>Hii</li>
+															<li>asdasdsa</li>
+														</ul>
+													</div> -->
+					</li>
+					<li class="<%= class_name("employees", "index") %>"><%= link_to 'Employees', employees_path %></li>
+					<li class="<%= class_name("assets", "new") %>"><%= link_to 'Add new assets', new_asset_path %></li>
+					<li class="<%= class_name("employees", "new") %>"><%= link_to 'Add new Employee', new_employee_path %></li>
+					<li class="<%= class_name("assignments", "new") %>"><%= link_to 'Assign asset', new_assignment_path %></li>
+					<li class="<%= class_name("admins", "new") %>"><%= link_to 'Add new admin', new_admin_path %></li>
+				</ul>	
+			</div>
+		</div>	
+	</div>
+	<% end %>
+</div>

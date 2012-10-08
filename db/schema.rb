@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -26,8 +27,8 @@ ActiveRecord::Schema.define(:version => 20120206114301) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
@@ -38,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20120206114301) do
     t.integer  "employee_id"
     t.datetime "date_issued"
     t.datetime "date_returned"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.datetime "expected_return_date"
   end
 
@@ -54,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20120206114301) do
     t.datetime "purchase_date"
     t.text     "additional_info"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "vendor"
     t.string   "currency_unit"
     t.string   "type"
@@ -78,16 +79,16 @@ ActiveRecord::Schema.define(:version => 20120206114301) do
     t.integer  "resource_id"
     t.string   "resource_type"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "employees", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.integer  "employee_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.datetime "deleted_at"
   end
 
@@ -95,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20120206114301) do
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "description"
   end
 

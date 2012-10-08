@@ -2,6 +2,9 @@ class HomeController < ApplicationController
 		
 	def index
 		@tags = Tag.includes(:assets)
+		@assets = Asset.limit(5)
+		@employees = Employee.limit(5)
+		@assignments = Assignment.limit(5)
 	end
 	
 	## Will search assets and employees and will filter it according to status and category
@@ -22,5 +25,5 @@ class HomeController < ApplicationController
 		@tag = Tag.where(:id => params[:tag_id]).first
 		@assets = @tag.assets.paginate :page => params[:page], :order => 'created_at asc', :per_page => 5
 	end
-		
+
 end

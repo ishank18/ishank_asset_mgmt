@@ -1,39 +1,16 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Asset Management</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-<div align='center'>
-	<div id='header'>
-		<span class='ProjectHeading'>Asset Management</span>
-		<div id="tabs">
-			<% if admin_signed_in? %>
-				<span style='float:right'>
-					| <%= link_to 'Search', search_path %> | 
-					<%= link_to 'Edit Password', password_reset_admins_path %> |
-					<%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %> |
-				</span>
-				<br><br>
-				<ul>
-					<li><%= link_to 'Home', root_path, :class => class_name("home", "index") %></li>
-					<li><%= link_to 'Assets', assets_path, :class => class_name("assets", "index") %></li>
-					<li><%= link_to 'Employees', employees_path, :class => class_name("employees", "index") %></li>
-					<li><%= link_to 'Add new assets', new_asset_path, :class => class_name("assets", "new") %></li>
-					<li><%= link_to 'Add new Employee', new_employee_path, :class => class_name("employees", "new") %></li>
-					<li><%= link_to 'Assign asset', new_assignment_path, :class => class_name("assignments", "new") %></li>
-					<li><%= link_to 'Add new admin', new_admin_path, :class => class_name("admins", "new") %></li>
-				</ul>	
-			<% end %>
+<html lang="en">
+	<head>
+	  <title>Asset Management</title>
+	  <%= stylesheet_link_tag :application %>
+	  <%= javascript_include_tag :application %>
+	  <%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div class="container">
+			<%= render :partial => "shared/header" %>
+			<%= flash_message %>
+			<%= yield %>
 		</div>
-	</div>
-</div>
-<br><br>
-<%= flash_message %>
-<%= yield %>
-
-</body>
+	</body>
 </html>

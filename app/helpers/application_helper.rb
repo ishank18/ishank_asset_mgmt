@@ -16,7 +16,7 @@ module ApplicationHelper
 	end
 	
 	def class_name controller, action
-		"highlighted" if params[:controller] == controller && params[:action] == action
+		"active" if params[:controller] == controller && params[:action] == action
 	end
 	
 	def get_all_employees

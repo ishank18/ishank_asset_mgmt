@@ -1,21 +1,47 @@
-<script>
+<div class="row">
+	<div class="span6">
+		<h4>Last 5 Assets</h4>
+		<ul>
+			<% @assets.each do |asset| %>
+				<li>
+					<%= link_to asset.name, asset %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="span6">
+		<h4>Last 5 Employees</h4>
+		<ul>
+			<% @employees.each do |employee| %>
+				<li>
+					<%= link_to employee.name, employee %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="span6">
+		<h4>Last 5 Assignments</h4>
+		<ul>
+			<% @assignments.each do |assignment| %>
+				<li>
+					<%= link_to assignment.asset.name, assignment.asset %> -> <%= link_to assignment.employee.name, assignment.employee %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="span6">
+		<% unless @tags.empty? %>
+			<h4>Tag List</h4>
+			<div class='TagList'>
+			<% @tags.each do |tag| %>
+				<span class='<%= tag_class tag %>' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
+			<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>
 
-function showTag(tag_id) {
-	$.ajax({
-    url: '<%= show_tag_path %>', 
-    dataType: 'script',
-    type: 'get', 
-    beforeSend: function() { showProgress() },
-    complete: function() { endProgress() },
-    data: 'tag_id='+tag_id
-  });
-}
-
-</script>
-<div id="progressContainer" align="center"></div>
-<h1 align='center'>Welcome Admin!</h1>
-
-<div id="container">
+<!-- <h3>Welcome Admin!</h3>
 	<div class='LeftPanel'>
 		<table class='HomePageTable'>
 			<tr>
@@ -58,4 +84,17 @@ function showTag(tag_id) {
 		<br>
 	</div>
 	<div class='Clear'></div>
-</div>
+</div> -->
+
+<script>
+function showTag(tag_id) {
+	$.ajax({
+    url: '<%= show_tag_path %>', 
+    dataType: 'script',
+    type: 'get', 
+    beforeSend: function() { showProgress() },
+    complete: function() { endProgress() },
+    data: 'tag_id='+tag_id
+  });
+}
+</script>

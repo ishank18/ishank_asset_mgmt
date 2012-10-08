@@ -1,22 +1,30 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.2.6'
 gem 'devise', '1.5.1'
 gem 'jquery_datepicker', '0.3.2'
 gem 'jquery-rails', '>= 1.0.12'
-gem 'rails3_acts_as_paranoid', '0.1.1'
+gem "rails3_acts_as_paranoid", "~>0.1.4"
 gem 'rspec-rails','~> 2.6'
 gem 'shoulda-matchers', '1.0.0'
 gem 'will_paginate', '>= 3.0.pre'
 gem "bullet", :group => "development"
 gem 'capistrano'
 gem 'date_validator', '0.6.3'
+gem 'twitter-bootstrap-rails'
+gem 'coffee-rails'
+
+group :assets do  
+  gem 'uglifier'
+  gem 'less'
+end
 
 
+gem 'less-rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '0.2.7'
+gem 'mysql2'
 
 # Use unicorn as the web server
 # gem 'unicorn'

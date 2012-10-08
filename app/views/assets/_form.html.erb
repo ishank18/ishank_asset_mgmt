@@ -59,7 +59,6 @@
 		<tr>
 			<td><%= f.label :purchase_date %> <%= mark_required(@asset, :purchase_date) %></td>
 			<td><%= f.text_field :purchase_date, :value => @asset.purchase_date.try(:strftime, "%d/%m/%Y") %></td>
-			
 		</tr>
 		
 		<tr >
