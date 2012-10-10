@@ -7,9 +7,10 @@ module ApplicationHelper
 
 	def flash_message
 		message = ""
+		close = content_tag :button, "x", :class => "close", "data-dismiss" => "alert", :type => "button"
 		[:notice, :alert].each do |type|
 			if(!flash[type].blank?)
-				message += content_tag :div, flash[type], :class => "#{type}"
+				message += content_tag :div, "#{flash[type]} #{close}".html_safe, :class => "alert #{(type == :notice) ? 'alert-info' : '' }"
 			end	
 		end
 		message.html_safe

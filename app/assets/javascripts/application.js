@@ -14,6 +14,26 @@
 
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+$(function () {
+	
+	
+	$(".tag").live("click", function() {
+		$.ajax({
+	    url: '/show_tag', 
+	    dataType: 'script',
+	    type: 'get', 
+	    beforeSend: function() { showProgress() },
+	    complete: function(data, status) { 
+				$("#tagResult").html(data.responseText).modal();
+			},
+	    data: {tag_id: $(this).data("id")}
+	  });		
+	});
+	
+	
+});
+
+
 
 function showProgress() {
 	$("#progressContainer").html("<div class='progress'></div><div class='loadingText'>Loading...</div>")

@@ -1,5 +1,13 @@
 <div class="row">
-	<div class="span6">
+	<div class="span9">
+		<h4>Last 5 Assignments</h4>
+		<ul>
+			<% @assignments.each do |assignment| %>
+				<li>
+					<%= link_to assignment.asset.name, assignment.asset %> <i class="icon-arrow-right"></i> <%= link_to assignment.employee.name, assignment.employee %>
+				</li>
+			<% end %>
+		</ul>
 		<h4>Last 5 Assets</h4>
 		<ul>
 			<% @assets.each do |asset| %>
@@ -8,8 +16,6 @@
 				</li>
 			<% end %>
 		</ul>
-	</div>
-	<div class="span6">
 		<h4>Last 5 Employees</h4>
 		<ul>
 			<% @employees.each do |employee| %>
@@ -19,27 +25,23 @@
 			<% end %>
 		</ul>
 	</div>
-	<div class="span6">
-		<h4>Last 5 Assignments</h4>
-		<ul>
-			<% @assignments.each do |assignment| %>
-				<li>
-					<%= link_to assignment.asset.name, assignment.asset %> -> <%= link_to assignment.employee.name, assignment.employee %>
-				</li>
-			<% end %>
-		</ul>
-	</div>
-	<div class="span6">
-		<% unless @tags.empty? %>
-			<h4>Tag List</h4>
-			<div class='TagList'>
+	<div class="span3">
+		<% unless @tags.empty? %>		
+			<div class='TagList well well-small'>
+			<p class="lead removeMargin">Tag List</p>
 			<% @tags.each do |tag| %>
-				<span class='<%= tag_class tag %>' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
+				<%= content_tag :span, tag.name, :class => tag_class(tag), "data-id" => tag.id %>
 			<% end %>
 			</div>
+			<div id="tagResult" class="modal" role="dialog" style="display:none;"></div>
 		<% end %>
+		
+		<ul class="nav nav-tabs nav-stacked">
+    	<li><%= link_to "Disabled Employees", disabled_employees_path %></li>
+			<li class="<%= class_name("admins", "new") %>"><%= link_to 'Add new admin', new_admin_path %></li>
+    </ul>
 	</div>
-</div>
+</div>	
 
 <!-- <h3>Welcome Admin!</h3>
 	<div class='LeftPanel'>
@@ -72,7 +74,7 @@
 	<div class='RightPanel'>
 	<br>
 		<%= link_to "Search", search_path %><br><br>
-		<%= link_to "Disabled Employees", disabled_employees_path %><br><br>
+		<br><br>
 		<% unless @tags.empty? %>
 			<span class='TagListHead'>Tag List</span>
 			<div class='TagList'>
@@ -86,15 +88,3 @@
 	<div class='Clear'></div>
 </div> -->
 
-<script>
-function showTag(tag_id) {
-	$.ajax({
-    url: '<%= show_tag_path %>', 
-    dataType: 'script',
-    type: 'get', 
-    beforeSend: function() { showProgress() },
-    complete: function() { endProgress() },
-    data: 'tag_id='+tag_id
-  });
-}
-</script>

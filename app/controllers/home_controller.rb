@@ -23,7 +23,8 @@ class HomeController < ApplicationController
 	## Will show assets in  the tags in the home page - Using AJAX
 	def show_tag
 		@tag = Tag.where(:id => params[:tag_id]).first
-		@assets = @tag.assets.paginate :page => params[:page], :order => 'created_at asc', :per_page => 5
+		@assets = @tag.assets
+		render :partial => "/home/show_tags"
 	end
 
 end

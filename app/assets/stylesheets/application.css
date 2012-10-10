@@ -9,3 +9,28 @@
 	margin-top: 20px;
   text-align: right;
 }
+
+.TagSize1 {
+	font-size:12px;
+}
+.TagSize2 {
+	font-size:14px;
+}
+.TagSize3 {
+	font-size:16px;
+}
+.TagSize4 {
+	font-size:18px;
+}
+.TagSizeBig {
+	font-size:22px;
+}
+
+.tag {
+	color: #0088CC;
+	cursor: pointer;
+}
+
+.removeMargin {
+	margin: 0px !important;
+}
