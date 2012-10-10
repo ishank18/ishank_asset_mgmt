@@ -1,14 +1,14 @@
 <div class="row">
 	<div class="span9">
-		<h4>Last 5 Assignments</h4>
+		<legend>Last 5 Assignments</legend>
 		<ul>
 			<% @assignments.each do |assignment| %>
 				<li>
-					<%= link_to assignment.asset.name, assignment.asset %> <i class="icon-arrow-right"></i> <%= link_to assignment.employee.name, assignment.employee %>
+					<%= link_to assignment.asset.name, assignment.asset -%> - <%= link_to assignment.employee.name, assignment.employee -%>
 				</li>
 			<% end %>
 		</ul>
-		<h4>Last 5 Assets</h4>
+		<legend>Last 5 Assets</legend>
 		<ul>
 			<% @assets.each do |asset| %>
 				<li>
@@ -16,7 +16,7 @@
 				</li>
 			<% end %>
 		</ul>
-		<h4>Last 5 Employees</h4>
+		<legend>Last 5 Employees</legend>
 		<ul>
 			<% @employees.each do |employee| %>
 				<li>
@@ -41,50 +41,4 @@
 			<li class="<%= class_name("admins", "new") %>"><%= link_to 'Add new admin', new_admin_path %></li>
     </ul>
 	</div>
-</div>	
-
-<!-- <h3>Welcome Admin!</h3>
-	<div class='LeftPanel'>
-		<table class='HomePageTable'>
-			<tr>
-				<td><%= link_to 'View all assets', assets_path %></td>
-				<td><%= link_to 'View all employee', employees_path %></td>
-			</tr>
-			<tr>
-				<td><%= link_to 'Add new assets', new_asset_path %></td>
-				<td><%= link_to 'Add new Employee', new_employee_path %></td>
-			</tr>
-			<tr>
-				<td><%= link_to 'Assign asset', new_assignment_path %></td>
-				<td><%= link_to 'Add new admin', new_admin_path %></td>
-			</tr>
-			<tr>
-			<td>
-			<% CATEGORY.each do |category| %>
-				<%= link_to category[0].pluralize, polymorphic_path(category[1].constantize) %><br />
-			<% end %>
-			</td>
-			<td></td>
-			</td>
-		</table>
-	
-	</div>
-	<div id="searchBox">
-	</div>
-	<div class='RightPanel'>
-	<br>
-		<%= link_to "Search", search_path %><br><br>
-		<br><br>
-		<% unless @tags.empty? %>
-			<span class='TagListHead'>Tag List</span>
-			<div class='TagList'>
-			<% @tags.each do |tag| %>
-				<span class='<%= tag_class tag %>' onclick="showTag(<%= tag.id %>);"><%= tag.name %></span>
-			<% end %>
-			</div>
-		<% end %>	
-		<br>
-	</div>
-	<div class='Clear'></div>
-</div> -->
-
+</div>

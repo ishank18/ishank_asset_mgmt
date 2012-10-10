@@ -1,21 +1,15 @@
-<h2 align='center'>Add Admin</h2>
-
-<%= form_tag admins_path, :method => :post do %>
-
+<%= form_tag admins_path, :method => :post, :class => "form-horizontal" do %>
+	<legend>Add Admin</legend>
 	<%= render :partial => "shared/errors", :locals => { :obj => @admin } %>
-  
-  <table width="800" class="ShowTable" align='center'>
-		<tr>
-			<td>E - mail *</td>
-			<td><%= email_field_tag :email %></td>
-		</tr>	
-		<tr>
-			<td></td>
-			<td><%= submit_tag "Add Admin" %></td>
-		</tr>	
-  </table>
-  
+  <div class="control-group">
+		<label class="control-label" for="email">Email *</label>
+		<div class="controls">
+			<%= email_field_tag :email %>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<%= submit_tag "Add Admin", :class => "btn" %>
+		</div>
+	</div>
 <% end %>
-<script>
-	$(".ShowTable tr:odd").addClass("AlternateRow");
-</script>
