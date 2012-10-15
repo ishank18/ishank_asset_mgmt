@@ -1,31 +1,30 @@
-<h2 align='center'><%= (params[:type]) ? "Disabled" : "All" %> Employees</h2>
-<div align='center'>
-<div style='width:800px;'>
-<div id="pageEnteriesInfo" align='right'><%= page_entries_info @employees %></div><br>
-
-<table width="800" class="ShowTable" align='center'>
+<legend><%= (params[:type]) ? "Disabled" : "All" %> Employees</legend>
+<div class="pull-right"><%= page_entries_info @employees %></div>
+<div class="clearfix"><br />&nbsp;</div>
+<table class="table table-striped">
+	<thead>
 	<tr>
 		<th>Employee Id</th>
 		<th>Name</th>
 		<th>Email</th>
 		<th>Action</th>
 	</tr>
+	</thead>
+	<tbody>
 	<% @employees.each do |emp| %>
 	<tr>
 		<td><%= emp.employee_id %></td>
 		<td><%= link_to emp.name, employee_path(emp) %></td>
 		<td><%= emp.email %></td>
 		<td>
-			<%= show_disable_option emp %>
-			<%= link_to 'Edit', edit_employee_path(emp) unless emp.deleted? %>
-			<%= link_to "History", histories_path(:type => "employee", :id => emp.id) unless(emp.assignments.blank?) %>
+			<div class="btn-group">
+				<%= show_disable_option emp %>
+				<%= (link_to 'Edit', edit_employee_path(emp), :class => "btn btn-small") unless emp.deleted? %>
+				<%= (link_to "History", histories_path(:type => "employee", :id => emp.id), :class => "btn btn-small btn-info") unless emp.assignments.blank? %>
+			</div>
 		</td>
 	</tr>
 	<% end %>
-</table><br>
-<div id='pagination' align='left'><%= will_paginate @employees %></div>
-</div>
-</div>
-<script>
-	$(".ShowTable tr:odd").addClass("AlternateRow");
-</script>
+	</tbody>
+</table>
+<%= will_paginate @employees %>

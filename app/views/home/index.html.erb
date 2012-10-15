@@ -1,15 +1,24 @@
 <div class="row">
 	<div class="span9">
 		<legend>Last 5 Assignments</legend>
-		<ul>
-			<% @assignments.each do |assignment| %>
-				<li>
-					<%= link_to assignment.asset.name, assignment.asset -%> - <%= link_to assignment.employee.name, assignment.employee -%>
-				</li>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Asset</th>
+					<th>Employee</th>
+				</tr>
+			</thead>	
+			<tbody>
+		 		<% @assignments.each do |assignment| %>
+				<tr>
+					<td><%= link_to assignment.asset.name, assignment.asset -%></td>
+					<td><%= link_to assignment.employee.name, assignment.employee -%></td>	
+				</tr>
 			<% end %>
-		</ul>
+			</tbody>
+		  </table>
 		<legend>Last 5 Assets</legend>
-		<ul>
+		<ul class="nav nav-tabs nav-stacked">
 			<% @assets.each do |asset| %>
 				<li>
 					<%= link_to asset.name, asset %>
@@ -17,7 +26,7 @@
 			<% end %>
 		</ul>
 		<legend>Last 5 Employees</legend>
-		<ul>
+		<ul class="nav nav-tabs nav-stacked">
 			<% @employees.each do |employee| %>
 				<li>
 					<%= link_to employee.name, employee %>
@@ -26,19 +35,7 @@
 		</ul>
 	</div>
 	<div class="span3">
-		<% unless @tags.empty? %>		
-			<div class='TagList well well-small'>
-			<p class="lead removeMargin">Tag List</p>
-			<% @tags.each do |tag| %>
-				<%= content_tag :span, tag.name, :class => tag_class(tag), "data-id" => tag.id %>
-			<% end %>
-			</div>
-			<div id="tagResult" class="modal" role="dialog" style="display:none;"></div>
-		<% end %>
-		
-		<ul class="nav nav-tabs nav-stacked">
-    	<li><%= link_to "Disabled Employees", disabled_employees_path %></li>
-			<li class="<%= class_name("admins", "new") %>"><%= link_to 'Add new admin', new_admin_path %></li>
-    </ul>
+		<%= render :partial => "shared/sidebar" %>
 	</div>
 </div>
+
