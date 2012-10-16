@@ -3,19 +3,19 @@
 	<%= render :partial => "shared/errors", :locals => { :obj => @employee } %>
 
 	<div class="control-group">
-		<%= f.label :employee_id, :class => "control-label" %>
+		<%= f.label :employee_id, "Employee Id *", :class => "control-label" %>
 		<div class="controls">
 			<%= f.text_field :employee_id %>
 		</div>
 	</div>
 	<div class="control-group">
-		<%= f.label :name, :class => "control-label" %>
+		<%= f.label :name, "Name *", :class => "control-label" %>
 		<div class="controls">
 			<%= f.text_field :name%>
 		</div>
 	</div>
 	<div class="control-group">
-		<%= f.label :email, :class => "control-label" %>
+		<%= f.label :email, "Email *", :class => "control-label" %>
 		<div class="controls">
 			<%= f.email_field :email %>
 		</div>

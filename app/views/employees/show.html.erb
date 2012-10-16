@@ -1,6 +1,6 @@
 <legend><small>Employee</small> &nbsp;<%= @employee.name %></legend>
 
-<table class="table">
+<table class="table table-striped">
 	<tr>
 		<td width="200px;">EmployeeId</td>
 		<td><%= @employee.employee_id %></td>
@@ -14,12 +14,12 @@
 		<td><%= @employee.email %></td>
 	</tr>
 	<tr>
-		<td>Actions</td>
+		<td>&nbsp;</td>
 		<td>
 			<%= show_disable_option @employee %> &nbsp;
-			<%= (link_to 'Edit', edit_employee_path(@employee), :class => "btn") unless @employee.deleted? %> &nbsp;
-			<%= (link_to "History", histories_path(:type => "employee", :id => @employee.id), :class => "btn btn-info") unless(@employee.assignments.blank?) %> &nbsp;
-			<%= link_to 'Return Asset', return_asset_path(:type => "employee", :id => @employee.id) if @employee.assignments.collect { |assignment| (!assignment.date_returned?) }.any? %>
+			<%= (link_to 'Edit', edit_employee_path(@employee), :class => "btn btn-small") unless @employee.deleted? %> &nbsp;
+			<%= (link_to "History", histories_path(:type => "employee", :id => @employee.id), :class => "btn btn-info btn-small") unless(@employee.assignments.blank?) %> &nbsp;
+			<%= (link_to 'Return Asset', return_asset_path(:type => "employee", :id => @employee.id), :class => "btn btn-small") if @employee.assignments.collect { |assignment| (!assignment.date_returned?) }.any? %>
 		</td>
 	</tr>
 </table>

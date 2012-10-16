@@ -1,8 +1,6 @@
-<table>
-	<tr>
-		<td>Location *</td>
-		<td>
-			<%= text_field_tag "asset[location]", @asset.try(:location) %>
-		</td>
-	</tr>
-</table>	
+<div class="control-group">
+	<label class="control-label" for="asset_type">Location *</label>
+	<div class="controls">
+		<%= text_field_tag "asset[location]", @asset.try(:location) %>
+	</div>
+</div>

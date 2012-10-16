@@ -1,16 +1,15 @@
-<table>
-	<tr>
-		<td>Operating System *</td>
-		<td>
-			<%= text_field_tag "asset[operating_system]", @asset.try(:operating_system) %>
-		</td>
-	</tr>
-	<tr>
-		<td>Has Bag</td>
-		<td>
-				<%= hidden_field_tag "asset[has_bag]", false %>
-				<%= check_box_tag "asset[has_bag]", true, @asset.try(:has_bag) %>
-		</td>
-	</tr>
-</table>	
+<div class="control-group">
+	<label class="control-label" for="asset_type">Operating System *</label>
+	<div class="controls">
+		<%= text_field_tag "asset[operating_system]", @asset.try(:operating_system) %>
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label" for="asset_type">Has Bag</label>
+	<div class="controls">
+		<%= hidden_field_tag "asset[has_bag]", false %>
+		<%= check_box_tag "asset[has_bag]", true, @asset.try(:has_bag) %>
+	</div>
+</div>
 

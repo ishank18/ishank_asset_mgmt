@@ -1,5 +1,5 @@
-<h2 align='center'><%= @asset.name %></h2>
-<table class='ShowTable' align='center'>
+<legend><small><%= @asset.class %></small> &nbsp;<%= @asset.name %></legend>
+<table class="table table-striped">
 	<tr>
 		<td width="200px;">Id</td>
 		<td><%= @asset.id %></td>
@@ -66,16 +66,11 @@
 	
 
 	<tr>
-		<td>Actions</td>
+		<td>&nbsp;</td>
 		<td>
-			<%= link_to 'Edit', edit_polymorphic_path(@asset) %>
-			<%= link_to "History", histories_path(:type => "asset", :id => @asset.id) unless @asset.assignments.blank? %>
-			<%= link_to 'Return Asset', return_asset_path(:type => "asset", :id => @asset.id.to_s) if @asset.status == "Assigned" %>
+			<%= link_to 'Edit', edit_polymorphic_path(@asset), :class => "btn btn-small" %> &nbsp;
+			<%= (link_to "History", histories_path(:type => "asset", :id => @asset.id), :class => "btn btn-small btn-info") unless @asset.assignments.blank? %> &nbsp;
+			<%= (link_to 'Return Asset', return_asset_path(:type => "asset", :id => @asset.id.to_s), :class => "btn btn-small") if @asset.status == "Assigned" %>
 		</td>
 	</tr>
 </table>
-
-
-<script>
-	$(".ShowTable tr:even").addClass("AlternateRow");
-</script>

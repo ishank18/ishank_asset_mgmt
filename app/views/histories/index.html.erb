@@ -9,9 +9,10 @@ $(".ShowTable tr:odd").addClass("AlternateRow");
 });
 </script>
 
-<h2 align='center'>History - <%= @record.name %></h2>
+<legend><small>History</small> &nbsp;<%= @record.name %></legend>
 
-<table width="800" class="ShowTable" align='center' id='historyTable'>
+<table class="table table-striped">
+	<thead>
 	<tr>
 		<th><%= (params[:type] == "employee") ? "Asset" : "Employee" %> Name</th>
 		<th>Issue Date</th>
@@ -20,6 +21,8 @@ $(".ShowTable tr:odd").addClass("AlternateRow");
 		<th>Status</th>
 		<th>Remark</th>
 	</tr>
+	</thead>
+	<tbody>
 	<% @histories.each do |history| %>
 	<tr>
 		<% if params[:type] == "asset" %>
@@ -34,4 +37,5 @@ $(".ShowTable tr:odd").addClass("AlternateRow");
 		<td><span id='remark_<%= history.id %>'><%= history.comment.body if history.comment %></span></td>
 	</tr>
 	<% end %>
+	</tbody>
 </table>
