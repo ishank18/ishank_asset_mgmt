@@ -1,10 +1,11 @@
-<h2>Search result</h2>
+<legend>Search result</legend>
 <%= page_entries_info @result %>
-<ul>
+<br />
+<br />
+<ul class="nav nav-tabs nav-stacked">
 <% @result.each do |res| %>
 	<li><%= link_to "#{res.id} - #{res.name}", res %></li>
 <% end %>
 </ul>
-<div id='pagination' align='left'><%= will_paginate @result %></div>
-
+<%= will_paginate @result, :remote => true %>
 <script> $('.pagination a').attr('data-remote', 'true'); </script>

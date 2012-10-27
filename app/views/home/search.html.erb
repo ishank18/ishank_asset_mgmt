@@ -1,31 +1,51 @@
+<% content_for :js do %>
 <script>
 $(function() { 
-	$('#search_button').click( function() {
-		if(!$('#asset').val() && !$('#category').val() && !$('#status').val() && !$('#employee').val()) {
-			alert("Please select/fill atleast one field");
-			return false;
-		}
-	})
-})
+	
+	$(".search_by input").live("click", function() {
+		p_text = $(this).closest(".radio").text();
+		$(".asset_field").attr("placeholder", p_text);
+	});
+	
+	$(".start_date").datepicker({dateFormat: 'yy-mm-dd'});
+	$(".end_date").datepicker({dateFormat: 'yy-mm-dd'});
+});
 </script>
-<div id="progressContainer" align="center"></div>
-<h2 align='center'>Search</h2>
-<% form_tag search_path, :remote => true, :method => :get do %>
-<table width="800" class="ShowTable" align='center'>
+<% end %>
+<legend>Search</legend>
+<%= form_tag search_path, :remote => true, :method => :get, :id => "search_form" do %>
+<table class="table remove_borders">
 	<tr >
 		<td >Asset :</td>
-		<td> <%= text_field_tag 'asset' %>  </td>
-		<td> <%= select_tag "status", options_for_select(STATUS), :include_blank => "- Select Status -" %> 
-		<%= select_tag "category", options_for_select(CATEGORY), :include_blank => "- Select Category -" %> </td>
+		<td>
+			<%= text_field_tag 'search[asset]', "", :class => "asset_field", :placeholder => "Name" %>
+			<div class="search_by">
+				<label class="radio inline"><%= radio_button_tag "search[by]", "name", :checked => true %> Name</label>
+				<label class="radio inline"><%= radio_button_tag "search[by]", "serial_number" %> Serial Number</label>
+				<label class="radio inline"><%= radio_button_tag "search[by]", "description" %> Description</label> 
+			</div>
+		</td>
+		<td>
+			<table style="border:0px">
+				<tr>
+					<td><%= select_tag "search[asset_status]", options_for_select(STATUS), :prompt => "- Select Status -" %> </td>
+					<td><%= select_tag "search[asset_type]", options_for_select(CATEGORY), :prompt => "- Select Category -" %></td>
+				</tr>
+				<tr>
+					<td><%= text_field_tag 'search[start]', "", :class => "start_date", :placeholder => "Start" %></td>
+					<td><%= text_field_tag 'search[end]', "", :class => "end_date", :placeholder => "End" %></td>
+				</tr>					
+			</table>	
+		</td>
 	</tr>
 	<tr>
 		<td>Employee :</td>
-		<td><%= text_field_tag 'employee' %> </td>
+		<td><%= text_field_tag 'search[employee]', "", :placeholder => "Name" %> </td>
 		<td></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td><%= submit_tag "Search", :id => "search_button"%></td>
+		<td><%= submit_tag "Search", :id => "search_button", :class => "btn" %></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -35,6 +55,3 @@ $(function() {
 	</tr>
 </table>
 <% end %>
-<script>
-	$(".ShowTable tr:even").addClass("AlternateRow");
-</script>

@@ -10,13 +10,7 @@ class HomeController < ApplicationController
 	## Will search assets and employees and will filter it according to status and category
 	def search
 		if request.xhr?
-  		asset, employee, status, category = params[:asset],  params[:employee], params[:status], params[:category]	
-  		if(asset.present? or category.present? or status.present?)
-  			@result = Asset.search asset, status, category, employee
-  		elsif(employee.present?)
-  			@result = Employee.where("employees.name like ?", "%#{employee}%")
-  		end
-  		@result = @result.paginate :page => params[:page], :per_page => 5
+		  @result = Asset.search(params[:search]).paginate(:page => params[:page], :per_page => 20)
     end  
 	end
 	

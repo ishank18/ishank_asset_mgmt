@@ -75,21 +75,35 @@
 }
 
 .ui-datepicker {
-	width: 204px;
-	padding: 10px;
+	width: 224px;
 	background: #F4F4F4;
 	.ui-datepicker-header {
+		margin: 0 7px;
+		.ui-datepicker-prev {
+			cursor: pointer;
+		}
 		.ui-datepicker-next {
 			float: right;
+			cursor: pointer;
 		}
 	}
 	.ui-datepicker-calendar {
 		width:100%;
 		th {
-			text-align: left;
+			text-align: center;
 		}
 		td {
-			background: blue;
+			text-align: center;
+			border: 1px solid silver;
+			a {
+				display: block;
+			}
 		}
 	}
+}
+
+.remove_borders {
+	tr {
+		border: 0px !important;
+	}	
 }

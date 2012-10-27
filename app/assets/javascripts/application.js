@@ -15,8 +15,7 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 $(function () {
-	
-	
+
 	$(".tag").live("click", function() {
 		$.ajax({
 	    url: '/show_tag', 
@@ -29,9 +28,13 @@ $(function () {
 	    data: {tag_id: $(this).data("id")}
 	  });		
 	});
-	
-	
+		
 });
+
+
+
+
+
 
 
 

@@ -21,12 +21,21 @@ class Asset < ActiveRecord::Base
 	scope :assignable, where(%{status not in ('#{STATUS["Assigned"]}', '#{STATUS["Repair"]}')})
 	
 	## Will return the search result according to the params provided
-	def self.search asset, status, category, employee
-		result = self.where("assets.name like ?", "%#{asset}%") if asset.present?
-		result = (asset.blank? ? self : result).where("assets.type = ?", category) if category.present?
-		result = ((asset.blank? && category.blank?) ? self : result).where("assets.status = ?", status) if status.present?
-		result = result.joins(:assignments => :employee).where("employees.name like ? and asset_employee_mappings.date_returned is NULL", "%#{employee}%") if employee.present?
-		result
+	def self.search params
+	  if (params[:asset].present? || params[:asset_status].present? || params[:asset_type].present? || params[:start].present? || params[:end].present?)
+  	  result = Asset.where("assets.#{params[:by]} like ?", "%#{params[:asset]}%")
+  	  (result = result.where("assets.status = ?", params[:asset_status])) if params[:asset_status].present?
+  	  (result = result.where("assets.type = ?", params[:asset_type])) if params[:asset_type].present?
+  	  (result = result.where("assets.purchase_date >= ?", params[:start])) if params[:start].present?
+  	  (result = result.where("assets.purchase_date <= ?", params[:end])) if params[:end].present?
+      (result = result.joins(:assignments => :employee).where("employees.name like ? and asset_employee_mappings.date_returned is NULL", "%#{params[:employee]}%")) if params[:employee].present?
+    elsif params[:employee].present?
+      result = Employee.where("employees.name like ?", "%#{params[:employee]}%")
+    else ## Returns a Arel object of Asset to avoid exception if no result is found
+      result = Asset.where("1!=1")
+    end
+    p params[:employee]
+	  result
 	end	
 	
 	## Will return an active relation of employees to whome any asset is asssigned	

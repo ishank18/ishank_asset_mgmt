@@ -41,7 +41,7 @@ $(function() {
 	<div class="control-group">
 		<label class="control-label" for="category">Asset Category *</label>
 		<div class="controls">
-			<%= select_tag "category", options_for_select(CATEGORY, params[:category]), :include_blank => "- Select -", :onChange => "populateAsset()" %>
+			<%= select_tag "category", options_for_select(CATEGORY, params[:category]), :prompt => "- Select -", :onChange => "populateAsset()" %>
 		</div>
 	</div>
 	

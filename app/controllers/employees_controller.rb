@@ -8,7 +8,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
-  	@employee = Employee.with_deleted.where(:id => params[:id]).first
+  	@employee = Employee.includes(:assets).with_deleted.where(:id => params[:id]).first
   end
 
   def new

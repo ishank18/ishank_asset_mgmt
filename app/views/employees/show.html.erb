@@ -2,7 +2,7 @@
 
 <table class="table table-striped">
 	<tr>
-		<td width="200px;">EmployeeId</td>
+		<td>EmployeeId</td>
 		<td><%= @employee.employee_id %></td>
 	</tr>
 	<tr >
@@ -13,6 +13,16 @@
 		<td>E- Mail</td>
 		<td><%= @employee.email %></td>
 	</tr>
+	<% if @employee.assets.size != 0 %>
+	<tr>
+		<td>Assigned Assets</td>
+		<td>
+			<% @employee.assets.each do |asset| %>
+				<%= link_to asset.name, asset %> &nbsp;
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
 	<tr>
 		<td>&nbsp;</td>
 		<td>
