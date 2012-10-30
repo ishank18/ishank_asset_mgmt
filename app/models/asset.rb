@@ -34,9 +34,10 @@ class Asset < ActiveRecord::Base
     else ## Returns a Arel object of Asset to avoid exception if no result is found
       result = Asset.where("1!=1")
     end
-    p params[:employee]
 	  result
 	end	
+	
+
 	
 	## Will return an active relation of employees to whome any asset is asssigned	
 	def assigned_employee

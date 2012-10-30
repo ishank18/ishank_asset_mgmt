@@ -1,6 +1,7 @@
 <legend>Search result</legend>
-<%= page_entries_info @result %>
-<br />
+<div class="well well-small"><%= (generate_search_info params[:search]).html_safe %></div>
+<div><%= page_entries_info @result %></div>
+
 <br />
 <ul class="nav nav-tabs nav-stacked">
 <% @result.each do |res| %>
