@@ -15,7 +15,7 @@ class AssetsController < ApplicationController
   end
   
   def create
-		@asset = params[:asset][:type].constantize.new params[:asset]
+		@asset = (params[:asset][:type].blank? ? Asset : params[:asset][:type].constantize).new params[:asset]
 		if(@asset.save)
 			redirect_to @asset, :alert => "Asset Successfully Added!"
 		else

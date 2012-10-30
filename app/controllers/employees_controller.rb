@@ -9,6 +9,7 @@ class EmployeesController < ApplicationController
 
   def show
   	@employee = Employee.includes(:assets).with_deleted.where(:id => params[:id]).first
+  	@assigned_assets_mapping = Assignment.where(:employee_id => params[:id]).assigned_assets.includes(:asset)
   end
 
   def new

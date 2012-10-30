@@ -17,8 +17,8 @@
 	<tr>
 		<td>Assigned Assets</td>
 		<td>
-			<% @employee.assets.each do |asset| %>
-				<%= link_to asset.name, asset %> &nbsp;
+			<% @assigned_assets_mapping.each do |aem| %>
+				<%= link_to aem.asset.name, aem.asset %> &nbsp;
 			<% end %>
 		</td>
 	</tr>
